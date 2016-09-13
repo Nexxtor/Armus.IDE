@@ -15,7 +15,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner a  = new Scanner();
-        a.lsFiles("hola");
+        a.lsFiles("/home/nextor/Escritorio/cualquiercosa.acl");
     }
     
 }
