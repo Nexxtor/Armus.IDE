@@ -90,7 +90,6 @@ public class IDE_Armus extends javax.swing.JFrame {
 
         btnAbrir.setText("A");
         btnAbrir.setToolTipText("");
-        btnAbrir.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Save.png"))); // NOI18N
         btnAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAbrirActionPerformed(evt);
