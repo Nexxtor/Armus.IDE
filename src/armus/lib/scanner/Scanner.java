@@ -14,4 +14,5 @@ public class Scanner {
         System.load("/home/nextor/NetBeansProjects/Armus.Lib/dist/libArmus.Lib.so");
     }
     public native String[] lsFiles(String pathFirstFile);
+    public native String[] lsTokens(String pathSecondFile);
 }
