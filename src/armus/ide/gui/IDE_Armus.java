@@ -322,7 +322,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         if(seleccionado.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION){
             archivo = seleccionado.getSelectedFile();
             if(archivo.canRead()){
-                if(archivo.getName().endsWith("txt")){
+                if(archivo.getName().endsWith("acl")){
                     String contenido = gestion.abrirTexto(archivo);
                     TxtArea.setText(contenido);  
                     ruta = seleccionado.getSelectedFile().getAbsolutePath();
@@ -355,7 +355,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     private void btnGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComoActionPerformed
         if(seleccionado.showDialog(null, "Guardar Texto") == JFileChooser.APPROVE_OPTION){
             archivo = seleccionado.getSelectedFile();
-            if(archivo.getName().endsWith("txt")){
+            if(archivo.getName().endsWith("acl")){
                 String contenido = TxtArea.getText();
                 String respuesta = gestion.guardarTexto(archivo, contenido);
                 ruta = seleccionado.getSelectedFile().getAbsolutePath();
@@ -397,7 +397,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         if(seleccionado.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION){
             archivo = seleccionado.getSelectedFile();
             if(archivo.canRead()){
-                if(archivo.getName().endsWith("txt")){
+                if(archivo.getName().endsWith("acl")){
                     String contenido = gestion.abrirTexto(archivo);
                     TxtArea.setText(contenido); 
                     ruta = seleccionado.getSelectedFile().getAbsolutePath();
@@ -430,7 +430,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         
         if(seleccionado.showDialog(null, "Guardar Texto") == JFileChooser.APPROVE_OPTION){
             archivo = seleccionado.getSelectedFile();
-            if(archivo.getName().endsWith("txt")){
+            if(archivo.getName().endsWith("acl")){
                 String contenido = TxtArea.getText();
                 String respuesta = gestion.guardarTexto(archivo, contenido);
                 ruta = seleccionado.getSelectedFile().getAbsolutePath();
