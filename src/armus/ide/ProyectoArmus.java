@@ -16,7 +16,6 @@ public class ProyectoArmus {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         IDE_Armus ventana = new IDE_Armus();
         ventana.setVisible(true);
         
