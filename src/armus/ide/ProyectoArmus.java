@@ -5,6 +5,7 @@
  */
 package armus.ide;
 import armus.ide.gui.IDE_Armus;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,6 +20,8 @@ public class ProyectoArmus {
         IDE_Armus ventana = new IDE_Armus();
         ventana.setVisible(true);
         
+        
+     
         
         
     }
