@@ -38,7 +38,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         initComponents();
 
         try { //agrega un icono para la aplicación
-            setIconImage(new ImageIcon(getClass().getResource("/icons/Logo.png")).getImage());
+            setIconImage(new ImageIcon("/opt/armus/Logo.png").getImage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage()); //muestra el exepción en consola
         }
