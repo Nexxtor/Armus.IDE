@@ -77,19 +77,20 @@ public class IDE_Armus extends javax.swing.JFrame {
         menuGuardarComo = new javax.swing.JMenuItem();
         menuSalir = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        menuColor1 = new javax.swing.JMenuItem();
-        menuColor2 = new javax.swing.JMenuItem();
-        menuColor3 = new javax.swing.JMenuItem();
-        menuColor4 = new javax.swing.JMenuItem();
-        menuColor5 = new javax.swing.JMenuItem();
         menuCopiar = new javax.swing.JMenuItem();
         menuCortar = new javax.swing.JMenuItem();
         menuPegar = new javax.swing.JMenuItem();
         MenuAyuda = new javax.swing.JMenu();
         btnEjecutar = new javax.swing.JRadioButtonMenuItem();
         jMenu14 = new javax.swing.JMenu();
-        jMenu12 = new javax.swing.JMenu();
+        preferencia = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        menuColor1 = new javax.swing.JMenuItem();
+        menuColor2 = new javax.swing.JMenuItem();
+        menuColor3 = new javax.swing.JMenuItem();
+        menuColor4 = new javax.swing.JMenuItem();
+        menuColor5 = new javax.swing.JMenuItem();
+        menuAyuda = new javax.swing.JMenuItem();
 
         jMenu11.setText("jMenu11");
 
@@ -100,7 +101,14 @@ public class IDE_Armus extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Armus");
         setMinimumSize(new java.awt.Dimension(500, 300));
-        setPreferredSize(new java.awt.Dimension(800, 700));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         Panel.setBackground(new java.awt.Color(26, 115, 126));
 
@@ -213,7 +221,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addComponent(btnCopiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNuevo)
-                        .addGap(0, 984, Short.MAX_VALUE))
+                        .addGap(0, 475, Short.MAX_VALUE))
                     .addComponent(ScrollPane1))
                 .addContainerGap())
         );
@@ -232,7 +240,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                .addComponent(ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -286,50 +294,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         jMenu1.setText("Editar");
         jMenu1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
 
-        jMenu5.setText("Configurar Vista");
-
-        menuColor1.setText("Pink");
-        menuColor1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuColor1ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(menuColor1);
-
-        menuColor2.setText("Blue");
-        menuColor2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuColor2ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(menuColor2);
-
-        menuColor3.setText("Green");
-        menuColor3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuColor3ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(menuColor3);
-
-        menuColor4.setText("DarkRed");
-        menuColor4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuColor4ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(menuColor4);
-
-        menuColor5.setText("Aqua");
-        menuColor5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuColor5ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(menuColor5);
-
-        jMenu1.add(jMenu5);
-
         menuCopiar.setText("Copiar");
         menuCopiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -373,14 +337,69 @@ public class IDE_Armus extends javax.swing.JFrame {
 
         BarraMenu.add(MenuAyuda);
 
-        jMenu12.setText("Ayuda");
-        jMenu12.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
-        jMenu12.addActionListener(new java.awt.event.ActionListener() {
+        preferencia.setText("Preferencias");
+        preferencia.setActionCommand("Opciones");
+        preferencia.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
+        preferencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu12ActionPerformed(evt);
+                preferenciaActionPerformed(evt);
             }
         });
-        BarraMenu.add(jMenu12);
+
+        jMenu5.setText("Temas");
+
+        menuColor1.setText("Pink");
+        menuColor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuColor1ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuColor1);
+
+        menuColor2.setText("Blue");
+        menuColor2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuColor2ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuColor2);
+
+        menuColor3.setText("Green");
+        menuColor3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuColor3ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuColor3);
+
+        menuColor4.setText("DarkRed");
+        menuColor4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuColor4ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuColor4);
+
+        menuColor5.setText("Aqua");
+        menuColor5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuColor5ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuColor5);
+
+        preferencia.add(jMenu5);
+
+        menuAyuda.setText("Ayuda");
+        menuAyuda.setActionCommand("");
+        menuAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAyudaActionPerformed(evt);
+            }
+        });
+        preferencia.add(menuAyuda);
+
+        BarraMenu.add(preferencia);
 
         setJMenuBar(BarraMenu);
 
@@ -483,10 +502,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPegarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-
-        if (JOptionPane.showConfirmDialog(null, "Esta seguro que desea salir?") == 0) {
-            System.exit(0);
-        }
+        salir();        
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void menuColor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor1ActionPerformed
@@ -534,34 +550,9 @@ public class IDE_Armus extends javax.swing.JFrame {
         BarraMenu.setBackground(new Color(222, 118, 118));
     }//GEN-LAST:event_menuColor4ActionPerformed
 
-    private void jMenu12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu12ActionPerformed
-        try {
-            File directorio = new File("temp"); //Creas un nuevo directorio a nivel del jar.
-            directorio.mkdirs();
-            directorio.setWritable(true);
-            //copia la direccion donde estará en archivo creado (copia)
-            String art = directorio.getCanonicalPath() + File.separator + "Ayuda.pdf";
-            //nuevo archivo en esa direccion
-            File temp = new File(art);
-            InputStream is = this.getClass().getResourceAsStream("/Resource/Ayuda.pdf");
-            FileOutputStream archivoDestino = new FileOutputStream(temp);
-            FileWriter fw = new FileWriter(temp);
-            byte[] buffer = new byte[512 * 1024];
-            //lee el archivo hasta que se acabe...
-            int nbLectura;
-            while ((nbLectura = is.read(buffer)) != -1) {
-                archivoDestino.write(buffer, 0, nbLectura);
-            }
-            //cierra el archivo, el inputS y el FileW
-            fw.close();
-            archivoDestino.close();
-            is.close();
-            //abre el archivo temporal
-            Desktop.getDesktop().open(temp);
-        } catch (IOException ex) {
-            System.out.println("Problema abriendo el manual de ayuda");
-        }
-    }//GEN-LAST:event_jMenu12ActionPerformed
+    private void preferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preferenciaActionPerformed
+        
+    }//GEN-LAST:event_preferenciaActionPerformed
 
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
         if (archivo == null) {
@@ -602,6 +593,43 @@ public class IDE_Armus extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnEjecutarActionPerformed
+
+    private void menuAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAyudaActionPerformed
+        try {
+            File directorio = new File("temp"); //Creas un nuevo directorio a nivel del jar.
+            directorio.mkdirs();
+            directorio.setWritable(true);
+            //copia la direccion donde estará en archivo creado (copia)
+            String art = directorio.getCanonicalPath() + File.separator + "Ayuda.pdf";
+            //nuevo archivo en esa direccion
+            File temp = new File(art);
+            InputStream is = this.getClass().getResourceAsStream("/Resource/Ayuda.pdf");
+            FileOutputStream archivoDestino = new FileOutputStream(temp);
+            FileWriter fw = new FileWriter(temp);
+            byte[] buffer = new byte[512 * 1024];
+            //lee el archivo hasta que se acabe...
+            int nbLectura;
+            while ((nbLectura = is.read(buffer)) != -1) {
+                archivoDestino.write(buffer, 0, nbLectura);
+            }
+            //cierra el archivo, el inputS y el FileW
+            fw.close();
+            archivoDestino.close();
+            is.close();
+            //abre el archivo temporal
+            Desktop.getDesktop().open(temp);
+        } catch (Exception ex) {
+            System.out.println("Problema abriendo el manual de ayuda");
+        }
+    }//GEN-LAST:event_menuAyudaActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        salir();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
     private void guardarArchivo() {
         if (archivo != null) {
             String contenido = TxtArea.getText();
@@ -649,6 +677,11 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         }
     }
+    private void salir(){
+        if (JOptionPane.showConfirmDialog(null, "Esta seguro que desea salir?") == 0) {
+            System.exit(0);
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -669,13 +702,13 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JButton btnPegar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem menuAbrir;
+    private javax.swing.JMenuItem menuAyuda;
     private javax.swing.JMenuItem menuColor1;
     private javax.swing.JMenuItem menuColor2;
     private javax.swing.JMenuItem menuColor3;
@@ -688,5 +721,6 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuNuevo;
     private javax.swing.JMenuItem menuPegar;
     private javax.swing.JMenuItem menuSalir;
+    private javax.swing.JMenu preferencia;
     // End of variables declaration//GEN-END:variables
 }
