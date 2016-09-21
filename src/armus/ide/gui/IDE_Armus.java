@@ -4,9 +4,17 @@
  * and open the template in the editor.
  */
 package armus.ide.gui;
+
 import java.io.File;
 import javax.swing.JFileChooser;
 import armus.ide.utilites.manejoArchivos;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.Font;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.swing.*;
 
 /**
@@ -14,14 +22,21 @@ import javax.swing.*;
  * @author stefa_000
  */
 public class IDE_Armus extends javax.swing.JFrame {
+
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
     manejoArchivos gestion = new manejoArchivos();
     String ruta = "";
-    
-    
+
     public IDE_Armus() {
         initComponents();
+
+        try { //agrega un icono para la aplicación
+            setIconImage(new ImageIcon(getClass().getResource("/icons/Logo.PNG")).getImage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage()); //muestra el exepción en consola
+        }
+
     }
 
     /**
@@ -55,11 +70,11 @@ public class IDE_Armus extends javax.swing.JFrame {
         menuSalir = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        menuColor1 = new javax.swing.JMenuItem();
+        menuColor2 = new javax.swing.JMenuItem();
+        menuColor3 = new javax.swing.JMenuItem();
+        menuColor4 = new javax.swing.JMenuItem();
+        menuColor5 = new javax.swing.JMenuItem();
         menuCopiar = new javax.swing.JMenuItem();
         menuCortar = new javax.swing.JMenuItem();
         menuPegar = new javax.swing.JMenuItem();
@@ -78,7 +93,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         setTitle("Armus");
         setMinimumSize(new java.awt.Dimension(500, 300));
 
-        Panel.setBackground(new java.awt.Color(51, 51, 51));
+        Panel.setBackground(new java.awt.Color(26, 115, 126));
 
         TxtArea.setBackground(new java.awt.Color(250, 222, 255));
         TxtArea.setColumns(20);
@@ -86,52 +101,74 @@ public class IDE_Armus extends javax.swing.JFrame {
         TxtArea.setRows(5);
         TxtArea.setTabSize(4);
         TxtArea.setBorder(null);
+        TxtArea.setOpaque(false);
         ScrollPanel.setViewportView(TxtArea);
 
-        btnAbrir.setText("A");
+        btnAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/folder.png"))); // NOI18N
         btnAbrir.setToolTipText("");
+        btnAbrir.setBorder(null);
+        btnAbrir.setBorderPainted(false);
+        btnAbrir.setContentAreaFilled(false);
+        btnAbrir.setSelected(true);
         btnAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAbrirActionPerformed(evt);
             }
         });
 
-        btnGuardar.setText("G");
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
+        btnGuardar.setBorder(null);
+        btnGuardar.setBorderPainted(false);
+        btnGuardar.setContentAreaFilled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
 
-        btnGuardarComo.setText("GC");
+        btnGuardarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save1.png"))); // NOI18N
+        btnGuardarComo.setBorder(null);
+        btnGuardarComo.setBorderPainted(false);
+        btnGuardarComo.setContentAreaFilled(false);
         btnGuardarComo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarComoActionPerformed(evt);
             }
         });
 
-        btnCortar.setText("C");
+        btnCortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/scissors.png"))); // NOI18N
+        btnCortar.setBorder(null);
+        btnCortar.setBorderPainted(false);
+        btnCortar.setContentAreaFilled(false);
         btnCortar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCortarActionPerformed(evt);
             }
         });
 
-        btnPegar.setText("P");
+        btnPegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/paste.png"))); // NOI18N
+        btnPegar.setBorder(null);
+        btnPegar.setBorderPainted(false);
+        btnPegar.setContentAreaFilled(false);
         btnPegar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPegarActionPerformed(evt);
             }
         });
 
-        btnCopiar.setText("Cp");
+        btnCopiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/copy.png"))); // NOI18N
+        btnCopiar.setBorderPainted(false);
+        btnCopiar.setContentAreaFilled(false);
         btnCopiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCopiarActionPerformed(evt);
             }
         });
 
-        btnNuevo.setText("N");
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/new-file.png"))); // NOI18N
+        btnNuevo.setBorder(null);
+        btnNuevo.setBorderPainted(false);
+        btnNuevo.setContentAreaFilled(false);
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -148,7 +185,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                     .addComponent(ScrollPanel)
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGuardarComo)
@@ -160,7 +197,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addComponent(btnCopiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNuevo)
-                        .addGap(0, 956, Short.MAX_VALUE)))
+                        .addGap(0, 984, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PanelLayout.setVerticalGroup(
@@ -183,7 +220,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         BarraMenu.setBackground(new java.awt.Color(255, 255, 255));
 
         jMenu3.setText("Archivo");
-        jMenu3.setFont(new java.awt.Font("Segoe UI Symbol", 3, 14)); // NOI18N
+        jMenu3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
 
         menuAbrir.setText("Abrir");
         menuAbrir.addActionListener(new java.awt.event.ActionListener() {
@@ -228,24 +265,50 @@ public class IDE_Armus extends javax.swing.JFrame {
         BarraMenu.add(jMenu3);
 
         jMenu1.setText("Editar");
-        jMenu1.setFont(new java.awt.Font("Segoe UI Symbol", 3, 14)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
 
         jMenu5.setText("Configurar Vista");
 
-        jMenuItem3.setText("jMenuItem3");
-        jMenu5.add(jMenuItem3);
+        menuColor1.setText("Pink");
+        menuColor1.setActionCommand("Pink");
+        menuColor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuColor1ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuColor1);
 
-        jMenuItem4.setText("jMenuItem4");
-        jMenu5.add(jMenuItem4);
+        menuColor2.setText("Blue");
+        menuColor2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuColor2ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuColor2);
 
-        jMenuItem5.setText("jMenuItem5");
-        jMenu5.add(jMenuItem5);
+        menuColor3.setText("Green");
+        menuColor3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuColor3ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuColor3);
 
-        jMenuItem6.setText("jMenuItem6");
-        jMenu5.add(jMenuItem6);
+        menuColor4.setText("DarkRed");
+        menuColor4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuColor4ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuColor4);
 
-        jMenuItem7.setText("jMenuItem7");
-        jMenu5.add(jMenuItem7);
+        menuColor5.setText("Aqua");
+        menuColor5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuColor5ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(menuColor5);
 
         jMenu1.add(jMenu5);
 
@@ -276,7 +339,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         BarraMenu.add(jMenu1);
 
         MenuAyuda.setText("Analizador Lexicográfico");
-        MenuAyuda.setFont(new java.awt.Font("Segoe UI Symbol", 3, 14)); // NOI18N
+        MenuAyuda.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
 
         jMenu13.setText("Ejecutar Analizador Lexicográfico");
         MenuAyuda.add(jMenu13);
@@ -287,7 +350,12 @@ public class IDE_Armus extends javax.swing.JFrame {
         BarraMenu.add(MenuAyuda);
 
         jMenu12.setText("Ayuda");
-        jMenu12.setFont(new java.awt.Font("Segoe UI Symbol", 3, 14)); // NOI18N
+        jMenu12.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
+        jMenu12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu12ActionPerformed(evt);
+            }
+        });
         BarraMenu.add(jMenu12);
 
         setJMenuBar(BarraMenu);
@@ -307,7 +375,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopiarActionPerformed
-        TxtArea.copy();     
+        TxtArea.copy();
     }//GEN-LAST:event_btnCopiarActionPerformed
 
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
@@ -318,56 +386,55 @@ public class IDE_Armus extends javax.swing.JFrame {
             String rutaNombreArchivo = dialogo.getSelectedFile().getPath();
             String NombreArchivo = dialogo.getSelectedFile().getName();
         }*/
-        
-        if(seleccionado.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION){
+
+        if (seleccionado.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
-            if(archivo.canRead()){
-                if(archivo.getName().endsWith("acl")){
+            if (archivo.canRead()) {
+                if (archivo.getName().endsWith("acl")) {
                     String contenido = gestion.abrirTexto(archivo);
-                    TxtArea.setText(contenido);  
+                    TxtArea.setText(contenido);
                     ruta = seleccionado.getSelectedFile().getAbsolutePath();
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo .txt");
                 }
             }
         }
-        
-        
+
+
     }//GEN-LAST:event_btnAbrirActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if(archivo != null){
+        if (archivo != null) {
             String contenido = TxtArea.getText();
-                String respuesta = gestion.guardarTexto(archivo, contenido);
-                if(respuesta != null){
-                    JOptionPane.showMessageDialog(null, respuesta);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Error al guardar el texto");
-                }
-        }else{
+            String respuesta = gestion.guardarTexto(archivo, contenido);
+            if (respuesta != null) {
+                JOptionPane.showMessageDialog(null, respuesta);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar el texto");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione la opcion guardar como ");
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComoActionPerformed
-        if(seleccionado.showDialog(null, "Guardar Texto") == JFileChooser.APPROVE_OPTION){
+        if (seleccionado.showDialog(null, "Guardar Texto") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
-            if(archivo.getName().endsWith("acl")){
+            if (archivo.getName().endsWith("acl")) {
                 String contenido = TxtArea.getText();
                 String respuesta = gestion.guardarTexto(archivo, contenido);
                 ruta = seleccionado.getSelectedFile().getAbsolutePath();
-                if(respuesta != null){
+                if (respuesta != null) {
                     JOptionPane.showMessageDialog(null, respuesta);
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Error al guardar el texto");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "El texto se debe guardar con extencion .txt");
             }
-            
+
         }
     }//GEN-LAST:event_btnGuardarComoActionPerformed
 
@@ -381,27 +448,27 @@ public class IDE_Armus extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
-       /* manejoArchivos archivoN = new manejoArchivos();
+        /* manejoArchivos archivoN = new manejoArchivos();
         archivoN.crear();*/
-       
-       if(!(TxtArea.getText().equals("")) || archivo != null){
-            if(((JOptionPane.showConfirmDialog(null, "Desea utilizar una nueva hoja de trabajo? \n\t Si acepta se borrara todos los cambios sin guardar")) == 0)){
-             archivo = null;
-             TxtArea.setText("");
+
+        if (!(TxtArea.getText().equals("")) || archivo != null) {
+            if (((JOptionPane.showConfirmDialog(null, "Desea utilizar una nueva hoja de trabajo? \n\t Si acepta se borrara todos los cambios sin guardar")) == 0)) {
+                archivo = null;
+                TxtArea.setText("");
             }
-      }  
-         
+        }
+
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void menuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirActionPerformed
-        if(seleccionado.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION){
+        if (seleccionado.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
-            if(archivo.canRead()){
-                if(archivo.getName().endsWith("acl")){
+            if (archivo.canRead()) {
+                if (archivo.getName().endsWith("acl")) {
                     String contenido = gestion.abrirTexto(archivo);
-                    TxtArea.setText(contenido); 
+                    TxtArea.setText(contenido);
                     ruta = seleccionado.getSelectedFile().getAbsolutePath();
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo .txt");
                 }
             }
@@ -413,36 +480,36 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_menuNuevoActionPerformed
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
-    if(archivo != null){
+        if (archivo != null) {
             String contenido = TxtArea.getText();
-                String respuesta = gestion.guardarTexto(archivo, contenido);
-                if(respuesta != null){
-                    JOptionPane.showMessageDialog(null, respuesta);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Error al guardar el texto");
-                }
-        }else{
+            String respuesta = gestion.guardarTexto(archivo, contenido);
+            if (respuesta != null) {
+                JOptionPane.showMessageDialog(null, respuesta);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar el texto");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione la opcion guardar como ");
-        }     
+        }
     }//GEN-LAST:event_menuGuardarActionPerformed
 
     private void menuGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarComoActionPerformed
-        
-        if(seleccionado.showDialog(null, "Guardar Texto") == JFileChooser.APPROVE_OPTION){
+
+        if (seleccionado.showDialog(null, "Guardar Texto") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
-            if(archivo.getName().endsWith("acl")){
+            if (archivo.getName().endsWith("acl")) {
                 String contenido = TxtArea.getText();
                 String respuesta = gestion.guardarTexto(archivo, contenido);
                 ruta = seleccionado.getSelectedFile().getAbsolutePath();
-                if(respuesta != null){
+                if (respuesta != null) {
                     JOptionPane.showMessageDialog(null, respuesta);
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Error al guardar el texto");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "El texto se debe guardar con extencion .txt");
             }
-            
+
         }
     }//GEN-LAST:event_menuGuardarComoActionPerformed
 
@@ -459,11 +526,85 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPegarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        
-        if(JOptionPane.showConfirmDialog(null, "Esta seguro que desea salir?") == 0){
+
+        if (JOptionPane.showConfirmDialog(null, "Esta seguro que desea salir?") == 0) {
             System.exit(0);
-        }  
+        }
     }//GEN-LAST:event_menuSalirActionPerformed
+
+    private void menuColor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor1ActionPerformed
+        Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
+        TxtArea.setFont(font);
+        TxtArea.setForeground(new Color(228, 114, 210));
+        TxtArea.setBackground(new Color(64, 0, 64));
+        Panel.setBackground(new Color(231, 81, 166));
+        BarraMenu.setBackground(new Color(250, 145, 204));
+    }//GEN-LAST:event_menuColor1ActionPerformed
+
+    private void menuColor5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor5ActionPerformed
+        Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
+        TxtArea.setFont(font);
+        TxtArea.setForeground(new Color(218, 141, 70));
+        TxtArea.setBackground(new Color(80, 44, 13));
+        Panel.setBackground(new Color(53, 202, 192));
+        BarraMenu.setBackground(new Color(121, 229, 222));
+    }//GEN-LAST:event_menuColor5ActionPerformed
+
+    private void menuColor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor2ActionPerformed
+        Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
+        TxtArea.setFont(font);
+        TxtArea.setForeground(new Color(102, 110, 222));
+        TxtArea.setBackground(new Color(16, 21, 84));
+        Panel.setBackground(new Color(53, 106, 180));
+        BarraMenu.setBackground(new Color(88, 138, 208));
+    }//GEN-LAST:event_menuColor2ActionPerformed
+
+    private void menuColor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor3ActionPerformed
+        Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
+        TxtArea.setFont(font);
+        TxtArea.setForeground(new Color(100, 198, 125));
+        TxtArea.setBackground(new Color(0, 59, 2));
+        Panel.setBackground(new Color(35, 170, 53));
+        BarraMenu.setBackground(new Color(106, 223, 122));
+    }//GEN-LAST:event_menuColor3ActionPerformed
+
+    private void menuColor4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor4ActionPerformed
+        Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
+        TxtArea.setFont(font);
+        TxtArea.setForeground(new Color(208, 67, 67));
+        TxtArea.setBackground(new Color(80, 44, 13));
+        Panel.setBackground(new Color(148, 13, 13));
+        BarraMenu.setBackground(new Color(222, 118, 118));
+    }//GEN-LAST:event_menuColor4ActionPerformed
+
+    private void jMenu12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu12ActionPerformed
+        try {
+            File directorio = new File("temp"); //Creas un nuevo directorio a nivel del jar.
+            directorio.mkdirs();
+            directorio.setWritable(true);
+            //copia la direccion donde estará en archivo creado (copia)
+            String art = directorio.getCanonicalPath() + File.separator + "Ayuda.pdf";
+            //nuevo archivo en esa direccion
+            File temp = new File(art);
+            InputStream is = this.getClass().getResourceAsStream("/Resource/Ayuda.pdf");
+            FileOutputStream archivoDestino = new FileOutputStream(temp);
+            FileWriter fw = new FileWriter(temp);
+            byte[] buffer = new byte[512 * 1024];
+            //lee el archivo hasta que se acabe...
+            int nbLectura;
+            while ((nbLectura = is.read(buffer)) != -1) {
+                archivoDestino.write(buffer, 0, nbLectura);
+            }
+            //cierra el archivo, el inputS y el FileW
+            fw.close();
+            archivoDestino.close();
+            is.close();
+            //abre el archivo temporal
+            Desktop.getDesktop().open(temp);
+        } catch (IOException ex) {
+            System.out.println("Problema abriendo el manual de ayuda");
+        }
+    }//GEN-LAST:event_jMenu12ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -488,12 +629,12 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem menuAbrir;
+    private javax.swing.JMenuItem menuColor1;
+    private javax.swing.JMenuItem menuColor2;
+    private javax.swing.JMenuItem menuColor3;
+    private javax.swing.JMenuItem menuColor4;
+    private javax.swing.JMenuItem menuColor5;
     private javax.swing.JMenuItem menuCopiar;
     private javax.swing.JMenuItem menuCortar;
     private javax.swing.JMenuItem menuGuardar;
