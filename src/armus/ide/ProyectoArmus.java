@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package armus.ide;
+
 import armus.ide.gui.IDE_Armus;
 import armus.lib.scanner.Scanner;
 import javax.swing.ImageIcon;
@@ -20,13 +21,7 @@ public class ProyectoArmus {
     public static void main(String[] args) {
         IDE_Armus ventana = new IDE_Armus();
         ventana.setVisible(true);
-//        Scanner a = new Scanner();
-//       String[] b =  a.lsFiles("/home/nextor/Escritorio/proyecto/main.acl");
-//       a.lsTokens(b);
-        
-     
-        
-        
+
     }
-    
+
 }

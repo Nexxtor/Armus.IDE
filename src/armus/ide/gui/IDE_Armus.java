@@ -195,7 +195,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         TxtAreaConsola.setEditable(false);
         TxtAreaConsola.setColumns(20);
         TxtAreaConsola.setRows(5);
-        TxtAreaConsola.setText("dxfdxzf");
         TxtAreaConsola.setToolTipText("");
         ScrollPane1.setViewportView(TxtAreaConsola);
 
@@ -507,7 +506,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPegarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        salir();        
+        salir();
     }//GEN-LAST:event_menuSalirActionPerformed
 
     private void menuColor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor1ActionPerformed
@@ -556,7 +555,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_menuColor4ActionPerformed
 
     private void preferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preferenciaActionPerformed
-        
+
     }//GEN-LAST:event_preferenciaActionPerformed
 
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
@@ -566,36 +565,49 @@ public class IDE_Armus extends javax.swing.JFrame {
             } else {
                 return;
             }
+        } else {
+           
+                String contenido = TxtArea.getText();
+                String respuesta = gestion.guardarTexto(archivo, contenido);
+                if (respuesta == null) {
+                    JOptionPane.showMessageDialog(null, "Error al guardar el texto");
+                }
         }
-        try {
-            Scanner scanner = new Scanner();
-            String[] listaArchivos = scanner.lsFiles(ruta);
-            TxtAreaConsola.setText("Se encontraron los siguientes archivos a Tokenizar \n");
-            for (String valor : listaArchivos) {
-                TxtAreaConsola.append(valor + "\n");
-            }
-            TxtAreaConsola.append("____________________________________________________________________________\n");
-            String[] tokens = scanner.lsTokens(listaArchivos);
-            if (tokens[0].equals("ok")) {
+            try {
+                Scanner scanner = new Scanner();
+                String[] listaArchivos = scanner.lsFiles(ruta);
+                /// Poner un error aqui si listaArchivos es nulo
+                if (listaArchivos == null) {
+                    anadirErrores();
+                    return;
+                }
+                TxtAreaConsola.setText("Se encontraron los siguientes archivos a Tokenizar \n");
+                for (String valor : listaArchivos) {
+                    TxtAreaConsola.append(valor + "\n");
+                }
+                TxtAreaConsola.append("____________________________________________________________________________\n");
+                String[] tokens = scanner.lsTokens(listaArchivos);
+
+                if (tokens == null) {
+                    anadirErrores();
+                }
 
                 String cadena;
-                FileReader f = new FileReader("lsToken.tok");
-                BufferedReader b = new BufferedReader(f);
+                FileReader f;
+                BufferedReader b;
+                f = new FileReader("lsToken.tok");
+                b = new BufferedReader(f);
                 while ((cadena = b.readLine()) != null) {
                     TxtAreaConsola.append(cadena + "\n");
                 }
                 b.close();
-            }
-        } catch (UnsatisfiedLinkError e) {
-            JOptionPane.showMessageDialog(null,
-                    "No se puede cargar la libreria del Scanner\n" + e.getMessage(),
-                    "Error cargando libreria", JOptionPane.ERROR_MESSAGE);
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        } catch (IOException ex) {
-            Logger.getLogger(IDE_Armus.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,
+                        "No se puede cargar la libreria del Scanner\n" + e.getMessage(),
+                        "Error cargando libreria", JOptionPane.ERROR_MESSAGE);
+            }
+        
 
     }//GEN-LAST:event_btnEjecutarActionPerformed
 
@@ -687,7 +699,25 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         }
     }
-    private void salir(){
+
+    private void anadirErrores() {
+        String cadena;
+        FileReader f;
+        BufferedReader b;
+        try {
+            f = new FileReader("log.txt");
+            b = new BufferedReader(f);
+            while ((cadena = b.readLine()) != null) {
+                TxtAreaConsola.append(cadena + "\n");
+            }
+            b.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se puede leer el archivo de errores " + ex.getMessage(), "error", JOptionPane.ERROR);
+        }
+
+    }
+
+    private void salir() {
         if (JOptionPane.showConfirmDialog(null, "Esta seguro que desea salir?") == 0) {
             System.exit(0);
         }
