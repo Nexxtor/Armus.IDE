@@ -38,7 +38,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         initComponents();
 
         try { //agrega un icono para la aplicación
-            setIconImage(new ImageIcon(getClass().getResource("/icons/Logo.PNG")).getImage());
+            setIconImage(new ImageIcon(getClass().getResource("/icons/Logo.png")).getImage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage()); //muestra el exepción en consola
         }
@@ -221,7 +221,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addComponent(btnCopiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNuevo)
-                        .addGap(0, 451, Short.MAX_VALUE))
+                        .addGap(0, 472, Short.MAX_VALUE))
                     .addComponent(ScrollPane1))
                 .addContainerGap())
         );
@@ -240,7 +240,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addComponent(ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -412,17 +412,11 @@ public class IDE_Armus extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
