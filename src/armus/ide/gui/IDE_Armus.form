@@ -94,7 +94,6 @@
                 <MenuItem class="javax.swing.JMenuItem" name="menuColor1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pink"/>
-                    <Property name="actionCommand" type="java.lang.String" value="Pink"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuColor1ActionPerformed"/>
@@ -168,11 +167,15 @@
             </Property>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu13">
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="btnEjecutar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ejecutar Analizador Lexicogr&#xe1;fico"/>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Ejecutar Analizador Lexicografico"/>
               </Properties>
-            </Menu>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEjecutarActionPerformed"/>
+              </Events>
+            </MenuItem>
             <Menu class="javax.swing.JMenu" name="jMenu14">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Configurar Parametros"/>

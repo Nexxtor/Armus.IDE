@@ -79,7 +79,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         menuCortar = new javax.swing.JMenuItem();
         menuPegar = new javax.swing.JMenuItem();
         MenuAyuda = new javax.swing.JMenu();
-        jMenu13 = new javax.swing.JMenu();
+        btnEjecutar = new javax.swing.JRadioButtonMenuItem();
         jMenu14 = new javax.swing.JMenu();
         jMenu12 = new javax.swing.JMenu();
 
@@ -270,7 +270,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         jMenu5.setText("Configurar Vista");
 
         menuColor1.setText("Pink");
-        menuColor1.setActionCommand("Pink");
         menuColor1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuColor1ActionPerformed(evt);
@@ -341,8 +340,14 @@ public class IDE_Armus extends javax.swing.JFrame {
         MenuAyuda.setText("Analizador Lexicográfico");
         MenuAyuda.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
 
-        jMenu13.setText("Ejecutar Analizador Lexicográfico");
-        MenuAyuda.add(jMenu13);
+        btnEjecutar.setSelected(true);
+        btnEjecutar.setText("Ejecutar Analizador Lexicografico");
+        btnEjecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEjecutarActionPerformed(evt);
+            }
+        });
+        MenuAyuda.add(btnEjecutar);
 
         jMenu14.setText("Configurar Parametros");
         MenuAyuda.add(jMenu14);
@@ -606,6 +611,10 @@ public class IDE_Armus extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenu12ActionPerformed
 
+    private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEjecutarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarraMenu;
@@ -616,6 +625,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JButton btnAbrir;
     private javax.swing.JButton btnCopiar;
     private javax.swing.JButton btnCortar;
+    private javax.swing.JRadioButtonMenuItem btnEjecutar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnGuardarComo;
     private javax.swing.JButton btnNuevo;
@@ -623,7 +633,6 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
-    private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
