@@ -71,6 +71,21 @@ public class configuraciones extends javax.swing.JFrame {
         txtSizeArchivo.setText(parametros[6] + "");
         
     }
+    
+    private boolean validarEntero(String valore){
+        int numerito=0;
+       try {
+		numerito = Integer.parseInt(valore);
+                if(numerito >= 0){
+                    return true;
+                }else{
+                    return false;
+                }
+		
+	} catch (NumberFormatException e){
+		return false;
+	}
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -269,7 +284,8 @@ public class configuraciones extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String sFichero = "/opt/armus/setings.txt";
 
-           
+        if(validarEntero(txtlinea.getText()) == true && validarEntero(txtId.getText()) == true && validarEntero(txtDigito.getText()) == true && validarEntero(txtFile.getText()) == true && validarEntero(txtNameFile.getText()) == true && validarEntero(txtCadena.getText()) == true && validarEntero(txtSizeArchivo.getText()) == true){ 
+            if(Integer.parseInt(txtlinea.getText()) >= 30 && Integer.parseInt(txtId.getText()) >= 30 && Integer.parseInt(txtDigito.getText()) >= 30 && Integer.parseInt(txtFile.getText()) >= 30 && Integer.parseInt(txtNameFile.getText()) >= 30 && Integer.parseInt(txtCadena.getText()) >= 30 && Integer.parseInt(txtSizeArchivo.getText()) >= 30 ){
                 try {
                     BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero));
                     bw.write(txtlinea.getText() +"\n"
@@ -289,7 +305,12 @@ public class configuraciones extends javax.swing.JFrame {
                 
             JOptionPane.showMessageDialog(null, "Se guardo correctamente");
             this.dispose();
-        
+            }else{
+                JOptionPane.showMessageDialog(null, "los parametros no cumplen con el valor minimo establecido");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Los campos deben ser numeros enteros positivos");
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
