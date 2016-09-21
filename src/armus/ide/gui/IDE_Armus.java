@@ -16,6 +16,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.*;
+import armus.lib.scanner.Scanner;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -404,56 +410,21 @@ public class IDE_Armus extends javax.swing.JFrame {
             String rutaNombreArchivo = dialogo.getSelectedFile().getPath();
             String NombreArchivo = dialogo.getSelectedFile().getName();
         }*/
-
-        if (seleccionado.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
-            archivo = seleccionado.getSelectedFile();
-            if (archivo.canRead()) {
-                if (archivo.getName().endsWith("acl")) {
-                    String contenido = gestion.abrirTexto(archivo);
-                    TxtArea.setText(contenido);
-                    ruta = seleccionado.getSelectedFile().getAbsolutePath();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo .txt");
-                }
-            }
-        }
+        abrirArchivo();
 
 
     }//GEN-LAST:event_btnAbrirActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (archivo != null) {
-            String contenido = TxtArea.getText();
-            String respuesta = gestion.guardarTexto(archivo, contenido);
-            if (respuesta != null) {
-                JOptionPane.showMessageDialog(null, respuesta);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar el texto");
-            }
+        if (archivo == null) {
+            guardarComo();
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione la opcion guardar como ");
+            guardarArchivo();
         }
-
-
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComoActionPerformed
-        if (seleccionado.showDialog(null, "Guardar Texto") == JFileChooser.APPROVE_OPTION) {
-            archivo = seleccionado.getSelectedFile();
-            if (archivo.getName().endsWith("acl")) {
-                String contenido = TxtArea.getText();
-                String respuesta = gestion.guardarTexto(archivo, contenido);
-                ruta = seleccionado.getSelectedFile().getAbsolutePath();
-                if (respuesta != null) {
-                    JOptionPane.showMessageDialog(null, respuesta);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al guardar el texto");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "El texto se debe guardar con extencion .txt");
-            }
-
-        }
+        guardarComo();
     }//GEN-LAST:event_btnGuardarComoActionPerformed
 
     private void btnCortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCortarActionPerformed
@@ -479,18 +450,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void menuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirActionPerformed
-        if (seleccionado.showDialog(this, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
-            archivo = seleccionado.getSelectedFile();
-            if (archivo.canRead()) {
-                if (archivo.getName().endsWith("acl")) {
-                    String contenido = gestion.abrirTexto(archivo);
-                    TxtArea.setText(contenido);
-                    ruta = seleccionado.getSelectedFile().getAbsolutePath();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo .txt");
-                }
-            }
-        }
+        abrirArchivo();
     }//GEN-LAST:event_menuAbrirActionPerformed
 
     private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
@@ -498,37 +458,16 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_menuNuevoActionPerformed
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
-        if (archivo != null) {
-            String contenido = TxtArea.getText();
-            String respuesta = gestion.guardarTexto(archivo, contenido);
-            if (respuesta != null) {
-                JOptionPane.showMessageDialog(null, respuesta);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar el texto");
-            }
+        if (archivo == null) {
+            guardarComo();
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione la opcion guardar como ");
+            guardarArchivo();
         }
+
     }//GEN-LAST:event_menuGuardarActionPerformed
 
     private void menuGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarComoActionPerformed
-
-        if (seleccionado.showDialog(null, "Guardar Texto") == JFileChooser.APPROVE_OPTION) {
-            archivo = seleccionado.getSelectedFile();
-            if (archivo.getName().endsWith("acl")) {
-                String contenido = TxtArea.getText();
-                String respuesta = gestion.guardarTexto(archivo, contenido);
-                ruta = seleccionado.getSelectedFile().getAbsolutePath();
-                if (respuesta != null) {
-                    JOptionPane.showMessageDialog(null, respuesta);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al guardar el texto");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "El texto se debe guardar con extencion .txt");
-            }
-
-        }
+        guardarComo();
     }//GEN-LAST:event_menuGuardarComoActionPerformed
 
     private void menuCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCopiarActionPerformed
@@ -625,9 +564,91 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu12ActionPerformed
 
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
-        JOptionPane.showMessageDialog(null, "btn ejecutar pulsado");
-        
+        if (archivo == null) {
+            if (JOptionPane.showConfirmDialog(null, "Desea guardar el archivo") == 0) {
+                guardarComo();
+            } else {
+                return;
+            }
+        }
+        try {
+            Scanner scanner = new Scanner();
+            String[] listaArchivos = scanner.lsFiles(ruta);
+            TxtAreaConsola.setText("Se encontraron los siguientes archivos a Tokenizar \n");
+            for (String valor : listaArchivos) {
+                TxtAreaConsola.append(valor + "\n");
+            }
+            TxtAreaConsola.append("____________________________________________________________________________\n");
+            String[] tokens = scanner.lsTokens(listaArchivos);
+            if (tokens[0].equals("ok")) {
+
+                String cadena;
+                FileReader f = new FileReader("lsToken.tok");
+                BufferedReader b = new BufferedReader(f);
+                while ((cadena = b.readLine()) != null) {
+                    TxtAreaConsola.append(cadena + "\n");
+                }
+                b.close();
+            }
+        } catch (UnsatisfiedLinkError e) {
+            JOptionPane.showMessageDialog(null,
+                    "No se puede cargar la libreria del Scanner\n" + e.getMessage(),
+                    "Error cargando libreria", JOptionPane.ERROR_MESSAGE);
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(IDE_Armus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_btnEjecutarActionPerformed
+    private void guardarArchivo() {
+        if (archivo != null) {
+            String contenido = TxtArea.getText();
+            String respuesta = gestion.guardarTexto(archivo, contenido);
+            if (respuesta != null) {
+                JOptionPane.showMessageDialog(null, respuesta);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar el texto");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione la opcion guardar como ");
+        }
+    }
+
+    private void guardarComo() {
+        if (seleccionado.showDialog(null, "Guardar Texto") == JFileChooser.APPROVE_OPTION) {
+            archivo = seleccionado.getSelectedFile();
+            if (archivo.getName().endsWith("acl")) {
+                String contenido = TxtArea.getText();
+                String respuesta = gestion.guardarTexto(archivo, contenido);
+                ruta = seleccionado.getSelectedFile().getAbsolutePath();
+                if (respuesta != null) {
+                    JOptionPane.showMessageDialog(null, respuesta);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al guardar el texto");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El texto se debe guardar con extencion .txt");
+            }
+
+        }
+    }
+
+    private void abrirArchivo() {
+        if (seleccionado.showDialog(this, "Abrir") == JFileChooser.APPROVE_OPTION) {
+            archivo = seleccionado.getSelectedFile();
+            if (archivo.canRead()) {
+                if (archivo.getName().endsWith("acl")) {
+                    String contenido = gestion.abrirTexto(archivo);
+                    TxtArea.setText(contenido);
+                    ruta = seleccionado.getSelectedFile().getAbsolutePath();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo .txt");
+                }
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
