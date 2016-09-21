@@ -660,7 +660,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             if (respuesta != null) {
                 JOptionPane.showMessageDialog(null, respuesta);
             } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar el texto");
+                JOptionPane.showMessageDialog(null, "Error al guardar el archivo");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione la opcion guardar como ");
@@ -677,10 +677,10 @@ public class IDE_Armus extends javax.swing.JFrame {
                 if (respuesta != null) {
                     JOptionPane.showMessageDialog(null, respuesta);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error al guardar el texto");
+                    JOptionPane.showMessageDialog(null, "Error al guardar el archivo");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El texto se debe guardar con extencion .txt");
+                JOptionPane.showMessageDialog(null, "El texto se debe guardar con extencion .acl");
             }
 
         }
@@ -695,7 +695,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                     TxtArea.setText(contenido);
                     ruta = seleccionado.getSelectedFile().getAbsolutePath();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo .txt");
+                    JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo .acl");
                 }
             }
         }
