@@ -61,6 +61,8 @@ public class IDE_Armus extends javax.swing.JFrame {
         btnPegar = new javax.swing.JButton();
         btnCopiar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
+        ScrollPane1 = new javax.swing.JScrollPane();
+        TxtAreaConsola = new javax.swing.JTextArea();
         BarraMenu = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuAbrir = new javax.swing.JMenuItem();
@@ -92,6 +94,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Armus");
         setMinimumSize(new java.awt.Dimension(500, 300));
+        setPreferredSize(new java.awt.Dimension(800, 700));
 
         Panel.setBackground(new java.awt.Color(26, 115, 126));
 
@@ -175,6 +178,13 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         });
 
+        TxtAreaConsola.setEditable(false);
+        TxtAreaConsola.setColumns(20);
+        TxtAreaConsola.setRows(5);
+        TxtAreaConsola.setText("dxfdxzf");
+        TxtAreaConsola.setToolTipText("");
+        ScrollPane1.setViewportView(TxtAreaConsola);
+
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
@@ -197,7 +207,8 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addComponent(btnCopiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNuevo)
-                        .addGap(0, 984, Short.MAX_VALUE)))
+                        .addGap(0, 984, Short.MAX_VALUE))
+                    .addComponent(ScrollPane1))
                 .addContainerGap())
         );
         PanelLayout.setVerticalGroup(
@@ -213,7 +224,9 @@ public class IDE_Armus extends javax.swing.JFrame {
                     .addComponent(btnCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(ScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -612,7 +625,8 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu12ActionPerformed
 
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "btn ejecutar pulsado");
+        
     }//GEN-LAST:event_btnEjecutarActionPerformed
 
 
@@ -620,8 +634,10 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenuBar BarraMenu;
     private javax.swing.JMenu MenuAyuda;
     private javax.swing.JPanel Panel;
+    private javax.swing.JScrollPane ScrollPane1;
     private javax.swing.JScrollPane ScrollPanel;
     private javax.swing.JTextArea TxtArea;
+    private javax.swing.JTextArea TxtAreaConsola;
     private javax.swing.JButton btnAbrir;
     private javax.swing.JButton btnCopiar;
     private javax.swing.JButton btnCortar;
