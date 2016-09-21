@@ -306,7 +306,7 @@ public class configuraciones extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Se guardo correctamente");
             this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "los parametros no cumplen con el valor minimo establecido");
+                JOptionPane.showMessageDialog(null, "Los parametros no cumplen con el valor minimo establecido. \nMinimo establecido = 30");
             }
         }else{
             JOptionPane.showMessageDialog(null, "Los campos deben ser numeros enteros positivos");
