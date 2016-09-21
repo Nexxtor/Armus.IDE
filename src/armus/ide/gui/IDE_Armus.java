@@ -82,7 +82,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         menuPegar = new javax.swing.JMenuItem();
         MenuAyuda = new javax.swing.JMenu();
         btnEjecutar = new javax.swing.JRadioButtonMenuItem();
-        jMenu14 = new javax.swing.JMenu();
         preferencia = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         menuColor1 = new javax.swing.JMenuItem();
@@ -90,6 +89,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         menuColor3 = new javax.swing.JMenuItem();
         menuColor4 = new javax.swing.JMenuItem();
         menuColor5 = new javax.swing.JMenuItem();
+        menuConfigurarParametros = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenuItem();
 
         jMenu11.setText("jMenu11");
@@ -332,9 +332,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         MenuAyuda.add(btnEjecutar);
 
-        jMenu14.setText("Configurar Parametros");
-        MenuAyuda.add(jMenu14);
-
         BarraMenu.add(MenuAyuda);
 
         preferencia.setText("Preferencias");
@@ -389,6 +386,14 @@ public class IDE_Armus extends javax.swing.JFrame {
         jMenu5.add(menuColor5);
 
         preferencia.add(jMenu5);
+
+        menuConfigurarParametros.setText("Configurar Parametros");
+        menuConfigurarParametros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuConfigurarParametrosActionPerformed(evt);
+            }
+        });
+        preferencia.add(menuConfigurarParametros);
 
         menuAyuda.setText("Ayuda");
         menuAyuda.setActionCommand("");
@@ -630,6 +635,11 @@ public class IDE_Armus extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
+
+    private void menuConfigurarParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuConfigurarParametrosActionPerformed
+        configuraciones ventanita = new configuraciones();
+        ventanita.setVisible(true);
+    }//GEN-LAST:event_menuConfigurarParametrosActionPerformed
     private void guardarArchivo() {
         if (archivo != null) {
             String contenido = TxtArea.getText();
@@ -702,7 +712,6 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JButton btnPegar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
@@ -714,6 +723,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuColor3;
     private javax.swing.JMenuItem menuColor4;
     private javax.swing.JMenuItem menuColor5;
+    private javax.swing.JMenuItem menuConfigurarParametros;
     private javax.swing.JMenuItem menuCopiar;
     private javax.swing.JMenuItem menuCortar;
     private javax.swing.JMenuItem menuGuardar;
