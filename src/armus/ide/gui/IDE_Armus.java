@@ -22,7 +22,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import armus.ide.gui.TextLineNumber;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 /**
  *
  * @author stefa_000
@@ -36,7 +38,7 @@ public class IDE_Armus extends javax.swing.JFrame {
 
     public IDE_Armus() {
         initComponents();
-
+        initTextLineNumber();
         try { //agrega un icono para la aplicación
             setIconImage(new ImageIcon("/opt/armus/Logo.png").getImage());
         } catch (Exception ex) {
@@ -44,7 +46,12 @@ public class IDE_Armus extends javax.swing.JFrame {
         }
 
     }
-
+    public  void initTextLineNumber(){
+        
+       TextLineNumber tln = new TextLineNumber(TxtArea); 
+       ScrollPanel.setRowHeaderView(tln);
+}
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
