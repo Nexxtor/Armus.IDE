@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package armus.ide;
+
 import armus.ide.gui.IDE_Armus;
+import armus.lib.scanner.Scanner;
+import armus.lib.parser.Parser;
 import javax.swing.ImageIcon;
 
 /**
@@ -17,13 +20,16 @@ public class ProyectoArmus {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IDE_Armus ventana = new IDE_Armus();
+       IDE_Armus ventana = new IDE_Armus();
         ventana.setVisible(true);
-        
-        
-     
-        
-        
+      
+      Scanner s = new Scanner();
+      String[] a = s.lsFiles("/home/nextor/Escritorio/proyecto/main.acl");
+      
+      Parser b = new Parser();
+      b.run(a); //Ejecuata el parser
+      
+
     }
-    
+
 }
