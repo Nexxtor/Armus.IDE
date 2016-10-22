@@ -27,7 +27,7 @@ public class ProyectoArmus {
       String[] a = s.lsFiles("/home/nextor/Escritorio/proyecto/main.acl");
       
       Parser b = new Parser();
-      b.run(a);
+      b.run(a); //Ejecuata el parser
       
 
     }
