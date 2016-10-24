@@ -58,9 +58,10 @@ public class IDE_Armus extends javax.swing.JFrame {
         return index;
     }
     //***************************************************************************
-    public IDE_Armus() {
+    public IDE_Armus() throws BadLocationException {
         initComponents();
         initTextLineNumber();//inicializa complemento enumerado de lineas de codigo fuente
+        
         //***************************************************************************
       final StyleContext cont = StyleContext.getDefaultStyleContext();
         final AttributeSet attr = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, Color.BLUE);
@@ -121,6 +122,30 @@ public class IDE_Armus extends javax.swing.JFrame {
         }
 
     }
+    //****************************************************************************************
+    //coloreo de linea de error
+      public void PintarLineaConError(JTextPane txt, String[] LineWithError, int i) throws BadLocationException{
+        int TotalLineas = txt.getText().split("\n").length;
+        int totalCaracteres = 0;
+        int indexLine = 1;
+        String lineaError = LineWithError[i].substring(0, 1);
+        String[] lines = txt.getText().split("\\n");
+
+        while(indexLine<=TotalLineas){
+        
+        int fin = lines[indexLine-1].length() + totalCaracteres;
+        
+            if(Integer.parseInt(lineaError)==indexLine){
+                DefaultHighlighter.DefaultHighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW);
+                txt.getHighlighter().addHighlight(fin-lines[indexLine-1].length(), fin, highlightPainter);
+            }
+            
+            
+            totalCaracteres = fin+1;
+            indexLine++;
+        }
+    }
+      //**********************************************************************************
     public  void initTextLineNumber(){
         
        TextLineNumber tln = new TextLineNumber(jTextPane1); 
