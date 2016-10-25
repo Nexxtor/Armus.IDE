@@ -114,7 +114,8 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="MenuAyuda">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Analizador Lexicogr&#xe1;fico"/>
+            <Property name="text" type="java.lang.String" value="Analizadores"/>
+            <Property name="actionCommand" type="java.lang.String" value=""/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Symbol" size="14" style="1"/>
             </Property>
@@ -127,6 +128,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEjecutarActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="btnEjecutarParser">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ejecutar Parser"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEjecutarParserActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -148,6 +157,14 @@
                 <Property name="text" type="java.lang.String" value="Temas"/>
               </Properties>
               <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="estandarTema">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Standard"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="estandarTemaActionPerformed"/>
+                  </Events>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="menuColor1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pink"/>

@@ -164,8 +164,10 @@ public class IDE_Armus extends javax.swing.JFrame {
         menuPegar = new javax.swing.JMenuItem();
         MenuAyuda = new javax.swing.JMenu();
         btnEjecutar = new javax.swing.JRadioButtonMenuItem();
+        btnEjecutarParser = new javax.swing.JMenuItem();
         preferencia = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        estandarTema = new javax.swing.JMenuItem();
         menuColor1 = new javax.swing.JMenuItem();
         menuColor2 = new javax.swing.JMenuItem();
         menuColor3 = new javax.swing.JMenuItem();
@@ -395,7 +397,8 @@ public class IDE_Armus extends javax.swing.JFrame {
 
         BarraMenu.add(jMenu1);
 
-        MenuAyuda.setText("Analizador Lexicográfico");
+        MenuAyuda.setText("Analizadores");
+        MenuAyuda.setActionCommand("");
         MenuAyuda.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
 
         btnEjecutar.setSelected(true);
@@ -406,6 +409,14 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         });
         MenuAyuda.add(btnEjecutar);
+
+        btnEjecutarParser.setText("Ejecutar Parser");
+        btnEjecutarParser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEjecutarParserActionPerformed(evt);
+            }
+        });
+        MenuAyuda.add(btnEjecutarParser);
 
         BarraMenu.add(MenuAyuda);
 
@@ -419,6 +430,14 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
 
         jMenu5.setText("Temas");
+
+        estandarTema.setText("Standard");
+        estandarTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estandarTemaActionPerformed(evt);
+            }
+        });
+        jMenu5.add(estandarTema);
 
         menuColor1.setText("Pink");
         menuColor1.addActionListener(new java.awt.event.ActionListener() {
@@ -589,7 +608,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(228, 114, 210));
-        jTextPane1.setBackground(new Color(64, 0, 64));
+        jTextPane1.setBackground(new Color(255,255,255));
         Panel.setBackground(new Color(231, 81, 166));
         BarraMenu.setBackground(new Color(250, 145, 204));
     }//GEN-LAST:event_menuColor1ActionPerformed
@@ -598,7 +617,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(218, 141, 70));
-        jTextPane1.setBackground(new Color(80, 44, 13));
+        jTextPane1.setBackground(new Color(255,255,255));
         Panel.setBackground(new Color(53, 202, 192));
         BarraMenu.setBackground(new Color(121, 229, 222));
     }//GEN-LAST:event_menuColor5ActionPerformed
@@ -607,7 +626,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(102, 110, 222));
-        jTextPane1.setBackground(new Color(16, 21, 84));
+        jTextPane1.setBackground(new Color(255,255,255));
         Panel.setBackground(new Color(53, 106, 180));
         BarraMenu.setBackground(new Color(88, 138, 208));
     }//GEN-LAST:event_menuColor2ActionPerformed
@@ -616,7 +635,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(100, 198, 125));
-        jTextPane1.setBackground(new Color(0, 59, 2));
+        jTextPane1.setBackground(new Color(255,255,255));
         Panel.setBackground(new Color(35, 170, 53));
         BarraMenu.setBackground(new Color(106, 223, 122));
     }//GEN-LAST:event_menuColor3ActionPerformed
@@ -625,7 +644,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(208, 67, 67));
-        jTextPane1.setBackground(new Color(80, 44, 13));
+        jTextPane1.setBackground(new Color(255,255,255));
         Panel.setBackground(new Color(148, 13, 13));
         BarraMenu.setBackground(new Color(222, 118, 118));
     }//GEN-LAST:event_menuColor4ActionPerformed
@@ -728,6 +747,29 @@ public class IDE_Armus extends javax.swing.JFrame {
         configuraciones ventanita = new configuraciones();
         ventanita.setVisible(true);
     }//GEN-LAST:event_menuConfigurarParametrosActionPerformed
+
+    private void estandarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estandarTemaActionPerformed
+        // TODO add your handling code here:
+        Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
+        jTextPane1.setFont(font);
+        jTextPane1.setForeground(new Color(228, 114, 210));
+        jTextPane1.setBackground(new Color(255,255,255));
+        Panel.setBackground(new Color(26,115,126));
+        BarraMenu.setBackground(new Color(250, 145, 204));
+    }//GEN-LAST:event_estandarTemaActionPerformed
+
+    private void btnEjecutarParserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarParserActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnEjecutarParserActionPerformed
     private void guardarArchivo() {
         if (archivo != null) {
             String contenido = jTextPane1.getText();
@@ -810,10 +852,12 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JButton btnCopiar;
     private javax.swing.JButton btnCortar;
     private javax.swing.JRadioButtonMenuItem btnEjecutar;
+    private javax.swing.JMenuItem btnEjecutarParser;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnGuardarComo;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnPegar;
+    private javax.swing.JMenuItem estandarTema;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu3;
