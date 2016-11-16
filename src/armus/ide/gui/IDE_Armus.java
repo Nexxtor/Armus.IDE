@@ -28,6 +28,7 @@ import javax.swing.JTextPane;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.text.*;
+
 /**
  *
  * @author stefa_000
@@ -37,81 +38,24 @@ public class IDE_Armus extends javax.swing.JFrame {
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
     manejoArchivos gestion = new manejoArchivos();
-    String ruta = "";
-    //***************************************************************************
-    private int findLastNonWordChar (String text, int index) {
-        while (--index >= 0) {
-            if (String.valueOf(text.charAt(index)).matches("\\W")) {
-                break;
-            }
-        }
-        return index;
-    }
+    String ruta = "", ruta2 = "", ruta3 = "", ruta4 = "", ruta5 = "", ruta6 = "", ruta7 = "", ruta8 = "", ruta9 = "", ruta10 = "";
 
-    private int findFirstNonWordChar (String text, int index) {
-        while (index < text.length()) {
-            if (String.valueOf(text.charAt(index)).matches("\\W")) {
-                break;
-            }
-            index++;
-        }
-        return index;
-    }
-    //***************************************************************************
     public IDE_Armus() {
         initComponents();
         initTextLineNumber();//inicializa complemento enumerado de lineas de codigo fuente
-        //***************************************************************************
-      final StyleContext cont = StyleContext.getDefaultStyleContext();
-        final AttributeSet attr = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, Color.BLUE);
-        final SimpleAttributeSet sas = new SimpleAttributeSet(); 
-        StyleConstants.setBold(sas, true);
-        final AttributeSet attrBlack = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, Color.BLACK);
-        DefaultStyledDocument doc = new DefaultStyledDocument() {
-            public void insertString (int offset, String str, AttributeSet a) throws BadLocationException {
-                super.insertString(offset, str, a);
 
-                String text = getText(0, getLength());
-                int before = findLastNonWordChar(text, offset);
-                if (before < 0) before = 0;
-                int after = findFirstNonWordChar(text, offset + str.length());
-                int wordL = before;
-                int wordR = before;
-
-                while (wordR <= after) {
-                    if (wordR == after || String.valueOf(text.charAt(wordR)).matches("\\W")) {
-                        if (text.substring(wordL, wordR).matches("(\\W)*(entero|byte|real|vacio|booleano|cadena|caracter|Objeto|Archivo|si|sino|probar|caso|defecto|romper|mientras|para|hacer|para_cada|Sistema|obtenerEntero|obtenerReal|\n" +
-"obtenerCadena|obtenerCaracter|mostrar|publica|privada|retornar|Arreglo|agregar|obtener|cuantos|quitar|abrir|leerLinea|volcado|cerrar|concatenar|parteEntera|comparar|\n" +
-"mayor|menor|esPar|decimalBin|pontencia|absoluto|modulo|longitudCadena|clase|incluir|verdadero|false|obtenerBooleano)")){
-                            setCharacterAttributes(wordL, wordR - wordL, sas, false);
-                            setCharacterAttributes(wordL, wordR - wordL, attr, false);
-                        }else
-                            setCharacterAttributes(wordL, wordR - wordL, attrBlack, false);
-                        wordL = wordR;
-                    }
-                    wordR++;
-                }
-            }
-
-            public void remove (int offs, int len) throws BadLocationException {
-                super.remove(offs, len);
-
-                String text = getText(0, getLength());
-                int before = findLastNonWordChar(text, offs);
-                if (before < 0) before = 0;
-                int after = findFirstNonWordChar(text, offs);
-
-                if (text.substring(before, after).matches("(\\W)*(entero|byte|real|vacio|booleano|cadena|caracter|Objeto|Archivo|si|sino|probar|caso|defecto|romper|mientras|para|hacer|para_cada|Sistema|obtenerEntero|obtenerReal|\n" +
-"obtenerCadena|obtenerCaracter|mostrar|publica|privada|retornar|Arreglo|agregar|obtener|cuantos|quitar|abrir|leerLinea|volcado|cerrar|concatenar|parteEntera|comparar|\n" +
-"mayor|menor|esPar|decimalBin|pontencia|absoluto|modulo|longitudCadena|clase|incluir|verdadero|false|obtenerBooleano)")) {
-                    setCharacterAttributes(before, after - before, sas, false);
-                    setCharacterAttributes(before, after - before, attr, false);
-                } else {
-                    setCharacterAttributes(before, after - before, attrBlack, false);
-                }
-            }
-        };
-        jTextPane1.setStyledDocument(doc);
+        //DefaultStyledDocument doc = ;
+                       
+        jTextPane1.setStyledDocument(new Guapiador());
+        jTextPane2.setStyledDocument(new Guapiador());
+        jTextPane3.setStyledDocument(new Guapiador());
+        jTextPane4.setStyledDocument(new Guapiador());
+        jTextPane5.setStyledDocument(new Guapiador());
+        jTextPane6.setStyledDocument(new Guapiador());
+        jTextPane7.setStyledDocument(new Guapiador());
+        jTextPane8.setStyledDocument(new Guapiador());
+        jTextPane9.setStyledDocument(new Guapiador());
+        jTextPane10.setStyledDocument(new Guapiador());
         setVisible(true);
         //***************************************************************************
         try { //agrega un icono para la aplicación
@@ -121,12 +65,40 @@ public class IDE_Armus extends javax.swing.JFrame {
         }
 
     }
-    public  void initTextLineNumber(){
-        
-       TextLineNumber tln = new TextLineNumber(jTextPane1); 
-       jScrollPane2.setRowHeaderView(tln);
-}
-   
+
+    public void initTextLineNumber() {
+
+        TextLineNumber tln = new TextLineNumber(jTextPane1);
+        jScrollPane2.setRowHeaderView(tln);
+
+        TextLineNumber tln1 = new TextLineNumber(jTextPane2);
+        jScrollPane1.setRowHeaderView(tln1);
+
+        TextLineNumber tln2 = new TextLineNumber(jTextPane3);
+        jScrollPane3.setRowHeaderView(tln2);
+
+        TextLineNumber tln3 = new TextLineNumber(jTextPane4);
+        jScrollPane4.setRowHeaderView(tln3);
+
+        TextLineNumber tln4 = new TextLineNumber(jTextPane5);
+        jScrollPane5.setRowHeaderView(tln4);
+
+        TextLineNumber tln5 = new TextLineNumber(jTextPane6);
+        jScrollPane6.setRowHeaderView(tln5);
+
+        TextLineNumber tln6 = new TextLineNumber(jTextPane7);
+        jScrollPane7.setRowHeaderView(tln6);
+
+        TextLineNumber tln7 = new TextLineNumber(jTextPane8);
+        jScrollPane8.setRowHeaderView(tln7);
+
+        TextLineNumber tln8 = new TextLineNumber(jTextPane9);
+        jScrollPane9.setRowHeaderView(tln8);
+
+        TextLineNumber tln9 = new TextLineNumber(jTextPane10);
+        jScrollPane10.setRowHeaderView(tln9);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,8 +121,27 @@ public class IDE_Armus extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         ScrollPane1 = new javax.swing.JScrollPane();
         TxtAreaConsola = new javax.swing.JTextArea();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextPane3 = new javax.swing.JTextPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPane4 = new javax.swing.JTextPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextPane5 = new javax.swing.JTextPane();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextPane6 = new javax.swing.JTextPane();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextPane7 = new javax.swing.JTextPane();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextPane8 = new javax.swing.JTextPane();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTextPane9 = new javax.swing.JTextPane();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTextPane10 = new javax.swing.JTextPane();
         BarraMenu = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuAbrir = new javax.swing.JMenuItem();
@@ -274,17 +265,60 @@ public class IDE_Armus extends javax.swing.JFrame {
         TxtAreaConsola.setToolTipText("");
         ScrollPane1.setViewportView(TxtAreaConsola);
 
+        jTabbedPane1.setToolTipText("");
+
+        jTextPane1.setText("gchgcgfcjgc");
         jScrollPane2.setViewportView(jTextPane1);
+
+        jTabbedPane1.addTab("tab1", jScrollPane2);
+
+        jScrollPane1.setViewportView(jTextPane2);
+
+        jTabbedPane1.addTab("tab2", jScrollPane1);
+
+        jTextPane3.setText("hhhhdiuhoadhvosj");
+        jScrollPane3.setViewportView(jTextPane3);
+
+        jTabbedPane1.addTab("tab3", jScrollPane3);
+
+        jScrollPane4.setViewportView(jTextPane4);
+
+        jTabbedPane1.addTab("tab4", jScrollPane4);
+
+        jScrollPane5.setViewportView(jTextPane5);
+
+        jTabbedPane1.addTab("tab5", jScrollPane5);
+
+        jScrollPane6.setViewportView(jTextPane6);
+
+        jTabbedPane1.addTab("tab6", jScrollPane6);
+
+        jScrollPane7.setViewportView(jTextPane7);
+
+        jTabbedPane1.addTab("tab7", jScrollPane7);
+
+        jScrollPane8.setViewportView(jTextPane8);
+
+        jTabbedPane1.addTab("tab8", jScrollPane8);
+
+        jScrollPane9.setViewportView(jTextPane9);
+
+        jTabbedPane1.addTab("tab9", jScrollPane9);
+
+        jScrollPane10.setViewportView(jTextPane10);
+
+        jTabbedPane1.addTab("tab10", jScrollPane10);
 
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+            .addGroup(PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1)
+                    .addComponent(ScrollPane1)
+                    .addGroup(PanelLayout.createSequentialGroup()
                         .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGuardar)
@@ -298,8 +332,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addComponent(btnCopiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNuevo)
-                        .addGap(0, 472, Short.MAX_VALUE))
-                    .addComponent(ScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 472, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PanelLayout.setVerticalGroup(
@@ -315,7 +348,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                     .addComponent(btnCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addContainerGap())
@@ -608,7 +641,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(228, 114, 210));
-        jTextPane1.setBackground(new Color(255,255,255));
+        jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(231, 81, 166));
         BarraMenu.setBackground(new Color(250, 145, 204));
     }//GEN-LAST:event_menuColor1ActionPerformed
@@ -617,7 +650,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(218, 141, 70));
-        jTextPane1.setBackground(new Color(255,255,255));
+        jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(53, 202, 192));
         BarraMenu.setBackground(new Color(121, 229, 222));
     }//GEN-LAST:event_menuColor5ActionPerformed
@@ -626,7 +659,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(102, 110, 222));
-        jTextPane1.setBackground(new Color(255,255,255));
+        jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(53, 106, 180));
         BarraMenu.setBackground(new Color(88, 138, 208));
     }//GEN-LAST:event_menuColor2ActionPerformed
@@ -635,7 +668,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(100, 198, 125));
-        jTextPane1.setBackground(new Color(255,255,255));
+        jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(35, 170, 53));
         BarraMenu.setBackground(new Color(106, 223, 122));
     }//GEN-LAST:event_menuColor3ActionPerformed
@@ -644,7 +677,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(208, 67, 67));
-        jTextPane1.setBackground(new Color(255,255,255));
+        jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(148, 13, 13));
         BarraMenu.setBackground(new Color(222, 118, 118));
     }//GEN-LAST:event_menuColor4ActionPerformed
@@ -661,48 +694,48 @@ public class IDE_Armus extends javax.swing.JFrame {
                 return;
             }
         } else {
-           
-                String contenido = jTextPane1.getText();
-                String respuesta = gestion.guardarTexto(archivo, contenido);
-                if (respuesta == null) {
-                    JOptionPane.showMessageDialog(null, "Error al guardar el texto");
-                }
-        }
-            try {
-                Scanner scanner = new Scanner();
-                String[] listaArchivos = scanner.lsFiles(ruta);
-                /// Poner un error aqui si listaArchivos es nulo
-                if (listaArchivos == null) {
-                    anadirErrores();
-                    return;
-                }
-                TxtAreaConsola.setText("Se encontraron los siguientes archivos a Tokenizar \n");
-                for (String valor : listaArchivos) {
-                    TxtAreaConsola.append(valor + "\n");
-                }
-                TxtAreaConsola.append("____________________________________________________________________________\n");
-                String[] tokens = scanner.lsTokens(listaArchivos);
 
-                if (tokens == null) {
-                    anadirErrores();
-                }
-
-                String cadena;
-                FileReader f;
-                BufferedReader b;
-                f = new FileReader("lsToken.tok");
-                b = new BufferedReader(f);
-                while ((cadena = b.readLine()) != null) {
-                    TxtAreaConsola.append(cadena + "\n");
-                }
-                b.close();
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,
-                        "No se puede cargar la libreria del Scanner\n" + e.getMessage(),
-                        "Error cargando libreria", JOptionPane.ERROR_MESSAGE);
+            String contenido = jTextPane1.getText();
+            String respuesta = gestion.guardarTexto(archivo, contenido);
+            if (respuesta == null) {
+                JOptionPane.showMessageDialog(null, "Error al guardar el texto");
             }
-        
+        }
+        try {
+            Scanner scanner = new Scanner();
+            String[] listaArchivos = scanner.lsFiles(ruta);
+            /// Poner un error aqui si listaArchivos es nulo
+            if (listaArchivos == null) {
+                anadirErrores();
+                return;
+            }
+            TxtAreaConsola.setText("Se encontraron los siguientes archivos a Tokenizar \n");
+            for (String valor : listaArchivos) {
+                TxtAreaConsola.append(valor + "\n");
+            }
+            TxtAreaConsola.append("____________________________________________________________________________\n");
+            String[] tokens = scanner.lsTokens(listaArchivos);
+
+            if (tokens == null) {
+                anadirErrores();
+            }
+
+            String cadena;
+            FileReader f;
+            BufferedReader b;
+            f = new FileReader("lsToken.tok");
+            b = new BufferedReader(f);
+            while ((cadena = b.readLine()) != null) {
+                TxtAreaConsola.append(cadena + "\n");
+            }
+            b.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "No se puede cargar la libreria del Scanner\n" + e.getMessage(),
+                    "Error cargando libreria", JOptionPane.ERROR_MESSAGE);
+        }
+
 
     }//GEN-LAST:event_btnEjecutarActionPerformed
 
@@ -753,22 +786,15 @@ public class IDE_Armus extends javax.swing.JFrame {
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
         jTextPane1.setFont(font);
         jTextPane1.setForeground(new Color(228, 114, 210));
-        jTextPane1.setBackground(new Color(255,255,255));
-        Panel.setBackground(new Color(26,115,126));
+        jTextPane1.setBackground(new Color(255, 255, 255));
+        Panel.setBackground(new Color(26, 115, 126));
         BarraMenu.setBackground(new Color(250, 145, 204));
     }//GEN-LAST:event_estandarTemaActionPerformed
 
     private void btnEjecutarParserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarParserActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_btnEjecutarParserActionPerformed
     private void guardarArchivo() {
         if (archivo != null) {
@@ -809,8 +835,51 @@ public class IDE_Armus extends javax.swing.JFrame {
             if (archivo.canRead()) {
                 if (archivo.getName().endsWith("acl")) {
                     String contenido = gestion.abrirTexto(archivo);
-                    jTextPane1.setText(contenido);
-                    ruta = seleccionado.getSelectedFile().getAbsolutePath();
+                    //System.out.printf("%i\n", jTabbedPane1.getSelectedIndex());
+                    switch (jTabbedPane1.getSelectedIndex()) {
+                        case 0:
+                            jTextPane1.setText(contenido);
+                            ruta = seleccionado.getSelectedFile().getAbsolutePath();
+                            break;
+                        case 1:
+                            jTextPane2.setText(contenido);
+                            ruta2 = seleccionado.getSelectedFile().getAbsolutePath();
+                            break;
+                        case 2:
+                            jTextPane3.setText(contenido);
+                            ruta3 = seleccionado.getSelectedFile().getAbsolutePath();
+                            break;
+                        case 3:
+                            jTextPane4.setText(contenido);
+                            ruta4 = seleccionado.getSelectedFile().getAbsolutePath();
+                            break;
+                        case 4:
+                            jTextPane5.setText(contenido);
+                            ruta5 = seleccionado.getSelectedFile().getAbsolutePath();
+                            break;
+                        case 5:
+                            jTextPane6.setText(contenido);
+                            ruta6 = seleccionado.getSelectedFile().getAbsolutePath();
+                            break;
+                        case 6:
+                            jTextPane7.setText(contenido);
+                            ruta7 = seleccionado.getSelectedFile().getAbsolutePath();
+                            break;
+                        case 7:
+                            jTextPane8.setText(contenido);
+                            ruta8 = seleccionado.getSelectedFile().getAbsolutePath();
+                            break;
+                        case 8:
+                            jTextPane9.setText(contenido);
+                            ruta9 = seleccionado.getSelectedFile().getAbsolutePath();
+                            break;
+                        case 9:
+                            jTextPane10.setText(contenido);
+                            ruta10 = seleccionado.getSelectedFile().getAbsolutePath();
+                            break;
+                        default:
+                            break;
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo .acl");
                 }
@@ -864,8 +933,27 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPane10;
+    private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JTextPane jTextPane3;
+    private javax.swing.JTextPane jTextPane4;
+    private javax.swing.JTextPane jTextPane5;
+    private javax.swing.JTextPane jTextPane6;
+    private javax.swing.JTextPane jTextPane7;
+    private javax.swing.JTextPane jTextPane8;
+    private javax.swing.JTextPane jTextPane9;
     private javax.swing.JMenuItem menuAbrir;
     private javax.swing.JMenuItem menuAyuda;
     private javax.swing.JMenuItem menuColor1;
