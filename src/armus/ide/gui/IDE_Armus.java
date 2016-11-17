@@ -746,7 +746,14 @@ public class IDE_Armus extends javax.swing.JFrame {
         String[] a = s.lsFiles(ruta.get(jTabbedPane1.getSelectedIndex()));
 
         Parser b = new Parser();
-        b.run(a); //Ejecuata el parser
+        String[] respuesta = b.run(a) ;
+        if(respuesta == null){
+            JOptionPane.showMessageDialog(null, "Se compilo con exito", "Exito", JOptionPane.HEIGHT);
+        }else{
+            for(int i = 0; i < respuesta.length; i++){
+                System.out.println(respuesta[i]);
+            }
+        }
 
 
     }//GEN-LAST:event_btnEjecutarParserActionPerformed
