@@ -6,11 +6,13 @@
 package armus.ide.utilites;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,6 +72,20 @@ public class manejoArchivos {
             respuesta = "Se guardo el archivo de texto";
         }catch(Exception e){
             
+        }
+        return respuesta;
+    }
+    
+    
+    public String guardarSencillo(String rutita, String Contenido){
+        String respuesta =null;
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(rutita));
+             bw.write(Contenido);
+             bw.close();
+             respuesta = "Se guardo el archivo de texto";
+        } catch (IOException ex) {
+            Logger.getLogger(manejoArchivos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return respuesta;
     }
