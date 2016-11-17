@@ -23,12 +23,7 @@ public class ProyectoArmus {
        IDE_Armus ventana = new IDE_Armus();
         ventana.setVisible(true);
       
-      Scanner s = new Scanner();
-      String[] a = s.lsFiles("/home/nextor/Escritorio/proyecto/main.acl");
-      
-      Parser b = new Parser();
-      b.run(a); //Ejecuata el parser
-      
+
 
     }
 
