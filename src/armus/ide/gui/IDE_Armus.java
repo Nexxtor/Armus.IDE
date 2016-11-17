@@ -30,6 +30,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.*;
 
 /**
@@ -58,15 +59,17 @@ public class IDE_Armus extends javax.swing.JFrame {
         scrollTexto.get(0).setRowHeaderView(tln3);
         jTabbedPane1.add(scrollTexto.get(0));
         jTabbedPane1.setTitleAt(0, "nuevo");
-        ruta.put(0, "");
 
-        setVisible(true);
+        ruta.put(0, "");
+       JFrame.setDefaultLookAndFeelDecorated(true);
+       
         //***************************************************************************
         try { //agrega un icono para la aplicación
             setIconImage(new ImageIcon("/opt/armus/Logo.png").getImage());
         } catch (Exception ex) {
             System.out.println(ex.getMessage()); //muestra el exepción en consola
         }
+         setVisible(true);
 
     }
 
@@ -95,11 +98,14 @@ public class IDE_Armus extends javax.swing.JFrame {
         btnPegar = new javax.swing.JButton();
         btnCopiar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
-        ScrollPane1 = new javax.swing.JScrollPane();
-        TxtAreaConsola = new javax.swing.JTextArea();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         btnAbrirP = new javax.swing.JButton();
         btnCerrarP = new javax.swing.JButton();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        ScrollPane1 = new javax.swing.JScrollPane();
+        TxtAreaConsola = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         BarraMenu = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuAbrir = new javax.swing.JMenuItem();
@@ -217,12 +223,6 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         });
 
-        TxtAreaConsola.setEditable(false);
-        TxtAreaConsola.setColumns(20);
-        TxtAreaConsola.setRows(5);
-        TxtAreaConsola.setToolTipText("");
-        ScrollPane1.setViewportView(TxtAreaConsola);
-
         jTabbedPane1.setToolTipText("");
 
         btnAbrirP.setText("nuevaPestania");
@@ -239,6 +239,31 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         });
 
+        jTabbedPane2.setName(""); // NOI18N
+
+        TxtAreaConsola.setEditable(false);
+        TxtAreaConsola.setColumns(20);
+        TxtAreaConsola.setRows(5);
+        TxtAreaConsola.setToolTipText("");
+        ScrollPane1.setViewportView(TxtAreaConsola);
+
+        jTabbedPane2.addTab("Console", ScrollPane1);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Archivo", "Linea", "Columna", "Error"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jTabbedPane2.addTab("Errores", jScrollPane1);
+
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
@@ -247,7 +272,6 @@ public class IDE_Armus extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1)
-                    .addComponent(ScrollPane1)
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -266,7 +290,8 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addComponent(btnAbrirP)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCerrarP)
-                        .addGap(0, 227, Short.MAX_VALUE)))
+                        .addGap(0, 167, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane2))
                 .addContainerGap())
         );
         PanelLayout.setVerticalGroup(
@@ -291,7 +316,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -685,6 +710,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                     "Error cargando libreria", JOptionPane.ERROR_MESSAGE);
         }
 
+        jTabbedPane2.setSelectedIndex(0);
 
     }//GEN-LAST:event_btnEjecutarActionPerformed
 
@@ -742,19 +768,30 @@ public class IDE_Armus extends javax.swing.JFrame {
 
     private void btnEjecutarParserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarParserActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel modelo = new DefaultTableModel();
+        jTable1.setModel(modelo);
+        
         Scanner s = new Scanner();
         String[] a = s.lsFiles(ruta.get(jTabbedPane1.getSelectedIndex()));
 
         Parser b = new Parser();
         String[] respuesta = b.run(a) ;
         if(respuesta == null){
-            JOptionPane.showMessageDialog(null, "Se compilo con exito", "Exito", JOptionPane.HEIGHT);
+            modelo.addColumn("Exito");
+            String[] ext = {"Compilado con exito"};
+            modelo.addRow(ext);
         }else{
+            modelo.addColumn("Archivo");
+            modelo.addColumn("# Linea");
+            modelo.addColumn("# Col");
+            modelo.addColumn("Detalles");
             for(int i = 0; i < respuesta.length; i++){
                 System.out.println(respuesta[i]);
+                modelo.addRow((Object[])respuesta[i].split(","));
             }
         }
-
+        
+        jTabbedPane2.setSelectedIndex(1);
 
     }//GEN-LAST:event_btnEjecutarParserActionPerformed
 
@@ -892,7 +929,10 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem menuAbrir;
     private javax.swing.JMenuItem menuAyuda;
     private javax.swing.JMenuItem menuColor1;
