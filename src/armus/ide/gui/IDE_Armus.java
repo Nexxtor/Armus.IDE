@@ -27,6 +27,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.text.*;
 
 /**
@@ -38,24 +40,26 @@ public class IDE_Armus extends javax.swing.JFrame {
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
     manejoArchivos gestion = new manejoArchivos();
-    String ruta = "", ruta2 = "", ruta3 = "", ruta4 = "", ruta5 = "", ruta6 = "", ruta7 = "", ruta8 = "", ruta9 = "", ruta10 = "";
-
+    Map<Integer, String>  ruta= new HashMap<Integer, String>(); 
+    int NumPestana =1; ////cambiar
+    
     public IDE_Armus() {
         initComponents();
-        initTextLineNumber();//inicializa complemento enumerado de lineas de codigo fuente
+        //initTextLineNumber();//inicializa complemento enumerado de lineas de codigo fuente
 
         //DefaultStyledDocument doc = ;
-                       
-        jTextPane1.setStyledDocument(new Guapiador());
-        jTextPane2.setStyledDocument(new Guapiador());
-        jTextPane3.setStyledDocument(new Guapiador());
-        jTextPane4.setStyledDocument(new Guapiador());
-        jTextPane5.setStyledDocument(new Guapiador());
-        jTextPane6.setStyledDocument(new Guapiador());
-        jTextPane7.setStyledDocument(new Guapiador());
-        jTextPane8.setStyledDocument(new Guapiador());
-        jTextPane9.setStyledDocument(new Guapiador());
-        jTextPane10.setStyledDocument(new Guapiador());
+        //ruta.put(0, "");
+        //jTextPane1.setStyledDocument(new Guapiador());
+        
+            panelesTexto.put(0, new JTextPane());
+            panelesTexto.get(0).setStyledDocument(new Guapiador());
+            scrollTexto.put(0, new JScrollPane(panelesTexto.get(0)));
+            TextLineNumber tln3 = new TextLineNumber(panelesTexto.get(0));
+            scrollTexto.get(0).setRowHeaderView(tln3);
+            jTabbedPane1.add(scrollTexto.get(0));
+            jTabbedPane1.setTitleAt(0, "nuevo");
+            ruta.put(0, "");
+        
         setVisible(true);
         //***************************************************************************
         try { //agrega un icono para la aplicación
@@ -64,40 +68,16 @@ public class IDE_Armus extends javax.swing.JFrame {
             System.out.println(ex.getMessage()); //muestra el exepción en consola
         }
 
+        
+        
+        
     }
 
-    public void initTextLineNumber() {
+   /* public void initTextLineNumber() {
 
         TextLineNumber tln = new TextLineNumber(jTextPane1);
         jScrollPane2.setRowHeaderView(tln);
-
-        TextLineNumber tln1 = new TextLineNumber(jTextPane2);
-        jScrollPane1.setRowHeaderView(tln1);
-
-        TextLineNumber tln2 = new TextLineNumber(jTextPane3);
-        jScrollPane3.setRowHeaderView(tln2);
-
-        TextLineNumber tln3 = new TextLineNumber(jTextPane4);
-        jScrollPane4.setRowHeaderView(tln3);
-
-        TextLineNumber tln4 = new TextLineNumber(jTextPane5);
-        jScrollPane5.setRowHeaderView(tln4);
-
-        TextLineNumber tln5 = new TextLineNumber(jTextPane6);
-        jScrollPane6.setRowHeaderView(tln5);
-
-        TextLineNumber tln6 = new TextLineNumber(jTextPane7);
-        jScrollPane7.setRowHeaderView(tln6);
-
-        TextLineNumber tln7 = new TextLineNumber(jTextPane8);
-        jScrollPane8.setRowHeaderView(tln7);
-
-        TextLineNumber tln8 = new TextLineNumber(jTextPane9);
-        jScrollPane9.setRowHeaderView(tln8);
-
-        TextLineNumber tln9 = new TextLineNumber(jTextPane10);
-        jScrollPane10.setRowHeaderView(tln9);
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,26 +102,8 @@ public class IDE_Armus extends javax.swing.JFrame {
         ScrollPane1 = new javax.swing.JScrollPane();
         TxtAreaConsola = new javax.swing.JTextArea();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextPane4 = new javax.swing.JTextPane();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTextPane5 = new javax.swing.JTextPane();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextPane6 = new javax.swing.JTextPane();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTextPane7 = new javax.swing.JTextPane();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTextPane8 = new javax.swing.JTextPane();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jTextPane9 = new javax.swing.JTextPane();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        jTextPane10 = new javax.swing.JTextPane();
+        btnAbrirP = new javax.swing.JButton();
+        btnCerrarP = new javax.swing.JButton();
         BarraMenu = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuAbrir = new javax.swing.JMenuItem();
@@ -267,47 +229,19 @@ public class IDE_Armus extends javax.swing.JFrame {
 
         jTabbedPane1.setToolTipText("");
 
-        jTextPane1.setText("gchgcgfcjgc");
-        jScrollPane2.setViewportView(jTextPane1);
+        btnAbrirP.setText("nuevaPestania");
+        btnAbrirP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbrirPActionPerformed(evt);
+            }
+        });
 
-        jTabbedPane1.addTab("tab1", jScrollPane2);
-
-        jScrollPane1.setViewportView(jTextPane2);
-
-        jTabbedPane1.addTab("tab2", jScrollPane1);
-
-        jTextPane3.setText("hhhhdiuhoadhvosj");
-        jScrollPane3.setViewportView(jTextPane3);
-
-        jTabbedPane1.addTab("tab3", jScrollPane3);
-
-        jScrollPane4.setViewportView(jTextPane4);
-
-        jTabbedPane1.addTab("tab4", jScrollPane4);
-
-        jScrollPane5.setViewportView(jTextPane5);
-
-        jTabbedPane1.addTab("tab5", jScrollPane5);
-
-        jScrollPane6.setViewportView(jTextPane6);
-
-        jTabbedPane1.addTab("tab6", jScrollPane6);
-
-        jScrollPane7.setViewportView(jTextPane7);
-
-        jTabbedPane1.addTab("tab7", jScrollPane7);
-
-        jScrollPane8.setViewportView(jTextPane8);
-
-        jTabbedPane1.addTab("tab8", jScrollPane8);
-
-        jScrollPane9.setViewportView(jTextPane9);
-
-        jTabbedPane1.addTab("tab9", jScrollPane9);
-
-        jScrollPane10.setViewportView(jTextPane10);
-
-        jTabbedPane1.addTab("tab10", jScrollPane10);
+        btnCerrarP.setText("cerrarPestania");
+        btnCerrarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
@@ -332,22 +266,33 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addComponent(btnCopiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNuevo)
-                        .addGap(0, 472, Short.MAX_VALUE)))
+                        .addGap(29, 29, 29)
+                        .addComponent(btnAbrirP)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCerrarP)
+                        .addGap(0, 227, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPegar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCortar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarComo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPegar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCortar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGuardarComo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAbrirP)
+                            .addComponent(btnCerrarP))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
@@ -550,7 +495,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopiarActionPerformed
-        jTextPane1.copy();
+        panelesTexto.get(jTabbedPane1.getSelectedIndex()).copy();
     }//GEN-LAST:event_btnCopiarActionPerformed
 
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
@@ -579,11 +524,11 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarComoActionPerformed
 
     private void btnCortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCortarActionPerformed
-        jTextPane1.cut();
+        panelesTexto.get(jTabbedPane1.getSelectedIndex()).cut();
     }//GEN-LAST:event_btnCortarActionPerformed
 
     private void btnPegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPegarActionPerformed
-        jTextPane1.paste();
+        panelesTexto.get(jTabbedPane1.getSelectedIndex()).paste();
     }//GEN-LAST:event_btnPegarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -591,10 +536,11 @@ public class IDE_Armus extends javax.swing.JFrame {
         /* manejoArchivos archivoN = new manejoArchivos();
         archivoN.crear();*/
 
-        if (!(jTextPane1.getText().equals("")) || archivo != null) {
+        if (!(panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText().equals("")) || archivo != null) {
             if (((JOptionPane.showConfirmDialog(null, "Desea utilizar una nueva hoja de trabajo? \n\t Si acepta se borrara todos los cambios sin guardar")) == 0)) {
                 archivo = null;
-                jTextPane1.setText("");
+                panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText("");
+                jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), "nuevo("+ jTabbedPane1.getSelectedIndex() +")");
             }
         }
 
@@ -606,6 +552,13 @@ public class IDE_Armus extends javax.swing.JFrame {
 
     private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
         // TODO add your handling code here:
+        if (!(panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText().equals("")) || archivo != null) {
+            if (((JOptionPane.showConfirmDialog(null, "Desea utilizar una nueva hoja de trabajo? \n\t Si acepta se borrara todos los cambios sin guardar")) == 0)) {
+                archivo = null;
+                panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText("");
+                jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), "nuevo("+ jTabbedPane1.getSelectedIndex() +")");
+            }
+        } 
     }//GEN-LAST:event_menuNuevoActionPerformed
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
@@ -622,15 +575,15 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_menuGuardarComoActionPerformed
 
     private void menuCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCopiarActionPerformed
-        jTextPane1.copy();
+        panelesTexto.get(jTabbedPane1.getSelectedIndex()).copy();
     }//GEN-LAST:event_menuCopiarActionPerformed
 
     private void menuCortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCortarActionPerformed
-        jTextPane1.cut();
+        panelesTexto.get(jTabbedPane1.getSelectedIndex()).cut();
     }//GEN-LAST:event_menuCortarActionPerformed
 
     private void menuPegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPegarActionPerformed
-        jTextPane1.paste();
+        panelesTexto.get(jTabbedPane1.getSelectedIndex()).paste();
     }//GEN-LAST:event_menuPegarActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
@@ -639,45 +592,45 @@ public class IDE_Armus extends javax.swing.JFrame {
 
     private void menuColor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor1ActionPerformed
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
-        jTextPane1.setFont(font);
-        jTextPane1.setForeground(new Color(228, 114, 210));
-        jTextPane1.setBackground(new Color(255, 255, 255));
+        //jTextPane1.setFont(font);
+        //jTextPane1.setForeground(new Color(228, 114, 210));
+        //jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(231, 81, 166));
         BarraMenu.setBackground(new Color(250, 145, 204));
     }//GEN-LAST:event_menuColor1ActionPerformed
 
     private void menuColor5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor5ActionPerformed
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
-        jTextPane1.setFont(font);
-        jTextPane1.setForeground(new Color(218, 141, 70));
-        jTextPane1.setBackground(new Color(255, 255, 255));
+        //jTextPane1.setFont(font);
+        //jTextPane1.setForeground(new Color(218, 141, 70));
+        //jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(53, 202, 192));
         BarraMenu.setBackground(new Color(121, 229, 222));
     }//GEN-LAST:event_menuColor5ActionPerformed
 
     private void menuColor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor2ActionPerformed
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
-        jTextPane1.setFont(font);
-        jTextPane1.setForeground(new Color(102, 110, 222));
-        jTextPane1.setBackground(new Color(255, 255, 255));
+        //jTextPane1.setFont(font);
+        //jTextPane1.setForeground(new Color(102, 110, 222));
+        //jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(53, 106, 180));
         BarraMenu.setBackground(new Color(88, 138, 208));
     }//GEN-LAST:event_menuColor2ActionPerformed
 
     private void menuColor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor3ActionPerformed
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
-        jTextPane1.setFont(font);
-        jTextPane1.setForeground(new Color(100, 198, 125));
-        jTextPane1.setBackground(new Color(255, 255, 255));
+        //jTextPane1.setFont(font);
+        //jTextPane1.setForeground(new Color(100, 198, 125));
+        //jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(35, 170, 53));
         BarraMenu.setBackground(new Color(106, 223, 122));
     }//GEN-LAST:event_menuColor3ActionPerformed
 
     private void menuColor4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor4ActionPerformed
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
-        jTextPane1.setFont(font);
-        jTextPane1.setForeground(new Color(208, 67, 67));
-        jTextPane1.setBackground(new Color(255, 255, 255));
+        //jTextPane1.setFont(font);
+        //jTextPane1.setForeground(new Color(208, 67, 67));
+        //jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(148, 13, 13));
         BarraMenu.setBackground(new Color(222, 118, 118));
     }//GEN-LAST:event_menuColor4ActionPerformed
@@ -695,7 +648,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         } else {
 
-            String contenido = jTextPane1.getText();
+            String contenido = panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText();
             String respuesta = gestion.guardarTexto(archivo, contenido);
             if (respuesta == null) {
                 JOptionPane.showMessageDialog(null, "Error al guardar el texto");
@@ -703,7 +656,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         }
         try {
             Scanner scanner = new Scanner();
-            String[] listaArchivos = scanner.lsFiles(ruta);
+            String[] listaArchivos = scanner.lsFiles(ruta.get(jTabbedPane1.getSelectedIndex()));
             /// Poner un error aqui si listaArchivos es nulo
             if (listaArchivos == null) {
                 anadirErrores();
@@ -784,9 +737,9 @@ public class IDE_Armus extends javax.swing.JFrame {
     private void estandarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estandarTemaActionPerformed
         // TODO add your handling code here:
         Font font = new Font("Lucida Sans Unicode", Font.BOLD, 14);
-        jTextPane1.setFont(font);
-        jTextPane1.setForeground(new Color(228, 114, 210));
-        jTextPane1.setBackground(new Color(255, 255, 255));
+        //jTextPane1.setFont(font);
+        //jTextPane1.setForeground(new Color(228, 114, 210));
+        //jTextPane1.setBackground(new Color(255, 255, 255));
         Panel.setBackground(new Color(26, 115, 126));
         BarraMenu.setBackground(new Color(250, 145, 204));
     }//GEN-LAST:event_estandarTemaActionPerformed
@@ -796,10 +749,43 @@ public class IDE_Armus extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnEjecutarParserActionPerformed
+
+    private void btnAbrirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirPActionPerformed
+        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqui
+        if(NumPestana < 10){
+            panelesTexto.put(NumPestana, new JTextPane());
+            panelesTexto.get(NumPestana).setStyledDocument(new Guapiador());
+            scrollTexto.put(NumPestana, new JScrollPane(panelesTexto.get(NumPestana)));
+            TextLineNumber tln3 = new TextLineNumber(panelesTexto.get(NumPestana));
+            scrollTexto.get(NumPestana).setRowHeaderView(tln3);
+            jTabbedPane1.add(scrollTexto.get(NumPestana));
+            jTabbedPane1.setTitleAt(NumPestana, "nuevo("+NumPestana + ")" );
+            ruta.put(NumPestana, "");
+            NumPestana++;
+        }else
+            JOptionPane.showMessageDialog(null, "El numnero de pestanas maximo es de 10, por favor cierre una para abrir otra");
+        
+    }//GEN-LAST:event_btnAbrirPActionPerformed
+
+    private void btnCerrarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarPActionPerformed
+        // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqui
+        NumPestana--;
+        if(NumPestana > 0){
+            jTabbedPane1.remove(scrollTexto.get(NumPestana));
+            scrollTexto.remove(NumPestana);
+            panelesTexto.remove(NumPestana);
+            ruta.remove(NumPestana);
+        }else{
+            JOptionPane.showMessageDialog(null, "Ya no hay pestanas que cerrar");
+             NumPestana=1;
+        }
+        
+        
+    }//GEN-LAST:event_btnCerrarPActionPerformed
     private void guardarArchivo() {
-        if (archivo != null) {
-            String contenido = jTextPane1.getText();
-            String respuesta = gestion.guardarTexto(archivo, contenido);
+        if (!(ruta.get(jTabbedPane1.getSelectedIndex()).equals(""))) {
+            String contenido = panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText();
+            String respuesta = gestion.guardarSencillo(ruta.get(jTabbedPane1.getSelectedIndex()), contenido);
             if (respuesta != null) {
                 JOptionPane.showMessageDialog(null, respuesta);
             } else {
@@ -814,9 +800,10 @@ public class IDE_Armus extends javax.swing.JFrame {
         if (seleccionado.showDialog(null, "Guardar Texto") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             if (archivo.getName().endsWith("acl")) {
-                String contenido = jTextPane1.getText();
+                String contenido = panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText();
                 String respuesta = gestion.guardarTexto(archivo, contenido);
-                ruta = seleccionado.getSelectedFile().getAbsolutePath();
+                ruta.replace(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
+                jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(),archivo.getName());
                 if (respuesta != null) {
                     JOptionPane.showMessageDialog(null, respuesta);
                 } else {
@@ -830,56 +817,17 @@ public class IDE_Armus extends javax.swing.JFrame {
     }
 
     private void abrirArchivo() {
+        int numeroP=0;
         if (seleccionado.showDialog(this, "Abrir") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             if (archivo.canRead()) {
                 if (archivo.getName().endsWith("acl")) {
                     String contenido = gestion.abrirTexto(archivo);
                     //System.out.printf("%i\n", jTabbedPane1.getSelectedIndex());
-                    switch (jTabbedPane1.getSelectedIndex()) {
-                        case 0:
-                            jTextPane1.setText(contenido);
-                            ruta = seleccionado.getSelectedFile().getAbsolutePath();
-                            break;
-                        case 1:
-                            jTextPane2.setText(contenido);
-                            ruta2 = seleccionado.getSelectedFile().getAbsolutePath();
-                            break;
-                        case 2:
-                            jTextPane3.setText(contenido);
-                            ruta3 = seleccionado.getSelectedFile().getAbsolutePath();
-                            break;
-                        case 3:
-                            jTextPane4.setText(contenido);
-                            ruta4 = seleccionado.getSelectedFile().getAbsolutePath();
-                            break;
-                        case 4:
-                            jTextPane5.setText(contenido);
-                            ruta5 = seleccionado.getSelectedFile().getAbsolutePath();
-                            break;
-                        case 5:
-                            jTextPane6.setText(contenido);
-                            ruta6 = seleccionado.getSelectedFile().getAbsolutePath();
-                            break;
-                        case 6:
-                            jTextPane7.setText(contenido);
-                            ruta7 = seleccionado.getSelectedFile().getAbsolutePath();
-                            break;
-                        case 7:
-                            jTextPane8.setText(contenido);
-                            ruta8 = seleccionado.getSelectedFile().getAbsolutePath();
-                            break;
-                        case 8:
-                            jTextPane9.setText(contenido);
-                            ruta9 = seleccionado.getSelectedFile().getAbsolutePath();
-                            break;
-                        case 9:
-                            jTextPane10.setText(contenido);
-                            ruta10 = seleccionado.getSelectedFile().getAbsolutePath();
-                            break;
-                        default:
-                            break;
-                    }
+                            panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText(contenido);
+                            ruta.replace(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
+                            jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(),archivo.getName());
+                         
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo .acl");
                 }
@@ -918,6 +866,8 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JScrollPane ScrollPane1;
     private javax.swing.JTextArea TxtAreaConsola;
     private javax.swing.JButton btnAbrir;
+    private javax.swing.JButton btnAbrirP;
+    private javax.swing.JButton btnCerrarP;
     private javax.swing.JButton btnCopiar;
     private javax.swing.JButton btnCortar;
     private javax.swing.JRadioButtonMenuItem btnEjecutar;
@@ -933,27 +883,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane10;
-    private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
-    private javax.swing.JTextPane jTextPane4;
-    private javax.swing.JTextPane jTextPane5;
-    private javax.swing.JTextPane jTextPane6;
-    private javax.swing.JTextPane jTextPane7;
-    private javax.swing.JTextPane jTextPane8;
-    private javax.swing.JTextPane jTextPane9;
     private javax.swing.JMenuItem menuAbrir;
     private javax.swing.JMenuItem menuAyuda;
     private javax.swing.JMenuItem menuColor1;
@@ -971,4 +901,8 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuSalir;
     private javax.swing.JMenu preferencia;
     // End of variables declaration//GEN-END:variables
+
+    
+    Map<Integer, javax.swing.JTextPane>  panelesTexto= new HashMap<Integer, javax.swing.JTextPane>();
+    Map<Integer, javax.swing.JScrollPane>  scrollTexto= new HashMap<Integer, javax.swing.JScrollPane>();
 }
