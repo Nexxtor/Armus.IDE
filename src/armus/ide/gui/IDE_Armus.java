@@ -395,6 +395,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         jMenu1.setText("Editar");
         jMenu1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
 
+        menuCopiar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         menuCopiar.setText("Copiar");
         menuCopiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -403,6 +404,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         jMenu1.add(menuCopiar);
 
+        menuCortar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         menuCortar.setText("Cortar");
         menuCortar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -411,6 +413,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         jMenu1.add(menuCortar);
 
+        menuPegar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         menuPegar.setText("Pegar");
         menuPegar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
