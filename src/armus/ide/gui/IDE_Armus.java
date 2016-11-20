@@ -275,7 +275,7 @@ public class IDE_Armus extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Errores", jScrollPane1);
 
-        btnCorrer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reply.png"))); // NOI18N
+        btnCorrer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/play-button (1).png"))); // NOI18N
         btnCorrer.setBorderPainted(false);
         btnCorrer.setContentAreaFilled(false);
         btnCorrer.setMaximumSize(new java.awt.Dimension(33, 33));
@@ -788,8 +788,8 @@ public class IDE_Armus extends javax.swing.JFrame {
         //jTextPane1.setFont(font);
         //jTextPane1.setForeground(new Color(228, 114, 210));
         //jTextPane1.setBackground(new Color(255, 255, 255));
-        Panel.setBackground(new Color(26, 115, 126));
-        BarraMenu.setBackground(new Color(250, 145, 204));
+        Panel.setBackground(new Color(26, 115, 126)); 
+        BarraMenu.setBackground(new Color(255, 255, 255));
     }//GEN-LAST:event_estandarTemaActionPerformed
 
     private void btnEjecutarParserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarParserActionPerformed
