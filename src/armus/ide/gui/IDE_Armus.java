@@ -803,7 +803,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAbrirPActionPerformed
 
     private void crearVentanaE(){
-        if (NumPestana < 5) {
+        if (NumPestana < 9) {
             NumPestana++;
             panelesTexto.put(NumPestana, new JTextPane());
             panelesTexto.get(NumPestana).setStyledDocument(new Guapiador());
@@ -815,7 +815,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             jTabbedPane1.setSelectedIndex(NumPestana);
            // ruta.put(NumPestana, "");
         } else {
-            JOptionPane.showMessageDialog(null, "El numnero de pestanas maximo es de 5, por favor cierre una para abrir otra");
+            JOptionPane.showMessageDialog(null, "El numnero de pestanas maximo es de 10, por favor cierre una para abrir otra");
         }
     }
     
@@ -831,7 +831,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             NumPestana--;
         } else {
             JOptionPane.showMessageDialog(null, "Ya no hay pestanas que cerrar");
-            NumPestana = 1;
+            NumPestana = 0;
         }
 
 
@@ -874,7 +874,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     private void abrirArchivo() {
         if((ruta.get(jTabbedPane1.getSelectedIndex())) != null){//|| !(panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText()).equals("")){
             //if(!((panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText()).equals(""))){
-                if(NumPestana == 5){
+                if(NumPestana == 9){
                     JOptionPane.showMessageDialog(null, "Ya no se pueden abrir mas pestanias");
                     return;
                 }    
