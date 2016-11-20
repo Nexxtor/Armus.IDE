@@ -106,7 +106,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         TxtAreaConsola = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnCorrer = new javax.swing.JButton();
         BarraMenu = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuAbrir = new javax.swing.JMenuItem();
@@ -275,13 +275,18 @@ public class IDE_Armus extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Errores", jScrollPane1);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reply.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setMaximumSize(new java.awt.Dimension(33, 33));
-        jButton1.setMinimumSize(new java.awt.Dimension(33, 33));
-        jButton1.setOpaque(false);
-        jButton1.setPreferredSize(new java.awt.Dimension(33, 33));
+        btnCorrer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reply.png"))); // NOI18N
+        btnCorrer.setBorderPainted(false);
+        btnCorrer.setContentAreaFilled(false);
+        btnCorrer.setMaximumSize(new java.awt.Dimension(33, 33));
+        btnCorrer.setMinimumSize(new java.awt.Dimension(33, 33));
+        btnCorrer.setOpaque(false);
+        btnCorrer.setPreferredSize(new java.awt.Dimension(33, 33));
+        btnCorrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCorrerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
@@ -310,7 +315,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCerrarP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCorrer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE))
                 .addContainerGap())
@@ -332,7 +337,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCerrarP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAbrirP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCorrer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -857,6 +862,10 @@ public class IDE_Armus extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnCerrarPActionPerformed
+
+    private void btnCorrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCorrerActionPerformed
     
     private void guardarArchivo() {
         if (!(ruta.get(jTabbedPane1.getSelectedIndex()).equals(""))) {
@@ -958,6 +967,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JButton btnAbrirP;
     private javax.swing.JButton btnCerrarP;
     private javax.swing.JButton btnCopiar;
+    private javax.swing.JButton btnCorrer;
     private javax.swing.JButton btnCortar;
     private javax.swing.JRadioButtonMenuItem btnEjecutar;
     private javax.swing.JMenuItem btnEjecutarParser;
@@ -966,7 +976,6 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnPegar;
     private javax.swing.JMenuItem estandarTema;
-    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu3;
