@@ -231,7 +231,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         btnAbrirP.setContentAreaFilled(false);
         btnAbrirP.setMaximumSize(new java.awt.Dimension(33, 33));
         btnAbrirP.setMinimumSize(new java.awt.Dimension(33, 33));
-        btnAbrirP.setOpaque(false);
         btnAbrirP.setPreferredSize(new java.awt.Dimension(33, 33));
         btnAbrirP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,7 +241,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         btnCerrarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file (1).png"))); // NOI18N
         btnCerrarP.setBorderPainted(false);
         btnCerrarP.setContentAreaFilled(false);
-        btnCerrarP.setOpaque(false);
         btnCerrarP.setPreferredSize(new java.awt.Dimension(33, 33));
         btnCerrarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,7 +278,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         btnCorrer.setContentAreaFilled(false);
         btnCorrer.setMaximumSize(new java.awt.Dimension(33, 33));
         btnCorrer.setMinimumSize(new java.awt.Dimension(33, 33));
-        btnCorrer.setOpaque(false);
         btnCorrer.setPreferredSize(new java.awt.Dimension(33, 33));
         btnCorrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,14 +323,14 @@ public class IDE_Armus extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnPegar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCortar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardarComo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCerrarP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAbrirP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -607,12 +604,13 @@ public class IDE_Armus extends javax.swing.JFrame {
                 archivo = null;
                 panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText("");
                 jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), "nuevo(" + jTabbedPane1.getSelectedIndex() + ")");
+                ruta.remove(jTabbedPane1.getSelectedIndex());
             }
         }
     }//GEN-LAST:event_menuNuevoActionPerformed
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
-        if (archivo == null) {
+       if (ruta.get(jTabbedPane1.getSelectedIndex()) == null) {
             guardarComo();
         } else {
             guardarArchivo();

@@ -327,6 +327,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnNuevo" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnPegar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="btnCortar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
@@ -334,7 +335,6 @@
                               <Component id="btnGuardar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="btnAbrir" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="btnCopiar" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="btnNuevo" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnCerrarP" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
@@ -478,7 +478,6 @@
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[33, 33]"/>
             </Property>
-            <Property name="opaque" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[33, 33]"/>
             </Property>
@@ -494,7 +493,6 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
-            <Property name="opaque" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[33, 33]"/>
             </Property>
@@ -604,7 +602,6 @@
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[33, 33]"/>
             </Property>
-            <Property name="opaque" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[33, 33]"/>
             </Property>
