@@ -916,17 +916,13 @@ public class IDE_Armus extends javax.swing.JFrame {
     }
 
     private void abrirArchivo() {
-        if((ruta.get(jTabbedPane1.getSelectedIndex())) != null){//|| !(panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText()).equals("")){
-            //if(!((panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText()).equals(""))){
+        if((ruta.get(jTabbedPane1.getSelectedIndex())) != null || !((panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText()).equals(""))){
                 if(NumPestana == 9){
                     JOptionPane.showMessageDialog(null, "Ya no se pueden abrir mas pestañas");
                     return;
                 }    
             crearVentanaE();
-            //}
-            
-            //jTabbedPane1.setSelectedIndex(NumPestana);
-        }        
+        }      
         if (seleccionado.showDialog(this, "Abrir") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             if (archivo.canRead()) {
