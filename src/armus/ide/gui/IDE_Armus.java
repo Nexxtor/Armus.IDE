@@ -43,7 +43,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     File archivo;
     manejoArchivos gestion = new manejoArchivos();
     Map<Integer, String> ruta = new HashMap<Integer, String>();
-    int NumPestana = 1; ////cambiar
+    int NumPestana = 0; ////cambiar
 
     public IDE_Armus() {
         initComponents();
@@ -60,7 +60,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         jTabbedPane1.add(scrollTexto.get(0));
         jTabbedPane1.setTitleAt(0, "nuevo");
 
-        ruta.put(0, "");
+        //ruta.put(0, "");
        JFrame.setDefaultLookAndFeelDecorated(true);
        
         //***************************************************************************
@@ -533,7 +533,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAbrirActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (archivo == null) {
+        if (ruta.get(jTabbedPane1.getSelectedIndex()) == null) {
             guardarComo();
         } else {
             guardarArchivo();
@@ -562,6 +562,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                 archivo = null;
                 panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText("");
                 jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), "nuevo(" + jTabbedPane1.getSelectedIndex() + ")");
+                ruta.remove(jTabbedPane1.getSelectedIndex());
             }
         }
 
@@ -797,7 +798,13 @@ public class IDE_Armus extends javax.swing.JFrame {
 
     private void btnAbrirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirPActionPerformed
         //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqui
-        if (NumPestana < 10) {
+        crearVentanaE();
+
+    }//GEN-LAST:event_btnAbrirPActionPerformed
+
+    private void crearVentanaE(){
+        if (NumPestana < 5) {
+            NumPestana++;
             panelesTexto.put(NumPestana, new JTextPane());
             panelesTexto.get(NumPestana).setStyledDocument(new Guapiador());
             scrollTexto.put(NumPestana, new JScrollPane(panelesTexto.get(NumPestana)));
@@ -805,22 +812,23 @@ public class IDE_Armus extends javax.swing.JFrame {
             scrollTexto.get(NumPestana).setRowHeaderView(tln3);
             jTabbedPane1.add(scrollTexto.get(NumPestana));
             jTabbedPane1.setTitleAt(NumPestana, "nuevo(" + NumPestana + ")");
-            ruta.put(NumPestana, "");
-            NumPestana++;
+            jTabbedPane1.setSelectedIndex(NumPestana);
+           // ruta.put(NumPestana, "");
         } else {
-            JOptionPane.showMessageDialog(null, "El numnero de pestanas maximo es de 10, por favor cierre una para abrir otra");
+            JOptionPane.showMessageDialog(null, "El numnero de pestanas maximo es de 5, por favor cierre una para abrir otra");
         }
-
-    }//GEN-LAST:event_btnAbrirPActionPerformed
-
+    }
+    
+    
     private void btnCerrarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarPActionPerformed
         // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqui
-        NumPestana--;
+        
         if (NumPestana > 0) {
             jTabbedPane1.remove(scrollTexto.get(NumPestana));
             scrollTexto.remove(NumPestana);
             panelesTexto.remove(NumPestana);
             ruta.remove(NumPestana);
+            NumPestana--;
         } else {
             JOptionPane.showMessageDialog(null, "Ya no hay pestanas que cerrar");
             NumPestana = 1;
@@ -848,7 +856,8 @@ public class IDE_Armus extends javax.swing.JFrame {
             if (archivo.getName().endsWith("acl")) {
                 String contenido = panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText();
                 String respuesta = gestion.guardarTexto(archivo, contenido);
-                ruta.replace(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
+                ruta.put(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
+                //ruta.replace(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
                 jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), archivo.getName());
                 if (respuesta != null) {
                     JOptionPane.showMessageDialog(null, respuesta);
@@ -863,7 +872,17 @@ public class IDE_Armus extends javax.swing.JFrame {
     }
 
     private void abrirArchivo() {
-        int numeroP = 0;
+        if((ruta.get(jTabbedPane1.getSelectedIndex())) != null){//|| !(panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText()).equals("")){
+            //if(!((panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText()).equals(""))){
+                if(NumPestana == 5){
+                    JOptionPane.showMessageDialog(null, "Ya no se pueden abrir mas pestanias");
+                    return;
+                }    
+            crearVentanaE();
+            //}
+            
+            //jTabbedPane1.setSelectedIndex(NumPestana);
+        }        
         if (seleccionado.showDialog(this, "Abrir") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             if (archivo.canRead()) {
@@ -871,14 +890,16 @@ public class IDE_Armus extends javax.swing.JFrame {
                     String contenido = gestion.abrirTexto(archivo);
                     //System.out.printf("%i\n", jTabbedPane1.getSelectedIndex());
                     panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText(contenido);
-                    ruta.replace(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
+                    ruta.put(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
+                    //ruta.replace(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
                     jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), archivo.getName());
+                   
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo .acl");
                 }
             }
-        }
+        } 
     }
 
     private void anadirErrores() {
