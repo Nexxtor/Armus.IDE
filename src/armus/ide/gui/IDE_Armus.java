@@ -822,20 +822,22 @@ public class IDE_Armus extends javax.swing.JFrame {
     
     private void btnCerrarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarPActionPerformed
         // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqui
-        
         if (NumPestana > 0) {
-            jTabbedPane1.remove(scrollTexto.get(NumPestana));
-            scrollTexto.remove(NumPestana);
-            panelesTexto.remove(NumPestana);
-            ruta.remove(NumPestana);
-            NumPestana--;
+            if (((JOptionPane.showConfirmDialog(null, "Desea cerrar la pestania? \nNota: se cerrara la ultima pestania sin guardar los cambios")) == 0)){
+                jTabbedPane1.remove(scrollTexto.get(NumPestana));
+                scrollTexto.remove(NumPestana);
+                panelesTexto.remove(NumPestana);
+                ruta.remove(NumPestana);
+                NumPestana--;    
+            }
+            
         } else {
             JOptionPane.showMessageDialog(null, "Ya no hay pestanas que cerrar");
             NumPestana = 0;
         }
 
-
     }//GEN-LAST:event_btnCerrarPActionPerformed
+    
     private void guardarArchivo() {
         if (!(ruta.get(jTabbedPane1.getSelectedIndex()).equals(""))) {
             String contenido = panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText();
