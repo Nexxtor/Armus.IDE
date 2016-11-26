@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package armus.ide.gui;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
@@ -12,446 +8,388 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
-/**
- *
- * @author Diana Lopez
- */
 
 public class TextLineNumber extends JPanel
-	implements CaretListener, DocumentListener, PropertyChangeListener
-{
-	public final static float LEFT = 0.0f;
-	public final static float CENTER = 0.5f;
-	public final static float RIGHT = 1.0f;
+        implements CaretListener, DocumentListener, PropertyChangeListener {
 
-	private final static Border OUTER = new MatteBorder(0, 0, 0, 2, Color.GRAY);
+    public final static float LEFT = 0.0f;
+    public final static float CENTER = 0.5f;
+    public final static float RIGHT = 1.0f;
+    private final static Border OUTER = new MatteBorder(0, 0, 0, 2, Color.GRAY);
+    private final static int HEIGHT = Integer.MAX_VALUE - 1000000;
 
-	private final static int HEIGHT = Integer.MAX_VALUE - 1000000;
+    private JTextComponent component;
 
-
-	private JTextComponent component;
-
-
-	private boolean updateFont;
-	private int borderGap;
-	private Color currentLineForeground;
-	private float digitAlignment;
-	private int minimumDisplayDigits;
-
+    private boolean updateFont;
+    private int borderGap;
+    private Color currentLineForeground;
+    private float digitAlignment;
+    private int minimumDisplayDigits;
 
     private int lastDigits;
     private int lastHeight;
     private int lastLine;
 
-	private HashMap<String, FontMetrics> fonts;
+    private HashMap<String, FontMetrics> fonts;
 
-	/**
-	 *	Create a line number component for a text component. This minimum
-	 *  display width will be based on 3 digits.
-	 *
-	 *  @param component  the related text component
-	 */
-	public TextLineNumber(JTextComponent component)
-	{
-		this(component, 3);
-	}
+    /**
+     * Crea un componenete de número de línea para el componenete de texto. Este
+     * ancho mínimo de pantalla se basará en 3 dígitos.
+     *
+     * @param component lo relacionado al componenete de texto
+     */
+    public TextLineNumber(JTextComponent component) {
+        this(component, 3);
+    }
 
-	/**
-	 *	Create a line number component for a text component.
-	 *
-	 *  @param component  the related text component
-	 *  @param minimumDisplayDigits  the number of digits used to calculate
-	 *                               the minimum width of the component
-	 */
-	public TextLineNumber(JTextComponent component, int minimumDisplayDigits)
-	{
-		this.component = component;
+    /**
+     * Crea un componenete de número de línea para el componenete de texto.
+     *
+     * @param component lo relacionado al componenete de texto
+     * @param minimumDisplayDigits el número de dígitos utilizados para calcular
+     * el ancho mínimo del componente
+     */
+    public TextLineNumber(JTextComponent component, int minimumDisplayDigits) {
+        this.component = component;
 
-		setFont( component.getFont() );
+        setFont(component.getFont());
 
-		setBorderGap( 5 );
-		setCurrentLineForeground( Color.RED );
-		setDigitAlignment( RIGHT );
-		setMinimumDisplayDigits( minimumDisplayDigits );
+        setBorderGap(5);
+        setCurrentLineForeground(Color.RED);
+        setDigitAlignment(RIGHT);
+        setMinimumDisplayDigits(minimumDisplayDigits);
 
-		component.getDocument().addDocumentListener(this);
-		component.addCaretListener( this );
-		component.addPropertyChangeListener("font", this);
-	}
+        component.getDocument().addDocumentListener(this);
+        component.addCaretListener(this);
+        component.addPropertyChangeListener("font", this);
+    }
 
-	/**
-	 *  Gets the update font property
-	 *
-	 *  @return the update font property
-	 */
-	public boolean getUpdateFont()
-	{
-		return updateFont;
-	}
+    /**
+     * Obtiene la actualización de la propiedad font (fuente de letra)
+     *
+     * @return la actualización de la propiedad font (fuente de letra)
+     */
+    public boolean getUpdateFont() {
+        return updateFont;
+    }
 
-	/**
-	 *  Set the update font property. Indicates whether this Font should be
-	 *  updated automatically when the Font of the related text component
-	 *  is changed.
-	 *
-	 *  @param updateFont  when true update the Font and repaint the line
-	 *                     numbers, otherwise just repaint the line numbers.
-	 */
-	public void setUpdateFont(boolean updateFont)
-	{
-		this.updateFont = updateFont;
-	}
+    /**
+     * Establece la actualización de la propiedad font. Indica si esta fuente se
+     * debe actualizar automáticamente cuando se cambia la fuente del componente
+     * de texto relacionado.
+     *
+     * @param updateFont cuando realiza la actualización de Font y vuelva a
+     * pintar los números de línea, de lo contrario simplemente repinta los
+     * números de línea.
+     */
+    public void setUpdateFont(boolean updateFont) {
+        this.updateFont = updateFont;
+    }
 
-	/**
-	 *  Gets the border gap
-	 *
-	 *  @return the border gap in pixels
-	 */
-	public int getBorderGap()
-	{
-		return borderGap;
-	}
+    /**
+     * Obtiene la brecha de borde
+     *
+     * @return la brecha de borde en píxeles
+     */
+    public int getBorderGap() {
+        return borderGap;
+    }
 
-	/**
-	 *  The border gap is used in calculating the left and right insets of the
-	 *  border. Default value is 5.
-	 *
-	 *  @param borderGap  the gap in pixels
-	 */
-	public void setBorderGap(int borderGap)
-	{
-		this.borderGap = borderGap;
-		Border inner = new EmptyBorder(0, borderGap, 0, borderGap);
-		setBorder( new CompoundBorder(OUTER, inner) );
-		lastDigits = 0;
-		setPreferredWidth();
-	}
+    /**
+     * La separación del borde se utiliza para calcular las inserciones
+     * izquierda y derecha del borde. El valor predeterminado es 5.
+     *
+     * @param borderGap la brecha en píxeles
+     */
+    public void setBorderGap(int borderGap) {
+        this.borderGap = borderGap;
+        Border inner = new EmptyBorder(0, borderGap, 0, borderGap);
+        setBorder(new CompoundBorder(OUTER, inner));
+        lastDigits = 0;
+        setPreferredWidth();
+    }
 
-	/**
-	 *  Gets the current line rendering Color
-	 *
-	 *  @return the Color used to render the current line number
-	 */
-	public Color getCurrentLineForeground()
-	{
-		return currentLineForeground == null ? getForeground() : currentLineForeground;
-	}
+    /**
+     * Obtiene la representación del Color de la línea actual
+     *
+     * @return el Color usado para representar el número de línea actual
+     */
+    public Color getCurrentLineForeground() {
+        return currentLineForeground == null ? getForeground() : currentLineForeground;
+    }
 
-	/**
-	 *  The Color used to render the current line digits. Default is Coolor.RED.
-	 *
-	 *  @param currentLineForeground  the Color used to render the current line
-	 */
-	public void setCurrentLineForeground(Color currentLineForeground)
-	{
-		this.currentLineForeground = currentLineForeground;
-	}
+    /**
+     * El color utilizado para representar los dígitos de la línea actual. Por
+     * defecto es Color.RED
+     *
+     * @param currentLineForeground el Color usado para representar la línea
+     * actual
+     */
+    public void setCurrentLineForeground(Color currentLineForeground) {
+        this.currentLineForeground = currentLineForeground;
+    }
 
-	/**
-	 *  Gets the digit alignment
-	 *
-	 *  @return the alignment of the painted digits
-	 */
-	public float getDigitAlignment()
-	{
-		return digitAlignment;
-	}
+    /**
+     * Obtiene la alineación de dígitos
+     *
+     * @return La alineación de los dígitos pintados
+     */
+    public float getDigitAlignment() {
+        return digitAlignment;
+    }
 
-	/**
-	 *  Specify the horizontal alignment of the digits within the component.
-	 *  Common values would be:
-	 *  <ul>
-	 *  <li>TextLineNumber.LEFT
-	 *  <li>TextLineNumber.CENTER
-	 *  <li>TextLineNumber.RIGHT (default)
-	 *	</ul>
-	 *  @param currentLineForeground  the Color used to render the current line
-	 */
-	public void setDigitAlignment(float digitAlignment)
-	{
-		this.digitAlignment =
-			digitAlignment > 1.0f ? 1.0f : digitAlignment < 0.0f ? -1.0f : digitAlignment;
-	}
+    /**
+     * Especifica la alineación horizontal de los dígitos dentro del componente.
+     * Los valores comunes serían:
+     * <ul>
+     * <li>TextLineNumber.LEFT
+     * <li>TextLineNumber.CENTER
+     * <li>TextLineNumber.RIGHT (por defecto)
+     * </ul>
+     */
+    public void setDigitAlignment(float digitAlignment) {
+        this.digitAlignment
+                = digitAlignment > 1.0f ? 1.0f : digitAlignment < 0.0f ? -1.0f : digitAlignment;
+    }
 
-	/**
-	 *  Gets the minimum display digits
-	 *
-	 *  @return the minimum display digits
-	 */
-	public int getMinimumDisplayDigits()
-	{
-		return minimumDisplayDigits;
-	}
+    /**
+     * Obtiene los dígitos mínimos de visualización
+     *
+     * @return los dígitos mínimos de visualización
+     */
+    public int getMinimumDisplayDigits() {
+        return minimumDisplayDigits;
+    }
 
-	/**
-	 *  Specify the mimimum number of digits used to calculate the preferred
-	 *  width of the component. Default is 3.
-	 *
-	 *  @param minimumDisplayDigits  the number digits used in the preferred
-	 *                               width calculation
-	 */
-	public void setMinimumDisplayDigits(int minimumDisplayDigits)
-	{
-		this.minimumDisplayDigits = minimumDisplayDigits;
-		setPreferredWidth();
-	}
+    /**
+     * Especifica el número mínimo de dígitos usados para calcular el ancho
+     * preferido del componente. El valor predeterminado es 3.
+     *
+     * @param minimumDisplayDigits el número de dígitos utilizados en el cálculo
+     * de ancho preferido
+     */
+    public void setMinimumDisplayDigits(int minimumDisplayDigits) {
+        this.minimumDisplayDigits = minimumDisplayDigits;
+        setPreferredWidth();
+    }
 
-	/**
-	 *  Calculate the width needed to display the maximum line number
-	 */
-	private void setPreferredWidth()
-	{
-		Element root = component.getDocument().getDefaultRootElement();
-		int lines = root.getElementCount();
-		int digits = Math.max(String.valueOf(lines).length(), minimumDisplayDigits);
+    /**
+     * Calcula el ancho necesario para mostrar el número de línea máximo
+     */
+    private void setPreferredWidth() {
+        Element root = component.getDocument().getDefaultRootElement();
+        int lines = root.getElementCount();
+        int digits = Math.max(String.valueOf(lines).length(), minimumDisplayDigits);
 
-		//  Update sizes when number of digits in the line number changes
+        // Actualiza los tamaños cuando el número de dígitos en el número de línea cambia
+        if (lastDigits != digits) {
+            lastDigits = digits;
+            FontMetrics fontMetrics = getFontMetrics(getFont());
+            int width = fontMetrics.charWidth('0') * digits;
+            Insets insets = getInsets();
+            int preferredWidth = insets.left + insets.right + width;
 
-		if (lastDigits != digits)
-		{
-			lastDigits = digits;
-			FontMetrics fontMetrics = getFontMetrics( getFont() );
-			int width = fontMetrics.charWidth( '0' ) * digits;
-			Insets insets = getInsets();
-			int preferredWidth = insets.left + insets.right + width;
+            Dimension d = getPreferredSize();
+            d.setSize(preferredWidth, HEIGHT);
+            setPreferredSize(d);
+            setSize(d);
+        }
+    }
 
-			Dimension d = getPreferredSize();
-			d.setSize(preferredWidth, HEIGHT);
-			setPreferredSize( d );
-			setSize( d );
-		}
-	}
+    /**
+     * Dibujar los números de línea
+     */
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-	/**
-	 *  Draw the line numbers
-	 */
-	@Override
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
+        // Determina el ancho del espacio disponible para dibujar el número de línea
+        FontMetrics fontMetrics = component.getFontMetrics(component.getFont());
+        Insets insets = getInsets();
+        int availableWidth = getSize().width - insets.left - insets.right;
 
-		//	Determine the width of the space available to draw the line number
+        // Determina las filas a dibujar dentro de los límites recortados.
+        Rectangle clip = g.getClipBounds();
+        int rowStartOffset = component.viewToModel(new Point(0, clip.y));
+        int endOffset = component.viewToModel(new Point(0, clip.y + clip.height));
 
-		FontMetrics fontMetrics = component.getFontMetrics( component.getFont() );
-		Insets insets = getInsets();
-		int availableWidth = getSize().width - insets.left - insets.right;
+        while (rowStartOffset <= endOffset) {
+            try {
+                if (isCurrentLine(rowStartOffset)) {
+                    g.setColor(getCurrentLineForeground());
+                } else {
+                    g.setColor(getForeground());
+                }
 
-		//  Determine the rows to draw within the clipped bounds.
+                // Obtiene el número de línea como una cadena y luego determina
+                // los desplazamientos "X" y "Y" para dibujar la cadena.
+                String lineNumber = getTextLineNumber(rowStartOffset);
+                int stringWidth = fontMetrics.stringWidth(lineNumber);
+                int x = getOffsetX(availableWidth, stringWidth) + insets.left;
+                int y = getOffsetY(rowStartOffset, fontMetrics);
+                g.drawString(lineNumber, x, y);
 
-		Rectangle clip = g.getClipBounds();
-		int rowStartOffset = component.viewToModel( new Point(0, clip.y) );
-		int endOffset = component.viewToModel( new Point(0, clip.y + clip.height) );
+                // Pasa a la siguiente fila
+                rowStartOffset = Utilities.getRowEnd(component, rowStartOffset) + 1;
+            } catch (Exception e) {
+                break;
+            }
+        }
+    }
 
-		while (rowStartOffset <= endOffset)
-		{
-			try
-            {
-    			if (isCurrentLine(rowStartOffset))
-    				g.setColor( getCurrentLineForeground() );
-    			else
-    				g.setColor( getForeground() );
+    /**
+     * Necesitamos saber si el cursor está actualmente en la línea que estamos a
+     * punto de pintar para que el número de línea pueda resaltarse.
+     */
+    private boolean isCurrentLine(int rowStartOffset) {
+        int caretPosition = component.getCaretPosition();
+        Element root = component.getDocument().getDefaultRootElement();
 
-    			//  Get the line number as a string and then determine the
-    			//  "X" and "Y" offsets for drawing the string.
+        if (root.getElementIndex(rowStartOffset) == root.getElementIndex(caretPosition)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    			String lineNumber = getTextLineNumber(rowStartOffset);
-    			int stringWidth = fontMetrics.stringWidth( lineNumber );
-    			int x = getOffsetX(availableWidth, stringWidth) + insets.left;
-				int y = getOffsetY(rowStartOffset, fontMetrics);
-    			g.drawString(lineNumber, x, y);
+    /**
+     * Obtiene el número de línea a dibujar. Se devolverá una cadena vacía
+     * cuando una línea de texto se haya envuelto.
+     */
+    protected String getTextLineNumber(int rowStartOffset) {
+        Element root = component.getDocument().getDefaultRootElement();
+        int index = root.getElementIndex(rowStartOffset);
+        Element line = root.getElement(index);
 
-    			//  Move to the next row
+        if (line.getStartOffset() == rowStartOffset) {
+            return String.valueOf(index + 1);
+        } else {
+            return "";
+        }
+    }
 
-    			rowStartOffset = Utilities.getRowEnd(component, rowStartOffset) + 1;
-			}
-			catch(Exception e) {break;}
-		}
-	}
+    /**
+     * Determina el desplazamiento en X para alinear correctamente el número de
+     * línea cuando se dibuja
+     */
+    private int getOffsetX(int availableWidth, int stringWidth) {
+        return (int) ((availableWidth - stringWidth) * digitAlignment);
+    }
 
-	/*
-	 *  We need to know if the caret is currently positioned on the line we
-	 *  are about to paint so the line number can be highlighted.
-	 */
-	private boolean isCurrentLine(int rowStartOffset)
-	{
-		int caretPosition = component.getCaretPosition();
-		Element root = component.getDocument().getDefaultRootElement();
+    /**
+     * Determina el desplazamiento en Y de la fila actual
+     */
+    private int getOffsetY(int rowStartOffset, FontMetrics fontMetrics)
+            throws BadLocationException {
 
-		if (root.getElementIndex( rowStartOffset ) == root.getElementIndex(caretPosition))
-			return true;
-		else
-			return false;
-	}
+        // Obtiene el rectángulo delimitador de la fila
+        Rectangle r = component.modelToView(rowStartOffset);
+        int lineHeight = fontMetrics.getHeight();
+        int y = r.y + r.height;
+        int descent = 0;
 
-	/*
-	 *	Get the line number to be drawn. The empty string will be returned
-	 *  when a line of text has wrapped.
-	 */
-	protected String getTextLineNumber(int rowStartOffset)
-	{
-		Element root = component.getDocument().getDefaultRootElement();
-		int index = root.getElementIndex( rowStartOffset );
-		Element line = root.getElement( index );
+        // El texto debe colocarse encima de la parte inferior del rectángulo
+        // delimitador en función del descenso de las fuentes contenidas en la fila.
+        if (r.height == lineHeight) { // Se utiliza la fuente predeterminada
+            descent = fontMetrics.getDescent();
+        } else { // Necesitamos comprobar todos los atributos para los cambios de fuente
+            if (fonts == null) {
+                fonts = new HashMap<String, FontMetrics>();
+            }
 
-		if (line.getStartOffset() == rowStartOffset)
-			return String.valueOf(index + 1);
-		else
-			return "";
-	}
+            Element root = component.getDocument().getDefaultRootElement();
+            int index = root.getElementIndex(rowStartOffset);
+            Element line = root.getElement(index);
 
-	/*
-	 *  Determine the X offset to properly align the line number when drawn
-	 */
-	private int getOffsetX(int availableWidth, int stringWidth)
-	{
-		return (int)((availableWidth - stringWidth) * digitAlignment);
-	}
+            for (int i = 0; i < line.getElementCount(); i++) {
+                Element child = line.getElement(i);
+                AttributeSet as = child.getAttributes();
+                String fontFamily = (String) as.getAttribute(StyleConstants.FontFamily);
+                Integer fontSize = (Integer) as.getAttribute(StyleConstants.FontSize);
+                String key = fontFamily + fontSize;
 
-	/*
-	 *  Determine the Y offset for the current row
-	 */
-	private int getOffsetY(int rowStartOffset, FontMetrics fontMetrics)
-		throws BadLocationException
-	{
-		//  Get the bounding rectangle of the row
+                FontMetrics fm = fonts.get(key);
 
-		Rectangle r = component.modelToView( rowStartOffset );
-		int lineHeight = fontMetrics.getHeight();
-		int y = r.y + r.height;
-		int descent = 0;
+                if (fm == null) {
+                    Font font = new Font(fontFamily, Font.PLAIN, fontSize);
+                    fm = component.getFontMetrics(font);
+                    fonts.put(key, fm);
+                }
 
-		//  The text needs to be positioned above the bottom of the bounding
-		//  rectangle based on the descent of the font(s) contained on the row.
+                descent = Math.max(descent, fm.getDescent());
+            }
+        }
+        return y - descent;
+    }
 
-		if (r.height == lineHeight)  // default font is being used
-		{
-			descent = fontMetrics.getDescent();
-		}
-		else  // We need to check all the attributes for font changes
-		{
-			if (fonts == null)
-				fonts = new HashMap<String, FontMetrics>();
+//  Implementa la interfaz CaretListener
+    @Override
+    public void caretUpdate(CaretEvent e) {
+        // Obtiene la línea en la que se encuentra el cursor
+        int caretPosition = component.getCaretPosition();
+        Element root = component.getDocument().getDefaultRootElement();
+        int currentLine = root.getElementIndex(caretPosition);
 
-			Element root = component.getDocument().getDefaultRootElement();
-			int index = root.getElementIndex( rowStartOffset );
-			Element line = root.getElement( index );
+        // Necesitamos repintar para que el número de línea correcto se pueda resaltar
+        if (lastLine != currentLine) {
+            repaint();
+            lastLine = currentLine;
+        }
+    }
 
-			for (int i = 0; i < line.getElementCount(); i++)
-			{
-				Element child = line.getElement(i);
-				AttributeSet as = child.getAttributes();
-				String fontFamily = (String)as.getAttribute(StyleConstants.FontFamily);
-				Integer fontSize = (Integer)as.getAttribute(StyleConstants.FontSize);
-				String key = fontFamily + fontSize;
+//  Implementa la interfaz DocumentListener
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        documentChanged();
+    }
 
-				FontMetrics fm = fonts.get( key );
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        documentChanged();
+    }
 
-				if (fm == null)
-				{
-					Font font = new Font(fontFamily, Font.PLAIN, fontSize);
-					fm = component.getFontMetrics( font );
-					fonts.put(key, fm);
-				}
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        documentChanged();
+    }
 
-				descent = Math.max(descent, fm.getDescent());
-			}
-		}
+    /**
+     * Un cambio de documento puede afectar el número de líneas de texto
+     * mostradas. Por lo tanto, el número de líneas también cambiará.
+     */
+    private void documentChanged() {
+        // La vista del componente no se ha actualizado en el momento en que se
+        // desencadena el objeto DocumentEvent
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    int endPos = component.getDocument().getLength();
+                    Rectangle rect = component.modelToView(endPos);
 
-		return y - descent;
-	}
+                    if (rect != null && rect.y != lastHeight) {
+                        setPreferredWidth();
+                        repaint();
+                        lastHeight = rect.y;
+                    }
+                } catch (BadLocationException ex) {
+                    /* nada que hacer */ }
+            }
+        });
+    }
 
-//
-//  Implement CaretListener interface
-//
-	@Override
-	public void caretUpdate(CaretEvent e)
-	{
-		//  Get the line the caret is positioned on
-
-		int caretPosition = component.getCaretPosition();
-		Element root = component.getDocument().getDefaultRootElement();
-		int currentLine = root.getElementIndex( caretPosition );
-
-		//  Need to repaint so the correct line number can be highlighted
-
-		if (lastLine != currentLine)
-		{
-			repaint();
-			lastLine = currentLine;
-		}
-	}
-
-//
-//  Implement DocumentListener interface
-//
-	@Override
-	public void changedUpdate(DocumentEvent e)
-	{
-		documentChanged();
-	}
-
-	@Override
-	public void insertUpdate(DocumentEvent e)
-	{
-		documentChanged();
-	}
-
-	@Override
-	public void removeUpdate(DocumentEvent e)
-	{
-		documentChanged();
-	}
-
-	/*
-	 *  A document change may affect the number of displayed lines of text.
-	 *  Therefore the lines numbers will also change.
-	 */
-	private void documentChanged()
-	{
-		//  View of the component has not been updated at the time
-		//  the DocumentEvent is fired
-
-		SwingUtilities.invokeLater(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				try
-				{
-					int endPos = component.getDocument().getLength();
-					Rectangle rect = component.modelToView(endPos);
-
-					if (rect != null && rect.y != lastHeight)
-					{
-						setPreferredWidth();
-						repaint();
-						lastHeight = rect.y;
-					}
-				}
-				catch (BadLocationException ex) { /* nothing to do */ }
-			}
-		});
-	}
-
-//
-//  Implement PropertyChangeListener interface
-//
-	@Override
-	public void propertyChange(PropertyChangeEvent evt)
-	{
-		if (evt.getNewValue() instanceof Font)
-		{
-			if (updateFont)
-			{
-				Font newFont = (Font) evt.getNewValue();
-				setFont(newFont);
-				lastDigits = 0;
-				setPreferredWidth();
-			}
-			else
-			{
-				repaint();
-			}
-		}
-	}
+//  Implementa la interzar PropertyChangeListener
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getNewValue() instanceof Font) {
+            if (updateFont) {
+                Font newFont = (Font) evt.getNewValue();
+                setFont(newFont);
+                lastDigits = 0;
+                setPreferredWidth();
+            } else {
+                repaint();
+            }
+        }
+    }
 }
