@@ -5,29 +5,21 @@ import javax.swing.JFileChooser;
 import armus.ide.utilites.manejoArchivos;
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.Font;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.*;
 import armus.lib.scanner.Scanner;
 import armus.lib.parser.Parser;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import armus.ide.gui.TextLineNumber;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import javax.swing.*;
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.*;
 
 public class IDE_Armus extends javax.swing.JFrame {
 
