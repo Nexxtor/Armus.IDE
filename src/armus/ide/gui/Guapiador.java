@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package armus.ide.gui;
 
 import java.awt.Color;
@@ -13,13 +8,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
-/**
- *
- * @author stefa_000
- */
 public class Guapiador extends DefaultStyledDocument {
-    //***************************************************************************
-
     final StyleContext cont = StyleContext.getDefaultStyleContext();
     final AttributeSet attr = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, Color.BLUE);
     final SimpleAttributeSet sas = new SimpleAttributeSet();
@@ -79,7 +68,6 @@ public class Guapiador extends DefaultStyledDocument {
         }
     }
 
-    //***************************************************************************
     private int findLastNonWordChar(String text, int index) {
         while (--index >= 0) {
             if (String.valueOf(text.charAt(index)).matches("\\W")) {
@@ -98,6 +86,4 @@ public class Guapiador extends DefaultStyledDocument {
         }
         return index;
     }
-
-    //***************************************************************************
 }
