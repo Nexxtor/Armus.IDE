@@ -13,7 +13,6 @@ import armus.lib.scanner.Scanner;
 import armus.lib.parser.Parser;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import armus.ide.gui.TextLineNumber;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.util.HashMap;
