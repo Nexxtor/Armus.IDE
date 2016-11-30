@@ -15,6 +15,8 @@ public class configuraciones extends javax.swing.JFrame {
 
     public configuraciones() {
         initComponents();
+        this.setResizable(false); //la ventana no se puede redimensionar
+        this.setLocationRelativeTo(null); //centrar la ventana en la pantalla
         obtenerValoresParametros();
     }
 
@@ -49,28 +51,13 @@ public class configuraciones extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(configuraciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-        txtlinea.setText(parametros[0] + "");
-        txtId.setText(parametros[1] + "");
-        txtDigito.setText(parametros[2] + "");
-        txtFile.setText(parametros[3] + "");
-        txtNameFile.setText(parametros[4] + "");
-        txtCadena.setText(parametros[5] + "");
-        txtSizeArchivo.setText(parametros[6] + "");
-    }
-
-    private boolean validarEntero(String valore) {
-        int numerito = 0;
-        try {
-            numerito = Integer.parseInt(valore);
-            if (numerito >= 0) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        sp_linea.setValue(parametros[0]);
+        sp_id.setValue(parametros[1]);
+        sp_digito.setValue(parametros[2]);
+        sp_file.setValue(parametros[3]);
+        sp_namefile.setValue(parametros[4]);
+        sp_cadena.setValue(parametros[5]);
+        sp_sizearchivo.setValue(parametros[6]);
     }
 
     @SuppressWarnings("unchecked")
@@ -78,7 +65,7 @@ public class configuraciones extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btn_Guardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -86,95 +73,91 @@ public class configuraciones extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtlinea = new javax.swing.JTextField();
-        txtId = new javax.swing.JTextField();
-        txtDigito = new javax.swing.JTextField();
-        txtFile = new javax.swing.JTextField();
-        txtNameFile = new javax.swing.JTextField();
-        txtCadena = new javax.swing.JTextField();
-        txtSizeArchivo = new javax.swing.JTextField();
+        sp_linea = new javax.swing.JSpinner();
+        sp_id = new javax.swing.JSpinner();
+        sp_digito = new javax.swing.JSpinner();
+        sp_file = new javax.swing.JSpinner();
+        sp_namefile = new javax.swing.JSpinner();
+        sp_cadena = new javax.swing.JSpinner();
+        sp_sizearchivo = new javax.swing.JSpinner();
+        btn_cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(578, 344));
+        setTitle("CONFIGURACIÓN");
+        setPreferredSize(null);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setPreferredSize(new java.awt.Dimension(412, 353));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_Guardar.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        btn_Guardar.setText("Guardar");
+        btn_Guardar.setBorder(null);
+        btn_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_GuardarActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Máximo de líneas:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Longitud máxima para identificadores:");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cantidad máxima de dígitos:");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Número máximo de archivos a incluir:");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Longitud máxima de la ruta para archivos:");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Longitud máxima de cadena:");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Symbol", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("*Tamaño máximo de archivo:");
+        jLabel8.setText("Tamaño máximo de archivo:");
 
-        txtlinea.setBackground(new java.awt.Color(240, 240, 240));
-        txtlinea.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtlinea.setBorder(null);
-        txtlinea.setPreferredSize(new java.awt.Dimension(15, 30));
+        sp_linea.setModel(new javax.swing.SpinnerNumberModel(1024, 30, null, 1));
+        sp_linea.setEditor(new javax.swing.JSpinner.NumberEditor(sp_linea, ""));
 
-        txtId.setBackground(new java.awt.Color(240, 240, 240));
-        txtId.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtId.setBorder(null);
+        sp_id.setModel(new javax.swing.SpinnerNumberModel(1024, 30, null, 1));
+        sp_id.setEditor(new javax.swing.JSpinner.NumberEditor(sp_id, ""));
 
-        txtDigito.setBackground(new java.awt.Color(240, 240, 240));
-        txtDigito.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtDigito.setBorder(null);
+        sp_digito.setModel(new javax.swing.SpinnerNumberModel(20, 10, null, 1));
+        sp_digito.setEditor(new javax.swing.JSpinner.NumberEditor(sp_digito, ""));
 
-        txtFile.setBackground(new java.awt.Color(240, 240, 240));
-        txtFile.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtFile.setBorder(null);
+        sp_file.setModel(new javax.swing.SpinnerNumberModel(150, 30, null, 1));
+        sp_file.setEditor(new javax.swing.JSpinner.NumberEditor(sp_file, ""));
 
-        txtNameFile.setBackground(new java.awt.Color(240, 240, 240));
-        txtNameFile.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtNameFile.setBorder(null);
+        sp_namefile.setModel(new javax.swing.SpinnerNumberModel(11264, 30, null, 1));
+        sp_namefile.setEditor(new javax.swing.JSpinner.NumberEditor(sp_namefile, ""));
 
-        txtCadena.setBackground(new java.awt.Color(240, 240, 240));
-        txtCadena.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtCadena.setBorder(null);
+        sp_cadena.setModel(new javax.swing.SpinnerNumberModel(1024, 30, null, 1));
+        sp_cadena.setEditor(new javax.swing.JSpinner.NumberEditor(sp_cadena, ""));
 
-        txtSizeArchivo.setBackground(new java.awt.Color(240, 240, 240));
-        txtSizeArchivo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtSizeArchivo.setBorder(null);
+        sp_sizearchivo.setModel(new javax.swing.SpinnerNumberModel(999, 30, null, 1));
+        sp_sizearchivo.setEditor(new javax.swing.JSpinner.NumberEditor(sp_sizearchivo, ""));
+
+        btn_cerrar.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        btn_cerrar.setText("Cerrar");
+        btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
@@ -183,63 +166,60 @@ public class configuraciones extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtlinea, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNameFile, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(443, 443, 443)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtSizeArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCadena, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDigito, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(29, 29, 29))
+                            .addComponent(sp_sizearchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sp_cadena, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sp_file, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sp_digito, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sp_linea, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sp_namefile, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sp_id, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtlinea, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sp_linea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sp_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDigito, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(sp_digito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFile, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(sp_file, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNameFile, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(sp_namefile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCadena, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(sp_cadena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSizeArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(sp_sizearchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8});
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtCadena, txtDigito, txtFile, txtId, txtNameFile, txtSizeArchivo, txtlinea});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -247,54 +227,48 @@ public class configuraciones extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
         String sFichero = "/opt/armus/setings.txt";
-
-        if (validarEntero(txtlinea.getText()) == true && validarEntero(txtId.getText()) == true && validarEntero(txtDigito.getText()) == true && validarEntero(txtFile.getText()) == true && validarEntero(txtNameFile.getText()) == true && validarEntero(txtCadena.getText()) == true && validarEntero(txtSizeArchivo.getText()) == true) {
-            if (Integer.parseInt(txtlinea.getText()) >= 30 && Integer.parseInt(txtId.getText()) >= 30 && Integer.parseInt(txtDigito.getText()) >= 30 && Integer.parseInt(txtFile.getText()) >= 30 && Integer.parseInt(txtNameFile.getText()) >= 30 && Integer.parseInt(txtCadena.getText()) >= 30 && Integer.parseInt(txtSizeArchivo.getText()) >= 30) {
-                try {
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero));
-                    bw.write(txtlinea.getText() + "\n"
-                            + txtId.getText() + "\n"
-                            + txtDigito.getText() + "\n"
-                            + txtFile.getText() + "\n"
-                            + txtNameFile.getText() + "\n"
-                            + txtCadena.getText() + "\n"
-                            + txtSizeArchivo.getText() + "\n");
-
-                    bw.close();
-                } catch (IOException ex1) {
-                    JOptionPane.showMessageDialog(null, "Porvafor revisa tus "
-                            + "permisos sobre el directorio /opt/armus y sus archivos", "Error de escritura", JOptionPane.ERROR_MESSAGE);
-                }
-
-                JOptionPane.showMessageDialog(null, "Se guardo correctamente");
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Los parametros no cumplen con el valor minimo establecido. \nMinimo establecido = 30");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Los campos deben ser numeros enteros positivos");
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero));
+            bw.write(sp_linea.getValue().toString() + "\n"
+                    + sp_id.getValue().toString() + "\n"
+                    + sp_digito.getValue().toString() + "\n"
+                    + sp_file.getValue().toString() + "\n"
+                    + sp_namefile.getValue().toString() + "\n"
+                    + sp_cadena.getValue().toString() + "\n"
+                    + sp_sizearchivo.getValue().toString() + "\n");
+            bw.close();
+        } catch (IOException ex1) {
+            JOptionPane.showMessageDialog(null, "Porvafor revisa tus "
+                    + "permisos sobre el directorio /opt/armus y sus archivos",
+                    "Error de escritura", JOptionPane.ERROR_MESSAGE);
         }
+        JOptionPane.showMessageDialog(null, "Se guardo correctamente");
+        this.dispose();
+    }//GEN-LAST:event_btn_GuardarActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_cerrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_Guardar;
+    private javax.swing.JButton btn_cerrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -303,12 +277,12 @@ public class configuraciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtCadena;
-    private javax.swing.JTextField txtDigito;
-    private javax.swing.JTextField txtFile;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtNameFile;
-    private javax.swing.JTextField txtSizeArchivo;
-    private javax.swing.JTextField txtlinea;
+    private javax.swing.JSpinner sp_cadena;
+    private javax.swing.JSpinner sp_digito;
+    private javax.swing.JSpinner sp_file;
+    private javax.swing.JSpinner sp_id;
+    private javax.swing.JSpinner sp_linea;
+    private javax.swing.JSpinner sp_namefile;
+    private javax.swing.JSpinner sp_sizearchivo;
     // End of variables declaration//GEN-END:variables
 }
