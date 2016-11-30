@@ -27,7 +27,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.acl", "acl");
     File archivo;
     manejoArchivos gestion = new manejoArchivos();
-    Map<Integer, String> ruta = new HashMap<Integer, String>();
+    Map<Integer, String> ruta = new HashMap<>();
     int NumPestana = 0; ////cambiar
 
     public IDE_Armus() {
@@ -47,8 +47,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.println(ex.getMessage()); //muestra el exepción en consola
         }
-        setVisible(true);
-
+        this.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -59,13 +58,13 @@ public class IDE_Armus extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         Panel = new javax.swing.JPanel();
-        btnAbrir = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
-        btnGuardarComo = new javax.swing.JButton();
-        btnCortar = new javax.swing.JButton();
-        btnPegar = new javax.swing.JButton();
-        btnCopiar = new javax.swing.JButton();
-        btnNuevo = new javax.swing.JButton();
+        btn_abrir = new javax.swing.JButton();
+        btn_guardar = new javax.swing.JButton();
+        btn_guardar_como = new javax.swing.JButton();
+        btn_cortar = new javax.swing.JButton();
+        btn_pegar = new javax.swing.JButton();
+        btn_copiar = new javax.swing.JButton();
+        btn_nuevo = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         btnAbrirP = new javax.swing.JButton();
         btnCerrarP = new javax.swing.JButton();
@@ -76,7 +75,8 @@ public class IDE_Armus extends javax.swing.JFrame {
         TablaErrores = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         TxtAreaResultado = new javax.swing.JTextArea();
-        btnCorrer = new javax.swing.JButton();
+        btn_compilar = new javax.swing.JButton();
+        btn_lexema_token = new javax.swing.JButton();
         BarraMenu = new javax.swing.JMenuBar();
         MenuArchivo = new javax.swing.JMenu();
         menuAbrir = new javax.swing.JMenuItem();
@@ -89,16 +89,20 @@ public class IDE_Armus extends javax.swing.JFrame {
         menuCortar = new javax.swing.JMenuItem();
         menuPegar = new javax.swing.JMenuItem();
         MenuAnalizadores = new javax.swing.JMenu();
-        btnEjecutar = new javax.swing.JRadioButtonMenuItem();
+        btnEjecutarLexemaToken = new javax.swing.JMenuItem();
         btnEjecutarParser = new javax.swing.JMenuItem();
         MenuPreferencias = new javax.swing.JMenu();
         SubMenuTemas = new javax.swing.JMenu();
-        estandarTema = new javax.swing.JMenuItem();
-        menuColor1 = new javax.swing.JMenuItem();
-        menuColor2 = new javax.swing.JMenuItem();
-        menuColor3 = new javax.swing.JMenuItem();
-        menuColor4 = new javax.swing.JMenuItem();
-        menuColor5 = new javax.swing.JMenuItem();
+        oscuro = new javax.swing.JMenuItem();
+        fucsia = new javax.swing.JMenuItem();
+        verde = new javax.swing.JMenuItem();
+        ocre = new javax.swing.JMenuItem();
+        aqua = new javax.swing.JMenuItem();
+        azul = new javax.swing.JMenuItem();
+        rosado = new javax.swing.JMenuItem();
+        cafe = new javax.swing.JMenuItem();
+        gris = new javax.swing.JMenuItem();
+        olivo = new javax.swing.JMenuItem();
         menuConfigurarParametros = new javax.swing.JMenuItem();
         MenuAyuda = new javax.swing.JMenu();
         menuAyuda = new javax.swing.JMenuItem();
@@ -115,85 +119,89 @@ public class IDE_Armus extends javax.swing.JFrame {
         setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(500, 300));
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
         });
 
-        Panel.setBackground(new java.awt.Color(26, 115, 126));
+        Panel.setBackground(new java.awt.Color(66, 66, 66));
 
-        btnAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/folder.png"))); // NOI18N
-        btnAbrir.setToolTipText("");
-        btnAbrir.setBorder(null);
-        btnAbrir.setBorderPainted(false);
-        btnAbrir.setContentAreaFilled(false);
-        btnAbrir.setFocusPainted(false);
-        btnAbrir.setSelected(true);
-        btnAbrir.addActionListener(new java.awt.event.ActionListener() {
+        btn_abrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/abrir.png"))); // NOI18N
+        btn_abrir.setToolTipText("Abrir código fuente");
+        btn_abrir.setAlignmentX(0.5F);
+        btn_abrir.setBorder(null);
+        btn_abrir.setBorderPainted(false);
+        btn_abrir.setContentAreaFilled(false);
+        btn_abrir.setFocusPainted(false);
+        btn_abrir.setSelected(true);
+        btn_abrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAbrirActionPerformed(evt);
+                btn_abrirActionPerformed(evt);
             }
         });
 
-        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
-        btnGuardar.setBorder(null);
-        btnGuardar.setBorderPainted(false);
-        btnGuardar.setContentAreaFilled(false);
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btn_guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar.png"))); // NOI18N
+        btn_guardar.setToolTipText("Guardar");
+        btn_guardar.setBorder(null);
+        btn_guardar.setBorderPainted(false);
+        btn_guardar.setContentAreaFilled(false);
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                btn_guardarActionPerformed(evt);
             }
         });
 
-        btnGuardarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save1.png"))); // NOI18N
-        btnGuardarComo.setBorder(null);
-        btnGuardarComo.setBorderPainted(false);
-        btnGuardarComo.setContentAreaFilled(false);
-        btnGuardarComo.addActionListener(new java.awt.event.ActionListener() {
+        btn_guardar_como.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar-como.png"))); // NOI18N
+        btn_guardar_como.setToolTipText("Guardar como...");
+        btn_guardar_como.setBorder(null);
+        btn_guardar_como.setBorderPainted(false);
+        btn_guardar_como.setContentAreaFilled(false);
+        btn_guardar_como.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarComoActionPerformed(evt);
+                btn_guardar_comoActionPerformed(evt);
             }
         });
 
-        btnCortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/scissors.png"))); // NOI18N
-        btnCortar.setBorder(null);
-        btnCortar.setBorderPainted(false);
-        btnCortar.setContentAreaFilled(false);
-        btnCortar.addActionListener(new java.awt.event.ActionListener() {
+        btn_cortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cortar.png"))); // NOI18N
+        btn_cortar.setToolTipText("Cortar");
+        btn_cortar.setBorder(null);
+        btn_cortar.setBorderPainted(false);
+        btn_cortar.setContentAreaFilled(false);
+        btn_cortar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCortarActionPerformed(evt);
+                btn_cortarActionPerformed(evt);
             }
         });
 
-        btnPegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/paste.png"))); // NOI18N
-        btnPegar.setBorder(null);
-        btnPegar.setBorderPainted(false);
-        btnPegar.setContentAreaFilled(false);
-        btnPegar.addActionListener(new java.awt.event.ActionListener() {
+        btn_pegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pegar.png"))); // NOI18N
+        btn_pegar.setToolTipText("Pegar");
+        btn_pegar.setBorder(null);
+        btn_pegar.setBorderPainted(false);
+        btn_pegar.setContentAreaFilled(false);
+        btn_pegar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPegarActionPerformed(evt);
+                btn_pegarActionPerformed(evt);
             }
         });
 
-        btnCopiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/copy.png"))); // NOI18N
-        btnCopiar.setBorderPainted(false);
-        btnCopiar.setContentAreaFilled(false);
-        btnCopiar.addActionListener(new java.awt.event.ActionListener() {
+        btn_copiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/copiar1.png"))); // NOI18N
+        btn_copiar.setToolTipText("Copiar");
+        btn_copiar.setBorderPainted(false);
+        btn_copiar.setContentAreaFilled(false);
+        btn_copiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCopiarActionPerformed(evt);
+                btn_copiarActionPerformed(evt);
             }
         });
 
-        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file (3).png"))); // NOI18N
-        btnNuevo.setBorder(null);
-        btnNuevo.setBorderPainted(false);
-        btnNuevo.setContentAreaFilled(false);
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+        btn_nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo1.png"))); // NOI18N
+        btn_nuevo.setToolTipText("Nuevo");
+        btn_nuevo.setBorder(null);
+        btn_nuevo.setBorderPainted(false);
+        btn_nuevo.setContentAreaFilled(false);
+        btn_nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
+                btn_nuevoActionPerformed(evt);
             }
         });
 
@@ -223,7 +231,8 @@ public class IDE_Armus extends javax.swing.JFrame {
 
         jTabbedPane2.setName(""); // NOI18N
 
-        jScrollPane1.setToolTipText("");
+        jScrollPane1.setForeground(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setToolTipText("Consola");
 
         TxtAreaConsola.setEditable(false);
         TxtAreaConsola.setColumns(20);
@@ -231,7 +240,10 @@ public class IDE_Armus extends javax.swing.JFrame {
         TxtAreaConsola.setToolTipText("Muestra la lista de lexemas con su correspondiente token");
         jScrollPane1.setViewportView(TxtAreaConsola);
 
-        jTabbedPane2.addTab("Console", jScrollPane1);
+        jTabbedPane2.addTab("Consola", new javax.swing.ImageIcon(getClass().getResource("/icons/lexema-token-16.png")), jScrollPane1); // NOI18N
+
+        jScrollPane2.setForeground(new java.awt.Color(0, 0, 0));
+        jScrollPane2.setToolTipText("Errores");
 
         TablaErrores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -245,7 +257,10 @@ public class IDE_Armus extends javax.swing.JFrame {
         TablaErrores.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(TablaErrores);
 
-        jTabbedPane2.addTab("Errores", jScrollPane2);
+        jTabbedPane2.addTab("Errores", new javax.swing.ImageIcon(getClass().getResource("/icons/negativo-16.png")), jScrollPane2); // NOI18N
+
+        jScrollPane3.setForeground(new java.awt.Color(0, 0, 0));
+        jScrollPane3.setToolTipText("Resultados");
 
         TxtAreaResultado.setColumns(20);
         TxtAreaResultado.setRows(5);
@@ -253,17 +268,30 @@ public class IDE_Armus extends javax.swing.JFrame {
         TxtAreaResultado.getAccessibleContext().setAccessibleName("TxtAreaResultado");
         TxtAreaResultado.getAccessibleContext().setAccessibleDescription("");
 
-        jTabbedPane2.addTab("Resultados", jScrollPane3);
+        jTabbedPane2.addTab("Resultados", new javax.swing.ImageIcon(getClass().getResource("/icons/resultados-16.png")), jScrollPane3); // NOI18N
 
-        btnCorrer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reply.png"))); // NOI18N
-        btnCorrer.setBorderPainted(false);
-        btnCorrer.setContentAreaFilled(false);
-        btnCorrer.setMaximumSize(new java.awt.Dimension(33, 33));
-        btnCorrer.setMinimumSize(new java.awt.Dimension(33, 33));
-        btnCorrer.setPreferredSize(new java.awt.Dimension(33, 33));
-        btnCorrer.addActionListener(new java.awt.event.ActionListener() {
+        btn_compilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/compilar.png"))); // NOI18N
+        btn_compilar.setToolTipText("Compilar programa");
+        btn_compilar.setBorder(null);
+        btn_compilar.setBorderPainted(false);
+        btn_compilar.setContentAreaFilled(false);
+        btn_compilar.setMaximumSize(new java.awt.Dimension(33, 33));
+        btn_compilar.setMinimumSize(new java.awt.Dimension(33, 33));
+        btn_compilar.setPreferredSize(new java.awt.Dimension(33, 33));
+        btn_compilar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCorrerActionPerformed(evt);
+                btn_compilarActionPerformed(evt);
+            }
+        });
+
+        btn_lexema_token.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lexema-token1.png"))); // NOI18N
+        btn_lexema_token.setToolTipText("Analizador Lexicográfico");
+        btn_lexema_token.setBorder(null);
+        btn_lexema_token.setBorderPainted(false);
+        btn_lexema_token.setContentAreaFilled(false);
+        btn_lexema_token.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_lexema_tokenActionPerformed(evt);
             }
         });
 
@@ -276,25 +304,27 @@ public class IDE_Armus extends javax.swing.JFrame {
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1)
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGuardar)
+                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGuardarComo)
+                        .addComponent(btn_guardar_como, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCortar)
+                        .addComponent(btn_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPegar)
+                        .addComponent(btn_cortar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_copiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNuevo)
+                        .addComponent(btn_pegar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_lexema_token, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_compilar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93)
                         .addComponent(btnAbrirP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCerrarP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCorrer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE))
                 .addGap(6, 6, 6))
@@ -303,31 +333,36 @@ public class IDE_Armus extends javax.swing.JFrame {
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnPegar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCortar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGuardarComo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCopiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCerrarP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAbrirP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnCorrer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btn_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btn_pegar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_cortar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_guardar_como, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_copiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnCerrarP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAbrirP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_compilar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_lexema_token, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
         );
 
+        BarraMenu.setBackground(new java.awt.Color(54, 54, 54));
+
         MenuArchivo.setText("Archivo");
         MenuArchivo.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
 
         menuAbrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        menuAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/abrir-16.png"))); // NOI18N
         menuAbrir.setText("Abrir");
         menuAbrir.setToolTipText("Abrir archivo");
         menuAbrir.addActionListener(new java.awt.event.ActionListener() {
@@ -338,6 +373,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         MenuArchivo.add(menuAbrir);
 
         menuNuevo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        menuNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo-16.png"))); // NOI18N
         menuNuevo.setText("Nuevo");
         menuNuevo.setToolTipText("Nuevo archivo");
         menuNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -348,6 +384,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         MenuArchivo.add(menuNuevo);
 
         menuGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        menuGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar-16.png"))); // NOI18N
         menuGuardar.setText("Guardar");
         menuGuardar.setToolTipText("Guardar el archivo actual");
         menuGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -357,6 +394,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         MenuArchivo.add(menuGuardar);
 
+        menuGuardarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar-como-16.png"))); // NOI18N
         menuGuardarComo.setText("Guardar Como...");
         menuGuardarComo.setToolTipText("Guarda el archivo actual con otro nombre");
         menuGuardarComo.addActionListener(new java.awt.event.ActionListener() {
@@ -366,6 +404,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         MenuArchivo.add(menuGuardarComo);
 
+        menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/salida-16.png"))); // NOI18N
         menuSalir.setText("Salir");
         menuSalir.setToolTipText("Salir del editor");
         menuSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -381,6 +420,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         MenuEditar.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
 
         menuCopiar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        menuCopiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/copiar1-16.png"))); // NOI18N
         menuCopiar.setText("Copiar");
         menuCopiar.setToolTipText("Copiar el texto seleccionado");
         menuCopiar.addActionListener(new java.awt.event.ActionListener() {
@@ -391,6 +431,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         MenuEditar.add(menuCopiar);
 
         menuCortar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        menuCortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cortar-16.png"))); // NOI18N
         menuCortar.setText("Cortar");
         menuCortar.setToolTipText("Cortar el texto seleccionado");
         menuCortar.addActionListener(new java.awt.event.ActionListener() {
@@ -401,6 +442,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         MenuEditar.add(menuCortar);
 
         menuPegar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        menuPegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pegar-16.png"))); // NOI18N
         menuPegar.setText("Pegar");
         menuPegar.setToolTipText("Pegar un texto");
         menuPegar.addActionListener(new java.awt.event.ActionListener() {
@@ -416,17 +458,19 @@ public class IDE_Armus extends javax.swing.JFrame {
         MenuAnalizadores.setActionCommand("");
         MenuAnalizadores.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
 
-        btnEjecutar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        btnEjecutar.setText("Ejecutar Analizador Lexicografico");
-        btnEjecutar.setToolTipText("Obtiene la lista de lexemas y tokens del código");
-        btnEjecutar.addActionListener(new java.awt.event.ActionListener() {
+        btnEjecutarLexemaToken.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        btnEjecutarLexemaToken.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lexema-token-16.png"))); // NOI18N
+        btnEjecutarLexemaToken.setText("Ejecutar Analizador Lexicográfico");
+        btnEjecutarLexemaToken.setToolTipText("Obtiene la lista de lexemas y tokens del código");
+        btnEjecutarLexemaToken.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEjecutarActionPerformed(evt);
+                btnEjecutarLexemaTokenActionPerformed(evt);
             }
         });
-        MenuAnalizadores.add(btnEjecutar);
+        MenuAnalizadores.add(btnEjecutarLexemaToken);
 
         btnEjecutarParser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        btnEjecutarParser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ejecutar3-16.png"))); // NOI18N
         btnEjecutarParser.setText("Ejecutar Parser");
         btnEjecutarParser.setToolTipText("Verifica la sintaxis, muestra los errores encontrados");
         btnEjecutarParser.addActionListener(new java.awt.event.ActionListener() {
@@ -442,59 +486,103 @@ public class IDE_Armus extends javax.swing.JFrame {
         MenuPreferencias.setActionCommand("Opciones");
         MenuPreferencias.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
 
+        SubMenuTemas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/colores-16.png"))); // NOI18N
         SubMenuTemas.setText("Temas");
         SubMenuTemas.setToolTipText("Cambia la apariencia del editor");
 
-        estandarTema.setText("Standard");
-        estandarTema.addActionListener(new java.awt.event.ActionListener() {
+        oscuro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        oscuro.setText("Oscuro (por defecto)");
+        oscuro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estandarTemaActionPerformed(evt);
+                oscuroActionPerformed(evt);
             }
         });
-        SubMenuTemas.add(estandarTema);
+        SubMenuTemas.add(oscuro);
 
-        menuColor1.setText("Pink");
-        menuColor1.addActionListener(new java.awt.event.ActionListener() {
+        fucsia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        fucsia.setText("Fucsia");
+        fucsia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuColor1ActionPerformed(evt);
+                fucsiaActionPerformed(evt);
             }
         });
-        SubMenuTemas.add(menuColor1);
+        SubMenuTemas.add(fucsia);
 
-        menuColor2.setText("Blue");
-        menuColor2.addActionListener(new java.awt.event.ActionListener() {
+        verde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        verde.setText("Verde");
+        verde.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuColor2ActionPerformed(evt);
+                verdeActionPerformed(evt);
             }
         });
-        SubMenuTemas.add(menuColor2);
+        SubMenuTemas.add(verde);
 
-        menuColor3.setText("Green");
-        menuColor3.addActionListener(new java.awt.event.ActionListener() {
+        ocre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        ocre.setText("Ocre");
+        ocre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuColor3ActionPerformed(evt);
+                ocreActionPerformed(evt);
             }
         });
-        SubMenuTemas.add(menuColor3);
+        SubMenuTemas.add(ocre);
 
-        menuColor4.setText("DarkRed");
-        menuColor4.addActionListener(new java.awt.event.ActionListener() {
+        aqua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        aqua.setText("Aqua");
+        aqua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuColor4ActionPerformed(evt);
+                aquaActionPerformed(evt);
             }
         });
-        SubMenuTemas.add(menuColor4);
+        SubMenuTemas.add(aqua);
 
-        menuColor5.setText("Aqua");
-        menuColor5.addActionListener(new java.awt.event.ActionListener() {
+        azul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        azul.setText("Azul");
+        azul.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuColor5ActionPerformed(evt);
+                azulActionPerformed(evt);
             }
         });
-        SubMenuTemas.add(menuColor5);
+        SubMenuTemas.add(azul);
+
+        rosado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        rosado.setText("Rosado");
+        rosado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rosadoActionPerformed(evt);
+            }
+        });
+        SubMenuTemas.add(rosado);
+
+        cafe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        cafe.setText("Café");
+        cafe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cafeActionPerformed(evt);
+            }
+        });
+        SubMenuTemas.add(cafe);
+
+        gris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        gris.setText("Gris");
+        gris.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                grisActionPerformed(evt);
+            }
+        });
+        SubMenuTemas.add(gris);
+
+        olivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        olivo.setText("Olivo");
+        olivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                olivoActionPerformed(evt);
+            }
+        });
+        SubMenuTemas.add(olivo);
 
         MenuPreferencias.add(SubMenuTemas);
 
+        menuConfigurarParametros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/preferencias-16.png"))); // NOI18N
         menuConfigurarParametros.setText("Configurar Parametros");
         menuConfigurarParametros.setToolTipText("Configura los parametros del compilador");
         menuConfigurarParametros.addActionListener(new java.awt.event.ActionListener() {
@@ -507,9 +595,11 @@ public class IDE_Armus extends javax.swing.JFrame {
         BarraMenu.add(MenuPreferencias);
 
         MenuAyuda.setText("Ayuda");
+        MenuAyuda.setToolTipText("Menú de ayuda");
         MenuAyuda.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
 
         menuAyuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        menuAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ayuda-16.png"))); // NOI18N
         menuAyuda.setText("Ayuda");
         menuAyuda.setToolTipText("Muestra el archivo de ayuda");
         menuAyuda.setActionCommand("");
@@ -520,7 +610,9 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         MenuAyuda.add(menuAyuda);
 
+        MenuAcercaDe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/info-16.png"))); // NOI18N
         MenuAcercaDe.setText("Acerca de...");
+        MenuAcercaDe.setToolTipText("Acerca de...");
         MenuAcercaDe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuAcercaDeActionPerformed(evt);
@@ -546,59 +638,44 @@ public class IDE_Armus extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCopiarActionPerformed
+    private void btn_copiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_copiarActionPerformed
         panelesTexto.get(jTabbedPane1.getSelectedIndex()).copy();
-    }//GEN-LAST:event_btnCopiarActionPerformed
+    }//GEN-LAST:event_btn_copiarActionPerformed
 
-    private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
+    private void btn_abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abrirActionPerformed
         abrirArchivo();
-    }//GEN-LAST:event_btnAbrirActionPerformed
+    }//GEN-LAST:event_btn_abrirActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         if (ruta.get(jTabbedPane1.getSelectedIndex()) == null) {
             guardarComo();
         } else {
             guardarArchivo();
         }
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btn_guardarActionPerformed
 
-    private void btnGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComoActionPerformed
+    private void btn_guardar_comoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardar_comoActionPerformed
         guardarComo();
-    }//GEN-LAST:event_btnGuardarComoActionPerformed
+    }//GEN-LAST:event_btn_guardar_comoActionPerformed
 
-    private void btnCortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCortarActionPerformed
+    private void btn_cortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cortarActionPerformed
         panelesTexto.get(jTabbedPane1.getSelectedIndex()).cut();
-    }//GEN-LAST:event_btnCortarActionPerformed
+    }//GEN-LAST:event_btn_cortarActionPerformed
 
-    private void btnPegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPegarActionPerformed
+    private void btn_pegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pegarActionPerformed
         panelesTexto.get(jTabbedPane1.getSelectedIndex()).paste();
-    }//GEN-LAST:event_btnPegarActionPerformed
+    }//GEN-LAST:event_btn_pegarActionPerformed
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        if (!(panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText().equals("")) || archivo != null) {
-            if (((JOptionPane.showConfirmDialog(null, "Desea utilizar una nueva hoja de trabajo? \n\t Si acepta se borrara todos los cambios sin guardar")) == 0)) {
-                archivo = null;
-                panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText("");
-                jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), "nuevo(" + jTabbedPane1.getSelectedIndex() + ")");
-                ruta.remove(jTabbedPane1.getSelectedIndex());
-            }
-        }
-
-    }//GEN-LAST:event_btnNuevoActionPerformed
+    private void btn_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoActionPerformed
+        nuevoArchivo();
+    }//GEN-LAST:event_btn_nuevoActionPerformed
 
     private void menuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirActionPerformed
         abrirArchivo();
     }//GEN-LAST:event_menuAbrirActionPerformed
 
     private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
-        if (!(panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText().equals("")) || archivo != null) {
-            if (((JOptionPane.showConfirmDialog(null, "Desea utilizar una nueva hoja de trabajo? \n\t Si acepta se borrara todos los cambios sin guardar")) == 0)) {
-                archivo = null;
-                panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText("");
-                jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), "nuevo(" + jTabbedPane1.getSelectedIndex() + ")");
-                ruta.remove(jTabbedPane1.getSelectedIndex());
-            }
-        }
+        nuevoArchivo();
     }//GEN-LAST:event_menuNuevoActionPerformed
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
@@ -629,83 +706,30 @@ public class IDE_Armus extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_menuSalirActionPerformed
 
-    private void menuColor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor1ActionPerformed
-        //Panel.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        Panel.setBackground(new Color(231, 81, 166));
-        BarraMenu.setBackground(new Color(250, 145, 204));
-    }//GEN-LAST:event_menuColor1ActionPerformed
+    private void fucsiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fucsiaActionPerformed
+        BarraMenu.setBackground(new Color(136, 0, 112)); //morado oscuro
+        Panel.setBackground(new Color(172, 0, 142)); //morado claro
+    }//GEN-LAST:event_fucsiaActionPerformed
 
-    private void menuColor5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor5ActionPerformed
-        Panel.setBackground(new Color(53, 202, 192));
-        BarraMenu.setBackground(new Color(121, 229, 222));
-    }//GEN-LAST:event_menuColor5ActionPerformed
+    private void aquaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aquaActionPerformed
+        BarraMenu.setBackground(new Color(0, 109, 136)); //oscuro
+        Panel.setBackground(new Color(0, 138, 172)); //claro
+    }//GEN-LAST:event_aquaActionPerformed
 
-    private void menuColor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor2ActionPerformed
-        Panel.setBackground(new Color(53, 106, 180));
-        BarraMenu.setBackground(new Color(88, 138, 208));
-    }//GEN-LAST:event_menuColor2ActionPerformed
+    private void azulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_azulActionPerformed
+        BarraMenu.setBackground(new Color(21, 83, 136)); //azul oscuro
+        Panel.setBackground(new Color(26, 104, 172)); //azul claro
+    }//GEN-LAST:event_azulActionPerformed
 
-    private void menuColor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor3ActionPerformed
-        Panel.setBackground(new Color(35, 170, 53));
-        BarraMenu.setBackground(new Color(106, 223, 122));
-    }//GEN-LAST:event_menuColor3ActionPerformed
+    private void verdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verdeActionPerformed
+        BarraMenu.setBackground(new Color(10, 81, 64)); //oscuro
+        Panel.setBackground(new Color(14, 109, 86)); //claro
+    }//GEN-LAST:event_verdeActionPerformed
 
-    private void menuColor4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuColor4ActionPerformed
-        Panel.setBackground(new Color(148, 13, 13));
-        BarraMenu.setBackground(new Color(222, 118, 118));
-    }//GEN-LAST:event_menuColor4ActionPerformed
-
-    private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
-        if (archivo == null) {
-            if (JOptionPane.showConfirmDialog(null, "Desea guardar el archivo") == 0) {
-                guardarComo();
-            } else {
-                return;
-            }
-        } else {
-
-            String contenido = panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText();
-            String respuesta = gestion.guardarTexto(archivo, contenido);
-            if (respuesta == null) {
-                JOptionPane.showMessageDialog(null, "Error al guardar el texto");
-            }
-        }
-        try {
-            Scanner scanner = new Scanner();
-            String[] listaArchivos = scanner.lsFiles(ruta.get(jTabbedPane1.getSelectedIndex()));
-            /// Poner un error aqui si listaArchivos es nulo
-            if (listaArchivos == null) {
-                anadirErrores();
-                return;
-            }
-            TxtAreaConsola.setText("Se encontraron los siguientes archivos a Tokenizar \n");
-            for (String valor : listaArchivos) {
-                TxtAreaConsola.append(valor + "\n");
-            }
-            TxtAreaConsola.append("____________________________________________________________________________\n");
-            String[] tokens = scanner.lsTokens(listaArchivos);
-
-            if (tokens == null) {
-                anadirErrores();
-            }
-
-            String cadena;
-            FileReader f;
-            BufferedReader b;
-            f = new FileReader("lsToken.tok");
-            b = new BufferedReader(f);
-            while ((cadena = b.readLine()) != null) {
-                TxtAreaConsola.append(cadena + "\n");
-            }
-            b.close();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,
-                    "No se puede cargar la libreria del Scanner\n" + e.getMessage(),
-                    "Error cargando libreria", JOptionPane.ERROR_MESSAGE);
-        }
-        jTabbedPane2.setSelectedIndex(0);
-    }//GEN-LAST:event_btnEjecutarActionPerformed
+    private void ocreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocreActionPerformed
+        BarraMenu.setBackground(new Color(117, 20, 20)); //oscuro
+        Panel.setBackground(new Color(158, 19, 28)); //claro
+    }//GEN-LAST:event_ocreActionPerformed
 
     private void menuAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAyudaActionPerformed
         try {
@@ -740,45 +764,18 @@ public class IDE_Armus extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_formWindowClosed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowClosing
-
     private void menuConfigurarParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuConfigurarParametrosActionPerformed
         configuraciones ventanita = new configuraciones();
         ventanita.setVisible(true);
     }//GEN-LAST:event_menuConfigurarParametrosActionPerformed
 
-    private void estandarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estandarTemaActionPerformed
-        Panel.setBackground(new Color(26, 115, 126));
-        BarraMenu.setBackground(new Color(60, 59, 55));
-    }//GEN-LAST:event_estandarTemaActionPerformed
+    private void oscuroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oscuroActionPerformed
+        BarraMenu.setBackground(new Color(54, 54, 54)); //oscuro
+        Panel.setBackground(new Color(66, 66, 66)); //claro
+    }//GEN-LAST:event_oscuroActionPerformed
 
     private void btnEjecutarParserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarParserActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel modelo = new DefaultTableModel();
-        TablaErrores.setModel(modelo);
-
-        Scanner s = new Scanner();
-        String[] a = s.lsFiles(ruta.get(jTabbedPane1.getSelectedIndex()));
-
-        Parser b = new Parser();
-        String[] respuesta = b.run(a);
-        if (respuesta == null) {
-            modelo.addColumn("Exito");
-            String[] ext = {"Compilado con exito"};
-            modelo.addRow(ext);
-        } else {
-            modelo.addColumn("Archivo");
-            modelo.addColumn("# Linea");
-            modelo.addColumn("# Col");
-            modelo.addColumn("Detalles");
-            for (int i = 0; i < respuesta.length; i++) {
-                System.out.println(respuesta[i]);
-                modelo.addRow((Object[]) respuesta[i].split(","));
-            }
-        }
-        jTabbedPane2.setSelectedIndex(1);
+        ejecutarParser();
     }//GEN-LAST:event_btnEjecutarParserActionPerformed
 
     private void btnAbrirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirPActionPerformed
@@ -823,14 +820,42 @@ public class IDE_Armus extends javax.swing.JFrame {
         ruta.remove(NumPestana);
     }
 
-    private void btnCorrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCorrerActionPerformed
+    private void btn_compilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_compilarActionPerformed
+        ejecutarParser();
+    }//GEN-LAST:event_btn_compilarActionPerformed
 
     private void MenuAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAcercaDeActionPerformed
         AcercaDe acercad = new AcercaDe();
         acercad.setVisible(true);
     }//GEN-LAST:event_MenuAcercaDeActionPerformed
+
+    private void rosadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rosadoActionPerformed
+        BarraMenu.setBackground(new Color(203, 78, 145)); //oscuro
+        Panel.setBackground(new Color(207, 110, 164)); //claro
+    }//GEN-LAST:event_rosadoActionPerformed
+
+    private void cafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cafeActionPerformed
+        BarraMenu.setBackground(new Color(87, 68, 53)); //oscuro
+        Panel.setBackground(new Color(111, 86, 65)); //claro
+    }//GEN-LAST:event_cafeActionPerformed
+
+    private void grisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grisActionPerformed
+        BarraMenu.setBackground(new Color(150, 150, 150)); //oscuro
+        Panel.setBackground(new Color(196, 196, 196)); //claro
+    }//GEN-LAST:event_grisActionPerformed
+
+    private void olivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_olivoActionPerformed
+        BarraMenu.setBackground(new Color(43, 73, 39)); //oscuro
+        Panel.setBackground(new Color(92, 99, 29)); //claro
+    }//GEN-LAST:event_olivoActionPerformed
+
+    private void btn_lexema_tokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lexema_tokenActionPerformed
+        ejecutarAnalizadorLexicografico();
+    }//GEN-LAST:event_btn_lexema_tokenActionPerformed
+
+    private void btnEjecutarLexemaTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarLexemaTokenActionPerformed
+        ejecutarAnalizadorLexicografico();
+    }//GEN-LAST:event_btnEjecutarLexemaTokenActionPerformed
 
     private void guardarArchivo() {
         if (!(ruta.get(jTabbedPane1.getSelectedIndex()).equals(""))) {
@@ -912,7 +937,94 @@ public class IDE_Armus extends javax.swing.JFrame {
             System.exit(0);
         }
     }
+    
+    private void nuevoArchivo(){
+        if (!(panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText().equals("")) || archivo != null) {
+            if (((JOptionPane.showConfirmDialog(null, "¿Desea utilizar una nueva hoja de trabajo? \n\t Si acepta se borraran todos los cambios sin guardar")) == 0)) {
+                archivo = null;
+                panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText("");
+                jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), "nuevo(" + jTabbedPane1.getSelectedIndex() + ")");
+                ruta.remove(jTabbedPane1.getSelectedIndex());
+            }
+        }
+    }
+    
+    private void ejecutarParser(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        TablaErrores.setModel(modelo);
 
+        Scanner s = new Scanner();
+        String[] a = s.lsFiles(ruta.get(jTabbedPane1.getSelectedIndex()));
+
+        Parser b = new Parser();
+        String[] respuesta = b.run(a);
+        if (respuesta == null) {
+            modelo.addColumn("Exito");
+            String[] ext = {"Compilado con exito"};
+            modelo.addRow(ext);
+        } else {
+            modelo.addColumn("Archivo");
+            modelo.addColumn("# Linea");
+            modelo.addColumn("# Col");
+            modelo.addColumn("Detalles");
+            for (int i = 0; i < respuesta.length; i++) {
+                System.out.println(respuesta[i]);
+                modelo.addRow((Object[]) respuesta[i].split(","));
+            }
+        }
+        jTabbedPane2.setSelectedIndex(1);
+    }
+    
+    private void ejecutarAnalizadorLexicografico(){
+        if (archivo == null) {
+            if (JOptionPane.showConfirmDialog(null, "Desea guardar el archivo") == 0) {
+                guardarComo();
+            } else {
+                return;
+            }
+        } else {
+            String contenido = panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText();
+            String respuesta = gestion.guardarTexto(archivo, contenido);
+            if (respuesta == null) {
+                JOptionPane.showMessageDialog(null, "Error al guardar el texto");
+            }
+        }
+        try {
+            Scanner scanner = new Scanner();
+            String[] listaArchivos = scanner.lsFiles(ruta.get(jTabbedPane1.getSelectedIndex()));
+            /// Poner un error aqui si listaArchivos es nulo
+            if (listaArchivos == null) {
+                anadirErrores();
+                return;
+            }
+            TxtAreaConsola.setText("Se encontraron los siguientes archivos a Tokenizar \n");
+            for (String valor : listaArchivos) {
+                TxtAreaConsola.append(valor + "\n");
+            }
+            TxtAreaConsola.append("____________________________________________________________________________\n");
+            String[] tokens = scanner.lsTokens(listaArchivos);
+
+            if (tokens == null) {
+                anadirErrores();
+            }
+
+            String cadena;
+            FileReader f;
+            BufferedReader b;
+            f = new FileReader("lsToken.tok");
+            b = new BufferedReader(f);
+            while ((cadena = b.readLine()) != null) {
+                TxtAreaConsola.append(cadena + "\n");
+            }
+            b.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "No se puede cargar la libreria del Scanner\n" + e.getMessage(),
+                    "Error cargando libreria", JOptionPane.ERROR_MESSAGE);
+        }
+        jTabbedPane2.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarraMenu;
@@ -927,19 +1039,24 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JTable TablaErrores;
     private javax.swing.JTextArea TxtAreaConsola;
     private javax.swing.JTextArea TxtAreaResultado;
-    private javax.swing.JButton btnAbrir;
+    private javax.swing.JMenuItem aqua;
+    private javax.swing.JMenuItem azul;
     private javax.swing.JButton btnAbrirP;
     private javax.swing.JButton btnCerrarP;
-    private javax.swing.JButton btnCopiar;
-    private javax.swing.JButton btnCorrer;
-    private javax.swing.JButton btnCortar;
-    private javax.swing.JRadioButtonMenuItem btnEjecutar;
+    private javax.swing.JMenuItem btnEjecutarLexemaToken;
     private javax.swing.JMenuItem btnEjecutarParser;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnGuardarComo;
-    private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnPegar;
-    private javax.swing.JMenuItem estandarTema;
+    private javax.swing.JButton btn_abrir;
+    private javax.swing.JButton btn_compilar;
+    private javax.swing.JButton btn_copiar;
+    private javax.swing.JButton btn_cortar;
+    private javax.swing.JButton btn_guardar;
+    private javax.swing.JButton btn_guardar_como;
+    private javax.swing.JButton btn_lexema_token;
+    private javax.swing.JButton btn_nuevo;
+    private javax.swing.JButton btn_pegar;
+    private javax.swing.JMenuItem cafe;
+    private javax.swing.JMenuItem fucsia;
+    private javax.swing.JMenuItem gris;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -950,11 +1067,6 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JMenuItem menuAbrir;
     private javax.swing.JMenuItem menuAyuda;
-    private javax.swing.JMenuItem menuColor1;
-    private javax.swing.JMenuItem menuColor2;
-    private javax.swing.JMenuItem menuColor3;
-    private javax.swing.JMenuItem menuColor4;
-    private javax.swing.JMenuItem menuColor5;
     private javax.swing.JMenuItem menuConfigurarParametros;
     private javax.swing.JMenuItem menuCopiar;
     private javax.swing.JMenuItem menuCortar;
@@ -963,8 +1075,13 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuNuevo;
     private javax.swing.JMenuItem menuPegar;
     private javax.swing.JMenuItem menuSalir;
+    private javax.swing.JMenuItem ocre;
+    private javax.swing.JMenuItem olivo;
+    private javax.swing.JMenuItem oscuro;
+    private javax.swing.JMenuItem rosado;
+    private javax.swing.JMenuItem verde;
     // End of variables declaration//GEN-END:variables
 
-    Map<Integer, javax.swing.JTextPane> panelesTexto = new HashMap<Integer, javax.swing.JTextPane>();
-    Map<Integer, javax.swing.JScrollPane> scrollTexto = new HashMap<Integer, javax.swing.JScrollPane>();
+    Map<Integer, javax.swing.JTextPane> panelesTexto = new HashMap<>();
+    Map<Integer, javax.swing.JScrollPane> scrollTexto = new HashMap<>();
 }
