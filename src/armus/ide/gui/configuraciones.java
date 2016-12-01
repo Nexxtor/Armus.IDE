@@ -21,7 +21,7 @@ public class configuraciones extends javax.swing.JFrame {
     }
 
     private void obtenerValoresParametros() {
-        int[] parametros = {1024, 1024, 20, 150, 1024, 123456, 99999};
+        int[] parametros = {1024, 1024, 20, 150, 1024, 123456, 99999, 0};
         try {
             String cadena;
             FileReader f;
@@ -40,7 +40,7 @@ public class configuraciones extends javax.swing.JFrame {
             if (!fichero.exists()) {
                 try {
                     BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero));
-                    bw.write("1024\n1024\n20\n150\n1024\n123456\n99999\n");
+                    bw.write("1024\n1024\n20\n150\n1024\n123456\n99999\n0\n");
                     bw.close();
                 } catch (IOException ex1) {
                     JOptionPane.showMessageDialog(null, "Por favor revisa tus "
@@ -243,7 +243,20 @@ public class configuraciones extends javax.swing.JFrame {
 
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
         String sFichero = "/opt/armus/setings.txt";
+        int[] parametros = {1024, 1024, 20, 150, 1024, 123456, 99999, 0};
         try {
+            //Lee el archivo de configuración y almacena los parametros
+            String cadena;
+            FileReader f;
+            f = new FileReader("/opt/armus/setings.txt");
+            BufferedReader b = new BufferedReader(f);
+            int i = 0;
+            while ((cadena = b.readLine()) != null) {
+                parametros[i] = Integer.parseInt(cadena);
+                i++;
+            }
+            b.close();
+
             BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero));
             bw.write(sp_linea.getValue().toString() + "\n"
                     + sp_id.getValue().toString() + "\n"
@@ -251,7 +264,8 @@ public class configuraciones extends javax.swing.JFrame {
                     + sp_file.getValue().toString() + "\n"
                     + sp_namefile.getValue().toString() + "\n"
                     + sp_cadena.getValue().toString() + "\n"
-                    + sp_sizearchivo.getValue().toString() + "\n");
+                    + sp_sizearchivo.getValue().toString() + "\n"
+                    + Integer.toString(parametros[7]) + "\n");
             bw.close();
         } catch (IOException ex1) {
             JOptionPane.showMessageDialog(null, "Porvafor revisa tus "
