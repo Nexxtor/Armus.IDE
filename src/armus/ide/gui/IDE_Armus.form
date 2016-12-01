@@ -224,7 +224,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="oscuro">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/rodillo-16.png"/>
+                      <Image iconType="3" name="/icons/Bote de pintura-16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Oscuro (por defecto)"/>
                   </Properties>
@@ -235,7 +235,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="fucsia">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/rodillo-16.png"/>
+                      <Image iconType="3" name="/icons/Bote de pintura-16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Fucsia"/>
                   </Properties>
@@ -246,7 +246,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="verde">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/rodillo-16.png"/>
+                      <Image iconType="3" name="/icons/Bote de pintura-16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Verde"/>
                   </Properties>
@@ -257,7 +257,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="ocre">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/rodillo-16.png"/>
+                      <Image iconType="3" name="/icons/Bote de pintura-16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Ocre"/>
                   </Properties>
@@ -268,7 +268,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="aqua">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/rodillo-16.png"/>
+                      <Image iconType="3" name="/icons/Bote de pintura-16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Aqua"/>
                   </Properties>
@@ -279,7 +279,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="azul">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/rodillo-16.png"/>
+                      <Image iconType="3" name="/icons/Bote de pintura-16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Azul"/>
                   </Properties>
@@ -290,7 +290,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="rosado">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/rodillo-16.png"/>
+                      <Image iconType="3" name="/icons/Bote de pintura-16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Rosado"/>
                   </Properties>
@@ -301,7 +301,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="cafe">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/rodillo-16.png"/>
+                      <Image iconType="3" name="/icons/Bote de pintura-16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Caf&#xe9;"/>
                   </Properties>
@@ -312,7 +312,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="gris">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/rodillo-16.png"/>
+                      <Image iconType="3" name="/icons/Bote de pintura-16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Gris"/>
                   </Properties>
@@ -323,7 +323,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="olivo">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/rodillo-16.png"/>
+                      <Image iconType="3" name="/icons/Bote de pintura-16.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Olivo"/>
                   </Properties>
@@ -484,14 +484,12 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btn_nuevo" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="btn_pegar" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btn_cortar" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btn_guardar_como" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btn_abrir" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btn_copiar" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btn_guardar" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btn_pegar" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="btn_cortar" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="btn_guardar_como" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="btn_copiar" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="btn_guardar" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="btn_abrir" min="-2" pref="33" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnCerrarP" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
                                   <Component id="btnAbrirP" min="-2" max="-2" attributes="0"/>
@@ -811,7 +809,7 @@
         <Component class="javax.swing.JButton" name="btn_compilar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/compilar.png"/>
+              <Image iconType="3" name="/icons/ejecutar1.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Compilar programa"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

@@ -12,11 +12,16 @@ import javax.swing.*;
 import armus.lib.scanner.Scanner;
 import armus.lib.parser.Parser;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,7 +46,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         scrollTexto.get(0).setRowHeaderView(tln3);
         jTabbedPane1.add(scrollTexto.get(0));
         jTabbedPane1.setTitleAt(0, "nuevo");
-
+        establecerTemaConfig(); //obtiene el tema guardado y lo establece
         try { //agrega un icono a la aplicación
             setIconImage(new ImageIcon("/opt/armus/Logo.png").getImage());
         } catch (Exception ex) {
@@ -270,7 +275,7 @@ public class IDE_Armus extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Resultados", new javax.swing.ImageIcon(getClass().getResource("/icons/resultados-16.png")), jScrollPane3); // NOI18N
 
-        btn_compilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/compilar.png"))); // NOI18N
+        btn_compilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ejecutar1.png"))); // NOI18N
         btn_compilar.setToolTipText("Compilar programa");
         btn_compilar.setBorder(null);
         btn_compilar.setBorderPainted(false);
@@ -337,13 +342,12 @@ public class IDE_Armus extends javax.swing.JFrame {
                     .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btn_pegar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btn_cortar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btn_guardar_como, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btn_abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btn_copiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_pegar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_cortar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_guardar_como, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_copiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnCerrarP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnAbrirP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -490,7 +494,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         SubMenuTemas.setText("Temas");
         SubMenuTemas.setToolTipText("Cambia la apariencia del editor");
 
-        oscuro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        oscuro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Bote de pintura-16.png"))); // NOI18N
         oscuro.setText("Oscuro (por defecto)");
         oscuro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -499,7 +503,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         SubMenuTemas.add(oscuro);
 
-        fucsia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        fucsia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Bote de pintura-16.png"))); // NOI18N
         fucsia.setText("Fucsia");
         fucsia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -508,7 +512,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         SubMenuTemas.add(fucsia);
 
-        verde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        verde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Bote de pintura-16.png"))); // NOI18N
         verde.setText("Verde");
         verde.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -517,7 +521,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         SubMenuTemas.add(verde);
 
-        ocre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        ocre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Bote de pintura-16.png"))); // NOI18N
         ocre.setText("Ocre");
         ocre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -526,7 +530,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         SubMenuTemas.add(ocre);
 
-        aqua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        aqua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Bote de pintura-16.png"))); // NOI18N
         aqua.setText("Aqua");
         aqua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -535,7 +539,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         SubMenuTemas.add(aqua);
 
-        azul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        azul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Bote de pintura-16.png"))); // NOI18N
         azul.setText("Azul");
         azul.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -544,7 +548,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         SubMenuTemas.add(azul);
 
-        rosado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        rosado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Bote de pintura-16.png"))); // NOI18N
         rosado.setText("Rosado");
         rosado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -553,7 +557,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         SubMenuTemas.add(rosado);
 
-        cafe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        cafe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Bote de pintura-16.png"))); // NOI18N
         cafe.setText("Café");
         cafe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -562,7 +566,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         SubMenuTemas.add(cafe);
 
-        gris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        gris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Bote de pintura-16.png"))); // NOI18N
         gris.setText("Gris");
         gris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -571,7 +575,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
         SubMenuTemas.add(gris);
 
-        olivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/rodillo-16.png"))); // NOI18N
+        olivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Bote de pintura-16.png"))); // NOI18N
         olivo.setText("Olivo");
         olivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -709,26 +713,31 @@ public class IDE_Armus extends javax.swing.JFrame {
     private void fucsiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fucsiaActionPerformed
         BarraMenu.setBackground(new Color(136, 0, 112)); //morado oscuro
         Panel.setBackground(new Color(172, 0, 142)); //morado claro
+        guardarTemaConfig(1);
     }//GEN-LAST:event_fucsiaActionPerformed
 
     private void aquaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aquaActionPerformed
         BarraMenu.setBackground(new Color(0, 109, 136)); //oscuro
         Panel.setBackground(new Color(0, 138, 172)); //claro
+        guardarTemaConfig(4);
     }//GEN-LAST:event_aquaActionPerformed
 
     private void azulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_azulActionPerformed
         BarraMenu.setBackground(new Color(21, 83, 136)); //azul oscuro
         Panel.setBackground(new Color(26, 104, 172)); //azul claro
+        guardarTemaConfig(5);
     }//GEN-LAST:event_azulActionPerformed
 
     private void verdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verdeActionPerformed
         BarraMenu.setBackground(new Color(10, 81, 64)); //oscuro
         Panel.setBackground(new Color(14, 109, 86)); //claro
+        guardarTemaConfig(0);
     }//GEN-LAST:event_verdeActionPerformed
 
     private void ocreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocreActionPerformed
         BarraMenu.setBackground(new Color(117, 20, 20)); //oscuro
         Panel.setBackground(new Color(158, 19, 28)); //claro
+        guardarTemaConfig(3);
     }//GEN-LAST:event_ocreActionPerformed
 
     private void menuAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAyudaActionPerformed
@@ -772,6 +781,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     private void oscuroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oscuroActionPerformed
         BarraMenu.setBackground(new Color(54, 54, 54)); //oscuro
         Panel.setBackground(new Color(66, 66, 66)); //claro
+        guardarTemaConfig(0);
     }//GEN-LAST:event_oscuroActionPerformed
 
     private void btnEjecutarParserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarParserActionPerformed
@@ -832,21 +842,25 @@ public class IDE_Armus extends javax.swing.JFrame {
     private void rosadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rosadoActionPerformed
         BarraMenu.setBackground(new Color(203, 78, 145)); //oscuro
         Panel.setBackground(new Color(207, 110, 164)); //claro
+        guardarTemaConfig(6);
     }//GEN-LAST:event_rosadoActionPerformed
 
     private void cafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cafeActionPerformed
         BarraMenu.setBackground(new Color(87, 68, 53)); //oscuro
         Panel.setBackground(new Color(111, 86, 65)); //claro
+        guardarTemaConfig(7);
     }//GEN-LAST:event_cafeActionPerformed
 
     private void grisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grisActionPerformed
         BarraMenu.setBackground(new Color(150, 150, 150)); //oscuro
         Panel.setBackground(new Color(196, 196, 196)); //claro
+        guardarTemaConfig(8);
     }//GEN-LAST:event_grisActionPerformed
 
     private void olivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_olivoActionPerformed
         BarraMenu.setBackground(new Color(43, 73, 39)); //oscuro
         Panel.setBackground(new Color(92, 99, 29)); //claro
+        guardarTemaConfig(9);
     }//GEN-LAST:event_olivoActionPerformed
 
     private void btn_lexema_tokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lexema_tokenActionPerformed
@@ -937,8 +951,8 @@ public class IDE_Armus extends javax.swing.JFrame {
             System.exit(0);
         }
     }
-    
-    private void nuevoArchivo(){
+
+    private void nuevoArchivo() {
         if (!(panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText().equals("")) || archivo != null) {
             if (((JOptionPane.showConfirmDialog(null, "¿Desea utilizar una nueva hoja de trabajo? \n\t Si acepta se borraran todos los cambios sin guardar")) == 0)) {
                 archivo = null;
@@ -948,8 +962,8 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         }
     }
-    
-    private void ejecutarParser(){
+
+    private void ejecutarParser() {
         DefaultTableModel modelo = new DefaultTableModel();
         TablaErrores.setModel(modelo);
 
@@ -974,8 +988,8 @@ public class IDE_Armus extends javax.swing.JFrame {
         }
         jTabbedPane2.setSelectedIndex(1);
     }
-    
-    private void ejecutarAnalizadorLexicografico(){
+
+    private void ejecutarAnalizadorLexicografico() {
         if (archivo == null) {
             if (JOptionPane.showConfirmDialog(null, "Desea guardar el archivo") == 0) {
                 guardarComo();
@@ -1024,6 +1038,115 @@ public class IDE_Armus extends javax.swing.JFrame {
                     "Error cargando libreria", JOptionPane.ERROR_MESSAGE);
         }
         jTabbedPane2.setSelectedIndex(0);
+    }
+
+    private void establecerTemaConfig() {
+        int[] parametros = {1024, 1024, 20, 150, 1024, 123456, 99999, 0};
+        try {
+            String cadena;
+            FileReader f;
+            f = new FileReader("/opt/armus/setings.txt");
+            BufferedReader b = new BufferedReader(f);
+            int i = 0;
+            while ((cadena = b.readLine()) != null) {
+                parametros[i] = Integer.parseInt(cadena);
+                i++;
+            }
+            b.close();
+        } catch (FileNotFoundException ex) {
+            String sFichero = "/opt/armus/setings.txt";
+            File fichero = new File(sFichero);
+
+            if (!fichero.exists()) {
+                try {
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero));
+                    bw.write("1024\n1024\n20\n150\n1024\n123456\n99999\n0\n");
+                    bw.close();
+                } catch (IOException ex1) {
+                    JOptionPane.showMessageDialog(null, "Por favor revisa tus "
+                            + "permisos sobre el directorio /opt/armus y sus archivos", "Error de escritura", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(configuraciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        switch (parametros[7]) {
+            case 0:
+                BarraMenu.setBackground(new Color(54, 54, 54)); //oscuro
+                Panel.setBackground(new Color(66, 66, 66)); //claro
+                break;
+            case 1:
+                BarraMenu.setBackground(new Color(136, 0, 112)); //morado oscuro
+                Panel.setBackground(new Color(172, 0, 142)); //morado claro
+                break;
+            case 2:
+                BarraMenu.setBackground(new Color(10, 81, 64)); //oscuro
+                Panel.setBackground(new Color(14, 109, 86)); //claro
+                break;
+            case 3:
+                BarraMenu.setBackground(new Color(117, 20, 20)); //oscuro
+                Panel.setBackground(new Color(158, 19, 28)); //claro
+                break;
+            case 4:
+                BarraMenu.setBackground(new Color(0, 109, 136)); //oscuro
+                Panel.setBackground(new Color(0, 138, 172)); //claro
+                break;
+            case 5:
+                BarraMenu.setBackground(new Color(21, 83, 136)); //azul oscuro
+                Panel.setBackground(new Color(26, 104, 172)); //azul claro
+                break;
+            case 6:
+                BarraMenu.setBackground(new Color(203, 78, 145)); //oscuro
+                Panel.setBackground(new Color(207, 110, 164)); //claro
+                break;
+            case 7:
+                BarraMenu.setBackground(new Color(87, 68, 53)); //oscuro
+                Panel.setBackground(new Color(111, 86, 65)); //claro
+                break;
+            case 8:
+                BarraMenu.setBackground(new Color(150, 150, 150)); //oscuro
+                Panel.setBackground(new Color(196, 196, 196)); //claro
+                break;
+            case 9:
+                BarraMenu.setBackground(new Color(43, 73, 39)); //oscuro
+                Panel.setBackground(new Color(92, 99, 29)); //claro
+                break;
+        }
+    }
+
+    private void guardarTemaConfig(int tema) {
+        String sFichero = "/opt/armus/setings.txt";
+        int[] parametros = {1024, 1024, 20, 150, 1024, 123456, 99999, 0};
+        try {
+            //Lee el archivo de configuración y almacena los parametros
+            String cadena;
+            FileReader f;
+            f = new FileReader("/opt/armus/setings.txt");
+            try (BufferedReader b = new BufferedReader(f)) {
+                int i = 0;
+                while ((cadena = b.readLine()) != null) {
+                    parametros[i] = Integer.parseInt(cadena);
+                    i++;
+                }
+            }
+
+            try ( //guarda la configuración asignada
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(sFichero))) {
+                bw.write(Integer.toString(parametros[0]) + "\n"
+                        + Integer.toString(parametros[1]) + "\n"
+                        + Integer.toString(parametros[2]) + "\n"
+                        + Integer.toString(parametros[3]) + "\n"
+                        + Integer.toString(parametros[4]) + "\n"
+                        + Integer.toString(parametros[5]) + "\n"
+                        + Integer.toString(parametros[6]) + "\n"
+                        + Integer.toString(tema) + "\n");
+            }
+        } catch (IOException ex1) {
+            JOptionPane.showMessageDialog(null, "Porvafor revisa tus "
+                    + "permisos sobre el directorio /opt/armus y sus archivos",
+                    "Error de escritura", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
