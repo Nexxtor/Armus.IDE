@@ -11,6 +11,7 @@ import java.io.InputStream;
 import javax.swing.*;
 import armus.lib.scanner.Scanner;
 import armus.lib.parser.Parser;
+import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -46,6 +47,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         scrollTexto.get(0).setRowHeaderView(tln3);
         jTabbedPane1.add(scrollTexto.get(0));
         jTabbedPane1.setTitleAt(0, "nuevo");
+        menuEmergenteArchivos();
         establecerTemaConfig(); //obtiene el tema guardado y lo establece
         try { //agrega un icono a la aplicación
             setIconImage(new ImageIcon("/opt/armus/Logo.png").getImage());
@@ -71,7 +73,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         btn_copiar = new javax.swing.JButton();
         btn_nuevo = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        btnAbrirP = new javax.swing.JButton();
         btnCerrarP = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -199,7 +200,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         });
 
-        btn_nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo1.png"))); // NOI18N
+        btn_nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo.png"))); // NOI18N
         btn_nuevo.setToolTipText("Nuevo");
         btn_nuevo.setBorder(null);
         btn_nuevo.setBorderPainted(false);
@@ -211,18 +212,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         });
 
         jTabbedPane1.setToolTipText("");
-
-        btnAbrirP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file (2).png"))); // NOI18N
-        btnAbrirP.setBorderPainted(false);
-        btnAbrirP.setContentAreaFilled(false);
-        btnAbrirP.setMaximumSize(new java.awt.Dimension(33, 33));
-        btnAbrirP.setMinimumSize(new java.awt.Dimension(33, 33));
-        btnAbrirP.setPreferredSize(new java.awt.Dimension(33, 33));
-        btnAbrirP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAbrirPActionPerformed(evt);
-            }
-        });
 
         btnCerrarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file (1).png"))); // NOI18N
         btnCerrarP.setBorderPainted(false);
@@ -326,9 +315,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addComponent(btn_lexema_token, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_compilar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93)
-                        .addComponent(btnAbrirP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(132, 132, 132)
                         .addComponent(btnCerrarP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE))
@@ -348,9 +335,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                             .addComponent(btn_copiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnCerrarP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnAbrirP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnCerrarP, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(btn_compilar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_lexema_token, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -671,7 +656,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_pegarActionPerformed
 
     private void btn_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoActionPerformed
-        nuevoArchivo();
+        crearVentanaE();
     }//GEN-LAST:event_btn_nuevoActionPerformed
 
     private void menuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirActionPerformed
@@ -679,7 +664,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAbrirActionPerformed
 
     private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
-        nuevoArchivo();
+        crearVentanaE();
     }//GEN-LAST:event_menuNuevoActionPerformed
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
@@ -788,10 +773,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         ejecutarParser();
     }//GEN-LAST:event_btnEjecutarParserActionPerformed
 
-    private void btnAbrirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirPActionPerformed
-        crearVentanaE();
-    }//GEN-LAST:event_btnAbrirPActionPerformed
-
     private void crearVentanaE() {
         if (NumPestana < 9) {
             NumPestana++;
@@ -803,6 +784,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             jTabbedPane1.add(scrollTexto.get(NumPestana));
             jTabbedPane1.setTitleAt(NumPestana, "nuevo(" + NumPestana + ")");
             jTabbedPane1.setSelectedIndex(NumPestana);
+            menuEmergenteArchivos();
         } else {
             JOptionPane.showMessageDialog(null, "El numnero de pestañas maximo es de 10, por favor cierre una para abrir otra");
         }
@@ -1149,6 +1131,27 @@ public class IDE_Armus extends javax.swing.JFrame {
         }
     }
 
+    private void menuEmergenteArchivos() {
+        /*Crea el popup menu para cada nueva pestaña*/
+        JPopupMenu menupp = new JPopupMenu();
+        JMenuItem cortar = new JMenuItem("Cortar", new ImageIcon(getClass().getResource("/icons/cortar-16.png")));
+        JMenuItem copiar = new JMenuItem("Copiar", new ImageIcon(getClass().getResource("/icons/copiar1-16.png")));
+        JMenuItem pegar = new JMenuItem("Pegar", new ImageIcon(getClass().getResource("/icons/pegar-16.png")));
+        menupp.add(copiar);
+        menupp.add(cortar);
+        menupp.add(pegar);
+        copiar.addActionListener((ActionEvent ae) -> {
+            panelesTexto.get(jTabbedPane1.getSelectedIndex()).copy();
+        });
+        cortar.addActionListener((ActionEvent ae) -> {
+            panelesTexto.get(jTabbedPane1.getSelectedIndex()).cut();
+        });
+        pegar.addActionListener((ActionEvent ae) -> {
+            panelesTexto.get(jTabbedPane1.getSelectedIndex()).paste();
+        });
+        panelesTexto.get(jTabbedPane1.getSelectedIndex()).setComponentPopupMenu(menupp);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarraMenu;
     private javax.swing.JMenuItem MenuAcercaDe;
@@ -1164,7 +1167,6 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JTextArea TxtAreaResultado;
     private javax.swing.JMenuItem aqua;
     private javax.swing.JMenuItem azul;
-    private javax.swing.JButton btnAbrirP;
     private javax.swing.JButton btnCerrarP;
     private javax.swing.JMenuItem btnEjecutarLexemaToken;
     private javax.swing.JMenuItem btnEjecutarParser;
