@@ -25,6 +25,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
 
 public class IDE_Armus extends javax.swing.JFrame {
 
@@ -35,6 +37,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     manejoArchivos gestion = new manejoArchivos();
     Map<Integer, String> ruta = new HashMap<>();
     int NumPestana = 0; ////cambiar
+    DefaultTableModel modelo = new DefaultTableModel();
 
     public IDE_Armus() {
         initComponents();
@@ -47,6 +50,9 @@ public class IDE_Armus extends javax.swing.JFrame {
         scrollTexto.get(0).setRowHeaderView(tln3);
         jTabbedPane1.add(scrollTexto.get(0));
         jTabbedPane1.setTitleAt(0, "nuevo");
+        
+        
+       
         menuEmergenteArchivos();
         establecerTemaConfig(); //obtiene el tema guardado y lo establece
         try { //agrega un icono a la aplicación
@@ -248,7 +254,13 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         ));
         TablaErrores.setToolTipText("Muestra la lista de errores encontrados en el código");
+        TablaErrores.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         TablaErrores.getTableHeader().setReorderingAllowed(false);
+        TablaErrores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaErroresMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TablaErrores);
 
         jTabbedPane2.addTab("Errores", new javax.swing.ImageIcon(getClass().getResource("/icons/negativo-16.png")), jScrollPane2); // NOI18N
@@ -853,6 +865,61 @@ public class IDE_Armus extends javax.swing.JFrame {
         ejecutarAnalizadorLexicografico();
     }//GEN-LAST:event_btnEjecutarLexemaTokenActionPerformed
 
+    private void TablaErroresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaErroresMouseClicked
+        // DefaultTableModel modelo = new DefaultTableModel();
+        //TablaErrores.setModel(modelo);
+        
+        
+        
+        
+        
+        int numeroLineaColor= Integer.parseInt(String.valueOf(modelo.getValueAt(TablaErrores.getSelectedRow(), 1)));
+        
+        try {
+            PintarLineaConError(panelesTexto.get(jTabbedPane1.getSelectedIndex()), numeroLineaColor);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(IDE_Armus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_TablaErroresMouseClicked
+
+    
+    //****************************************************************************************
+    //coloreo de linea de error
+      public void PintarLineaConError(JTextPane txt, int i) throws BadLocationException{
+        int TotalLineas = txt.getText().split("\n").length;
+        int totalCaracteres = 0;
+        int indexLine = 1;
+        
+        String[] lines = txt.getText().split("\\n");
+
+        while(indexLine<=TotalLineas){
+        
+        int fin = lines[indexLine-1].length() + totalCaracteres;
+        
+            if(i==indexLine){
+                DefaultHighlighter.DefaultHighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW);
+                txt.getHighlighter().addHighlight(fin-lines[indexLine-1].length(), fin, highlightPainter);
+            }
+            
+            
+            
+            //DefaultHighlighter.DefaultHighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW);
+            
+            
+            
+            totalCaracteres = fin+1;
+            indexLine++;
+        }
+    }
+    
+    
+    
+    
+    
+    
     private void guardarArchivo() {
         if (!(ruta.get(jTabbedPane1.getSelectedIndex()).equals(""))) {
             String contenido = panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText();
@@ -946,7 +1013,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }
 
     private void ejecutarParser() {
-        DefaultTableModel modelo = new DefaultTableModel();
+        //DefaultTableModel modelo = new DefaultTableModel();
         TablaErrores.setModel(modelo);
 
         Scanner s = new Scanner();
@@ -966,6 +1033,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             for (int i = 0; i < respuesta.length; i++) {
                 System.out.println(respuesta[i]);
                 modelo.addRow((Object[]) respuesta[i].split(","));
+                
             }
         }
         jTabbedPane2.setSelectedIndex(1);
