@@ -975,17 +975,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         }
     }
 
-    private void nuevoArchivo() {
-        if (!(panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText().equals("")) || archivo != null) {
-            if (((JOptionPane.showConfirmDialog(null, "¿Desea utilizar una nueva hoja de trabajo? \n\t Si acepta se borraran todos los cambios sin guardar")) == 0)) {
-                archivo = null;
-                panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText("");
-                jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), "nuevo(" + jTabbedPane1.getSelectedIndex() + ")");
-                ruta.remove(jTabbedPane1.getSelectedIndex());
-            }
-        }
-    }
-
     private void ejecutarParser() {
         DefaultTableModel modelo = new DefaultTableModel();
         TablaErrores.setModel(modelo);
