@@ -16,12 +16,15 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,20 +35,30 @@ public class IDE_Armus extends javax.swing.JFrame {
     FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.acl", "acl");
     File archivo;
     manejoArchivos gestion = new manejoArchivos();
-    Map<Integer, String> ruta = new HashMap<>();
+    ArrayList <String> ruta = new ArrayList<>();
+    
     int NumPestana = 0; ////cambiar
+    int numTabs=0;
 
     public IDE_Armus() {
         initComponents();
         this.setLocationRelativeTo(null); //centrar la ventana en la pantalla
         seleccionado.setFileFilter(filtro); //Le indicamos el filtro acl
-        panelesTexto.put(0, new JTextPane());
+        panelesTexto.add(0, new JTextPane());
         panelesTexto.get(0).setStyledDocument(new Guapiador());
-        scrollTexto.put(0, new JScrollPane(panelesTexto.get(0)));
+        scrollTexto.add(0, new JScrollPane(panelesTexto.get(0)));
         TextLineNumber tln3 = new TextLineNumber(panelesTexto.get(0));
         scrollTexto.get(0).setRowHeaderView(tln3);
-        jTabbedPane1.add(scrollTexto.get(0));
+        jTabbedPane1.add(scrollTexto.get(0), "Tab " + String.valueOf(numTabs), numTabs++);
         jTabbedPane1.setTitleAt(0, "nuevo");
+        
+        jTabbedPane1.setTabComponentAt(0, new DemoCustomTab(this));
+        
+        //creo la pestaña de agregar +
+        jTabbedPane1.add(new JPanel(), " +   ", numTabs++);
+        jTabbedPane1.addChangeListener(changeListener);
+        ruta.add(0, null);
+        
         establecerTemaConfig(); //obtiene el tema guardado y lo establece
         try { //agrega un icono a la aplicación
             setIconImage(new ImageIcon("/opt/armus/Logo.png").getImage());
@@ -199,7 +212,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         });
 
-        btn_nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo1.png"))); // NOI18N
+        btn_nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo.png"))); // NOI18N
         btn_nuevo.setToolTipText("Nuevo");
         btn_nuevo.setBorder(null);
         btn_nuevo.setBorderPainted(false);
@@ -210,6 +223,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         });
 
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setToolTipText("");
 
         btnAbrirP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file (2).png"))); // NOI18N
@@ -642,6 +656,13 @@ public class IDE_Armus extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            crearVentanaE();
+        }
+    };
+
     private void btn_copiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_copiarActionPerformed
         panelesTexto.get(jTabbedPane1.getSelectedIndex()).copy();
     }//GEN-LAST:event_btn_copiarActionPerformed
@@ -793,28 +814,40 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAbrirPActionPerformed
 
     private void crearVentanaE() {
-        if (NumPestana < 9) {
-            NumPestana++;
-            panelesTexto.put(NumPestana, new JTextPane());
-            panelesTexto.get(NumPestana).setStyledDocument(new Guapiador());
-            scrollTexto.put(NumPestana, new JScrollPane(panelesTexto.get(NumPestana)));
-            TextLineNumber tln3 = new TextLineNumber(panelesTexto.get(NumPestana));
-            scrollTexto.get(NumPestana).setRowHeaderView(tln3);
-            jTabbedPane1.add(scrollTexto.get(NumPestana));
-            jTabbedPane1.setTitleAt(NumPestana, "nuevo(" + NumPestana + ")");
-            jTabbedPane1.setSelectedIndex(NumPestana);
-        } else {
-            JOptionPane.showMessageDialog(null, "El numnero de pestañas maximo es de 10, por favor cierre una para abrir otra");
+        int index = numTabs - 1;
+        if (jTabbedPane1.getSelectedIndex() == index) {
+            System.out.print("Crear index " + String.valueOf(index) + "/");
+            panelesTexto.add(new JTextPane());
+            panelesTexto.get(index).setStyledDocument(new Guapiador());
+            scrollTexto.add(new JScrollPane(panelesTexto.get(index)));
+            TextLineNumber tln3 = new TextLineNumber(panelesTexto.get(index));
+            scrollTexto.get(index).setRowHeaderView(tln3);
+            jTabbedPane1.add(scrollTexto.get(index), "Tab " + String.valueOf(index),index);
+            ruta.add(null);
+            
+            /* set tab is custom tab */
+            jTabbedPane1.setTabComponentAt(index, new DemoCustomTab(this));
+            jTabbedPane1.removeChangeListener(changeListener);
+            jTabbedPane1.setSelectedIndex(index);
+            jTabbedPane1.addChangeListener(changeListener);
+            numTabs++;
+            System.out.println(String.valueOf(numTabs));
+            /*Crea el popup menu para cada nueva pestaña*/
+            JPopupMenu menupp = new JPopupMenu();
+            JMenuItem cortar = new JMenuItem("Cortar",new ImageIcon(getClass().getResource("/icons/cortar-16.png")));
+            JMenuItem copiar = new JMenuItem("Copiar",new ImageIcon(getClass().getResource("/icons/copiar1-16.png")));
+            JMenuItem pegar = new JMenuItem("Pegar",new ImageIcon(getClass().getResource("/icons/pegar-16.png")));
+            
         }
     }
-
+    
     private void btnCerrarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarPActionPerformed
         if (NumPestana > 0) {
             if ((panelesTexto.get(NumPestana).getText()).equals("")) {
-                removePestania();
+                //removePestania();
                 NumPestana--;
             } else if (((JOptionPane.showConfirmDialog(null, "Desea cerrar la pestaña? \nNota: se cerrara la ultima pestaña sin guardar los cambios")) == 0)) {
-                removePestania();
+                //removePestania();
                 NumPestana--;
             }
         } else {
@@ -823,12 +856,33 @@ public class IDE_Armus extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCerrarPActionPerformed
 
-    private void removePestania() {
-        jTabbedPane1.remove(scrollTexto.get(NumPestana));
-        scrollTexto.remove(NumPestana);
-        panelesTexto.remove(NumPestana);
-        ruta.remove(NumPestana);
+    public void removePestania(int index) {
+        if(JOptionPane.showConfirmDialog(null, "Esta seguro que desea cerrar la pestania") ==0){
+            System.out.println("elimin index " + String.valueOf(index));
+            jTabbedPane1.remove(index);
+            System.out.println("a");
+            //jTabbedPane1.remove(scrollTexto.get(index));
+            scrollTexto.remove(index);
+            System.out.println("b");
+            panelesTexto.remove(index);
+            System.out.println("a");
+            //jTabbedPane1.remove(index);
+            ruta.remove(index);
+
+            numTabs--;
+            System.out.println(String.valueOf(numTabs));
+            if (index == numTabs - 1 && index > 0) {
+                jTabbedPane1.setSelectedIndex(numTabs - 2);
+            } else {
+                jTabbedPane1.setSelectedIndex(index);
+            }
+
+            if (numTabs == 1) {
+                crearVentanaE();
+            }
+        }
     }
+    
 
     private void btn_compilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_compilarActionPerformed
         ejecutarParser();
@@ -891,7 +945,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             if (archivo.getName().endsWith("acl")) {
                 String contenido = panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText();
                 String respuesta = gestion.guardarTexto(archivo, contenido);
-                ruta.put(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
+                ruta.set(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
                 jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), archivo.getName());
                 if (respuesta != null) {
                     JOptionPane.showMessageDialog(null, respuesta);
@@ -906,10 +960,7 @@ public class IDE_Armus extends javax.swing.JFrame {
 
     private void abrirArchivo() {
         if ((ruta.get(jTabbedPane1.getSelectedIndex())) != null || !((panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText()).equals(""))) {
-            if (NumPestana == 9) {
-                JOptionPane.showMessageDialog(null, "Ya no se pueden abrir más pestañas");
-                return;
-            }
+            
             crearVentanaE();
         }
 
@@ -920,7 +971,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                     String contenido = gestion.abrirTexto(archivo);
                     //System.out.printf("%i\n", jTabbedPane1.getSelectedIndex());
                     panelesTexto.get(jTabbedPane1.getSelectedIndex()).setText(contenido);
-                    ruta.put(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
+                    ruta.add(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
                     //ruta.replace(jTabbedPane1.getSelectedIndex(), seleccionado.getSelectedFile().getAbsolutePath());
                     jTabbedPane1.setTitleAt(jTabbedPane1.getSelectedIndex(), archivo.getName());
                 } else {
@@ -1186,7 +1237,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JMenuItem menuAbrir;
     private javax.swing.JMenuItem menuAyuda;
@@ -1205,6 +1256,11 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenuItem verde;
     // End of variables declaration//GEN-END:variables
 
-    Map<Integer, javax.swing.JTextPane> panelesTexto = new HashMap<>();
-    Map<Integer, javax.swing.JScrollPane> scrollTexto = new HashMap<>();
+    
+    
+   ArrayList  <JTextPane> panelesTexto = new ArrayList <>();
+   ArrayList  <JScrollPane> scrollTexto = new ArrayList <>();
+    
+    
+    
 }
