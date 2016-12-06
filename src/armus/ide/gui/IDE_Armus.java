@@ -247,6 +247,7 @@ public class IDE_Armus extends javax.swing.JFrame {
             }
         ));
         TablaErrores.setToolTipText("Muestra la lista de errores encontrados en el código");
+        TablaErrores.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         TablaErrores.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(TablaErrores);
 
@@ -865,6 +866,37 @@ public class IDE_Armus extends javax.swing.JFrame {
     private void btnEjecutarLexemaTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarLexemaTokenActionPerformed
         ejecutarAnalizadorLexicografico();
     }//GEN-LAST:event_btnEjecutarLexemaTokenActionPerformed
+/*
+   /* 
+    //****************************************************************************************
+    //coloreo de linea de error
+      public void PintarLineaConError(JTextPane txt, int i) throws BadLocationException{
+        int TotalLineas = txt.getText().split("\n").length;
+        int totalCaracteres = 0;
+        int indexLine = 1;
+        
+        String[] lines = txt.getText().split("\\n");
+
+        while(indexLine<=TotalLineas){
+        
+        int fin = lines[indexLine-1].length() + totalCaracteres;
+        
+            if(i==indexLine){
+                DefaultHighlighter.DefaultHighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW);
+                txt.getHighlighter().addHighlight(fin-lines[indexLine-1].length(), fin, highlightPainter);
+            }
+            
+            
+            
+            //DefaultHighlighter.DefaultHighlightPainter highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW);
+            
+            
+            
+            totalCaracteres = fin+1;
+            indexLine++;
+        }
+    }
+    */
 
     private void guardarArchivo() {
         if (!(ruta.get(jTabbedPane1.getSelectedIndex()).equals(""))) {
@@ -972,9 +1004,9 @@ public class IDE_Armus extends javax.swing.JFrame {
             modelo.addColumn("# Linea");
             modelo.addColumn("# Col");
             modelo.addColumn("Detalles");
-            for (int i = 0; i < respuesta.length; i++) {
-                System.out.println(respuesta[i]);
-                modelo.addRow((Object[]) respuesta[i].split(","));
+            for (String respuesta1 : respuesta) {
+                System.out.println(respuesta1);
+                modelo.addRow((Object[]) respuesta1.split(","));
             }
         }
         jTabbedPane2.setSelectedIndex(1);
