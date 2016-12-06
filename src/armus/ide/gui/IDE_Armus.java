@@ -11,6 +11,7 @@ import java.io.InputStream;
 import javax.swing.*;
 import armus.lib.scanner.Scanner;
 import armus.lib.parser.Parser;
+import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -19,8 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.ChangeEvent;
@@ -49,16 +48,14 @@ public class IDE_Armus extends javax.swing.JFrame {
         scrollTexto.add(0, new JScrollPane(panelesTexto.get(0)));
         TextLineNumber tln3 = new TextLineNumber(panelesTexto.get(0));
         scrollTexto.get(0).setRowHeaderView(tln3);
-        jTabbedPane1.add(scrollTexto.get(0), "Tab " + String.valueOf(numTabs), numTabs++);
+        jTabbedPane1.add(scrollTexto.get(0), "nuevo " + String.valueOf(numTabs), numTabs++);
         jTabbedPane1.setTitleAt(0, "nuevo");
-        
         jTabbedPane1.setTabComponentAt(0, new DemoCustomTab(this));
-        
         //creo la pestaña de agregar +
-        jTabbedPane1.add(new JPanel(), " +   ", numTabs++);
+        jTabbedPane1.add(new JPanel(), "   +   ", numTabs++);
         jTabbedPane1.addChangeListener(changeListener);
         ruta.add(0, null);
-        
+        menuEmergenteArchivos(); //muestra el popupmenu
         establecerTemaConfig(); //obtiene el tema guardado y lo establece
         try { //agrega un icono a la aplicación
             setIconImage(new ImageIcon("/opt/armus/Logo.png").getImage());
@@ -84,8 +81,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         btn_copiar = new javax.swing.JButton();
         btn_nuevo = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        btnAbrirP = new javax.swing.JButton();
-        btnCerrarP = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         TxtAreaConsola = new javax.swing.JTextArea();
@@ -226,28 +221,6 @@ public class IDE_Armus extends javax.swing.JFrame {
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setToolTipText("");
 
-        btnAbrirP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file (2).png"))); // NOI18N
-        btnAbrirP.setBorderPainted(false);
-        btnAbrirP.setContentAreaFilled(false);
-        btnAbrirP.setMaximumSize(new java.awt.Dimension(33, 33));
-        btnAbrirP.setMinimumSize(new java.awt.Dimension(33, 33));
-        btnAbrirP.setPreferredSize(new java.awt.Dimension(33, 33));
-        btnAbrirP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAbrirPActionPerformed(evt);
-            }
-        });
-
-        btnCerrarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file (1).png"))); // NOI18N
-        btnCerrarP.setBorderPainted(false);
-        btnCerrarP.setContentAreaFilled(false);
-        btnCerrarP.setPreferredSize(new java.awt.Dimension(33, 33));
-        btnCerrarP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarPActionPerformed(evt);
-            }
-        });
-
         jTabbedPane2.setName(""); // NOI18N
 
         jScrollPane1.setForeground(new java.awt.Color(0, 0, 0));
@@ -289,7 +262,7 @@ public class IDE_Armus extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Resultados", new javax.swing.ImageIcon(getClass().getResource("/icons/resultados-16.png")), jScrollPane3); // NOI18N
 
-        btn_compilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ejecutar1.png"))); // NOI18N
+        btn_compilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ejecutar2.png"))); // NOI18N
         btn_compilar.setToolTipText("Compilar programa");
         btn_compilar.setBorder(null);
         btn_compilar.setBorderPainted(false);
@@ -340,10 +313,6 @@ public class IDE_Armus extends javax.swing.JFrame {
                         .addComponent(btn_lexema_token, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_compilar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93)
-                        .addComponent(btnAbrirP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCerrarP, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE))
                 .addGap(6, 6, 6))
@@ -361,10 +330,7 @@ public class IDE_Armus extends javax.swing.JFrame {
                             .addComponent(btn_guardar_como, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_copiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnCerrarP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnAbrirP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btn_abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(btn_compilar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_lexema_token, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -488,7 +454,7 @@ public class IDE_Armus extends javax.swing.JFrame {
         MenuAnalizadores.add(btnEjecutarLexemaToken);
 
         btnEjecutarParser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        btnEjecutarParser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ejecutar3-16.png"))); // NOI18N
+        btnEjecutarParser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ejecutar1-16.png"))); // NOI18N
         btnEjecutarParser.setText("Ejecutar Parser");
         btnEjecutarParser.setToolTipText("Verifica la sintaxis, muestra los errores encontrados");
         btnEjecutarParser.addActionListener(new java.awt.event.ActionListener() {
@@ -656,11 +622,8 @@ public class IDE_Armus extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    ChangeListener changeListener = new ChangeListener() {
-        @Override
-        public void stateChanged(ChangeEvent e) {
-            crearVentanaE();
-        }
+    ChangeListener changeListener = (ChangeEvent e) -> {
+        crearVentanaE();
     };
 
     private void btn_copiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_copiarActionPerformed
@@ -692,7 +655,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_pegarActionPerformed
 
     private void btn_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevoActionPerformed
-        nuevoArchivo();
+        crearVentanaE();
     }//GEN-LAST:event_btn_nuevoActionPerformed
 
     private void menuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirActionPerformed
@@ -700,7 +663,7 @@ public class IDE_Armus extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAbrirActionPerformed
 
     private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
-        nuevoArchivo();
+        crearVentanaE();
     }//GEN-LAST:event_menuNuevoActionPerformed
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
@@ -809,68 +772,45 @@ public class IDE_Armus extends javax.swing.JFrame {
         ejecutarParser();
     }//GEN-LAST:event_btnEjecutarParserActionPerformed
 
-    private void btnAbrirPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirPActionPerformed
-        crearVentanaE();
-    }//GEN-LAST:event_btnAbrirPActionPerformed
-
     private void crearVentanaE() {
         int index = numTabs - 1;
         if (jTabbedPane1.getSelectedIndex() == index) {
-            System.out.print("Crear index " + String.valueOf(index) + "/");
+            //System.out.print("Crear index " + String.valueOf(index) + "/");
             panelesTexto.add(new JTextPane());
             panelesTexto.get(index).setStyledDocument(new Guapiador());
             scrollTexto.add(new JScrollPane(panelesTexto.get(index)));
             TextLineNumber tln3 = new TextLineNumber(panelesTexto.get(index));
             scrollTexto.get(index).setRowHeaderView(tln3);
-            jTabbedPane1.add(scrollTexto.get(index), "Tab " + String.valueOf(index),index);
+            jTabbedPane1.add(scrollTexto.get(index), "nuevo " + String.valueOf(index),index);
             ruta.add(null);
             
-            /* set tab is custom tab */
+            /* Establece una pestania perzonalizada */
             jTabbedPane1.setTabComponentAt(index, new DemoCustomTab(this));
             jTabbedPane1.removeChangeListener(changeListener);
             jTabbedPane1.setSelectedIndex(index);
             jTabbedPane1.addChangeListener(changeListener);
             numTabs++;
-            System.out.println(String.valueOf(numTabs));
+            //System.out.println(String.valueOf(numTabs));
             /*Crea el popup menu para cada nueva pestaña*/
-            JPopupMenu menupp = new JPopupMenu();
-            JMenuItem cortar = new JMenuItem("Cortar",new ImageIcon(getClass().getResource("/icons/cortar-16.png")));
-            JMenuItem copiar = new JMenuItem("Copiar",new ImageIcon(getClass().getResource("/icons/copiar1-16.png")));
-            JMenuItem pegar = new JMenuItem("Pegar",new ImageIcon(getClass().getResource("/icons/pegar-16.png")));
-            
+            menuEmergenteArchivos();
         }
     }
     
-    private void btnCerrarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarPActionPerformed
-        if (NumPestana > 0) {
-            if ((panelesTexto.get(NumPestana).getText()).equals("")) {
-                //removePestania();
-                NumPestana--;
-            } else if (((JOptionPane.showConfirmDialog(null, "Desea cerrar la pestaña? \nNota: se cerrara la ultima pestaña sin guardar los cambios")) == 0)) {
-                //removePestania();
-                NumPestana--;
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Ya no hay pestañas que cerrar");
-            NumPestana = 0;
-        }
-    }//GEN-LAST:event_btnCerrarPActionPerformed
-
     public void removePestania(int index) {
         if(JOptionPane.showConfirmDialog(null, "Esta seguro que desea cerrar la pestania") ==0){
-            System.out.println("elimin index " + String.valueOf(index));
+            //System.out.println("elimin index " + String.valueOf(index));
             jTabbedPane1.remove(index);
-            System.out.println("a");
+            //System.out.println("a");
             //jTabbedPane1.remove(scrollTexto.get(index));
             scrollTexto.remove(index);
-            System.out.println("b");
+            //System.out.println("b");
             panelesTexto.remove(index);
-            System.out.println("a");
+            //System.out.println("a");
             //jTabbedPane1.remove(index);
             ruta.remove(index);
 
             numTabs--;
-            System.out.println(String.valueOf(numTabs));
+            //System.out.println(String.valueOf(numTabs));
             if (index == numTabs - 1 && index > 0) {
                 jTabbedPane1.setSelectedIndex(numTabs - 2);
             } else {
@@ -960,7 +900,6 @@ public class IDE_Armus extends javax.swing.JFrame {
 
     private void abrirArchivo() {
         if ((ruta.get(jTabbedPane1.getSelectedIndex())) != null || !((panelesTexto.get(jTabbedPane1.getSelectedIndex()).getText()).equals(""))) {
-            
             crearVentanaE();
         }
 
@@ -1199,6 +1138,27 @@ public class IDE_Armus extends javax.swing.JFrame {
                     "Error de escritura", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    private void menuEmergenteArchivos() {
+        /*Crea el popup menu para cada nueva pestaña*/
+        JPopupMenu menupp = new JPopupMenu();
+        JMenuItem cortar = new JMenuItem("Cortar", new ImageIcon(getClass().getResource("/icons/cortar-16.png")));
+        JMenuItem copiar = new JMenuItem("Copiar", new ImageIcon(getClass().getResource("/icons/copiar1-16.png")));
+        JMenuItem pegar = new JMenuItem("Pegar", new ImageIcon(getClass().getResource("/icons/pegar-16.png")));
+        menupp.add(copiar);
+        menupp.add(cortar);
+        menupp.add(pegar);
+        copiar.addActionListener((ActionEvent ae) -> {
+            panelesTexto.get(jTabbedPane1.getSelectedIndex()).copy();
+        });
+        cortar.addActionListener((ActionEvent ae) -> {
+            panelesTexto.get(jTabbedPane1.getSelectedIndex()).cut();
+        });
+        pegar.addActionListener((ActionEvent ae) -> {
+            panelesTexto.get(jTabbedPane1.getSelectedIndex()).paste();
+        });
+        panelesTexto.get(jTabbedPane1.getSelectedIndex()).setComponentPopupMenu(menupp);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarraMenu;
@@ -1215,8 +1175,6 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JTextArea TxtAreaResultado;
     private javax.swing.JMenuItem aqua;
     private javax.swing.JMenuItem azul;
-    private javax.swing.JButton btnAbrirP;
-    private javax.swing.JButton btnCerrarP;
     private javax.swing.JMenuItem btnEjecutarLexemaToken;
     private javax.swing.JMenuItem btnEjecutarParser;
     private javax.swing.JButton btn_abrir;
@@ -1256,11 +1214,6 @@ public class IDE_Armus extends javax.swing.JFrame {
     private javax.swing.JMenuItem verde;
     // End of variables declaration//GEN-END:variables
 
-    
-    
    ArrayList  <JTextPane> panelesTexto = new ArrayList <>();
    ArrayList  <JScrollPane> scrollTexto = new ArrayList <>();
-    
-    
-    
 }

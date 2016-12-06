@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package armus.ide.gui;
 
 import java.awt.Color;
@@ -18,11 +13,10 @@ import javax.swing.border.EtchedBorder;
 
 
 public class DemoCustomTab extends JPanel {
-
 	IDE_Armus customJTabbedPane;
 
-	/** JPanel contain a JLabel and a JButton to close
-     * @param customJTabbedPane */
+	/** JPanel contiene un JLabel y un JButton para cerrar.
+         *  @param customJTabbedPane */
 	public DemoCustomTab(IDE_Armus customJTabbedPane) {
 		this.customJTabbedPane = customJTabbedPane;
 		setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -34,7 +28,8 @@ public class DemoCustomTab extends JPanel {
 
 	private void addLabel() {
 		JLabel label = new JLabel() {
-			/** set text for JLabel, it will title of tab */
+			/* establece el texto del JLabel, el titulo del tab */
+                        @Override
 			public String getText() {
 				int index = customJTabbedPane.jTabbedPane1.indexOfTabComponent(DemoCustomTab.this);
 				if (index != -1) {
@@ -43,7 +38,7 @@ public class DemoCustomTab extends JPanel {
 				return null;
 			}
 		};
-		/** add more space between the label and the button */
+		/* agregar mas espacio entre el label y el boton */
 		label.setBorder(new EmptyBorder(0, 0, 0, 10));
 		add(label);
 	}
@@ -52,27 +47,21 @@ public class DemoCustomTab extends JPanel {
 		public CustomButton(String text) {
 			int size = 15;
 			setText(text);
-			/** set size for button close */
+			/** establece el tamano del boton cerrar */
 			setPreferredSize(new Dimension(size, size));
-
-			setToolTipText("close the Tab");
-
-			/** set transparent */
+			setToolTipText("Cierra la pestaña");
+			/** establecer transparente */
 			setContentAreaFilled(false);
-
-			/** set border for button */
+			/** establece el borde para el boton */
 			setBorder(new EtchedBorder());
-			/** don't show border */
+			/** no muestra el borde */
 			setBorderPainted(false);
-
 			setFocusable(false);
-
-			/** add event with mouse */
+			/** agrega el evento con el mouse */
 			addMouseListener(this);
-
 		}
 
-		/** when click button, tab will close */
+		/** cuando se hace clic al boton, la pestania se cierra */
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			int index = customJTabbedPane.jTabbedPane1.indexOfTabComponent(DemoCustomTab.this);
@@ -89,14 +78,14 @@ public class DemoCustomTab extends JPanel {
 		public void mouseReleased(MouseEvent e) {
 		}
 
-		/** show border button when mouse hover */
+		/** muestra el borde del boton cuando el mouse pasa */
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			setBorderPainted(true);
 			setForeground(Color.RED);
 		}
 
-		/** hide border when mouse not hover */
+		/** mantiene el borde cuando el mouse pasa */
 		@Override
 		public void mouseExited(MouseEvent e) {
 			setBorderPainted(false);

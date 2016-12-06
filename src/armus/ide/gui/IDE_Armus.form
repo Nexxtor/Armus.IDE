@@ -192,7 +192,7 @@
                   <KeyStroke key="Ctrl+P"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/ejecutar3-16.png"/>
+                  <Image iconType="3" name="/icons/ejecutar1-16.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ejecutar Parser"/>
                 <Property name="toolTipText" type="java.lang.String" value="Verifica la sintaxis, muestra los errores encontrados"/>
@@ -464,10 +464,6 @@
                           <Component id="btn_lexema_token" min="-2" pref="33" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btn_compilar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="btnAbrirP" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnCerrarP" min="-2" pref="37" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Component id="jTabbedPane2" alignment="0" pref="868" max="32767" attributes="0"/>
@@ -490,10 +486,6 @@
                               <Component id="btn_copiar" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="btn_guardar" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="btn_abrir" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnCerrarP" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btnAbrirP" min="-2" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
                           <Component id="btn_compilar" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -632,42 +624,6 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
         </Container>
-        <Component class="javax.swing.JButton" name="btnAbrirP">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/file (2).png"/>
-            </Property>
-            <Property name="borderPainted" type="boolean" value="false"/>
-            <Property name="contentAreaFilled" type="boolean" value="false"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[33, 33]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[33, 33]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[33, 33]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAbrirPActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnCerrarP">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/file (1).png"/>
-            </Property>
-            <Property name="borderPainted" type="boolean" value="false"/>
-            <Property name="contentAreaFilled" type="boolean" value="false"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[33, 33]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCerrarPActionPerformed"/>
-          </Events>
-        </Component>
         <Container class="javax.swing.JTabbedPane" name="jTabbedPane2">
           <Properties>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
@@ -813,7 +769,7 @@
         <Component class="javax.swing.JButton" name="btn_compilar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/ejecutar1.png"/>
+              <Image iconType="3" name="/icons/ejecutar2.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Compilar programa"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
