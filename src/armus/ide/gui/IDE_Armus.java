@@ -52,7 +52,8 @@ public class IDE_Armus extends javax.swing.JFrame {
         jTabbedPane1.setTitleAt(0, "nuevo");
         jTabbedPane1.setTabComponentAt(0, new DemoCustomTab(this));
         //creo la pestaña de agregar +
-        jTabbedPane1.add(new JPanel(), "   +   ", numTabs++);
+        
+        jTabbedPane1.add(new JPanel(),new ImageIcon(getClass().getResource("/icons/agregar-16.png")), numTabs++);
         jTabbedPane1.addChangeListener(changeListener);
         ruta.add(0, null);
         menuEmergenteArchivos(); //muestra el popupmenu

@@ -23,7 +23,7 @@ public class DemoCustomTab extends JPanel {
 		setBorder(new EmptyBorder(5, 2, 2, 2));
 		setOpaque(false);
 		addLabel();
-		add(new CustomButton("x"));
+		add(new CustomButton("X"));
 	}
 
 	private void addLabel() {
